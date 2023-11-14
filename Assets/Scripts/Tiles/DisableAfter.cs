@@ -12,7 +12,6 @@ public class DisableAfter : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= delay)
-            gameObject.SetActive(false);
+        if (timer >= delay) gameObject.SetActive(false);
     }
 }

@@ -16,7 +16,7 @@ public class Gem : MonoBehaviour
         }
             
         FindObjectOfType<AudioManager>().PlaySound("PickUp");
-        PlayerManager.score++;
+        FindObjectOfType<PlayerManager>().AddPoint(other.name);
         gameObject.SetActive(false);
     }
 }

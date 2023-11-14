@@ -14,8 +14,7 @@ public class Tile : MonoBehaviour
             else
             {
                 container.SetActive(true);
-                foreach (Transform gem in container.transform)
-                    gem.gameObject.SetActive(true);
+                foreach (Transform gem in container.transform) gem.gameObject.SetActive(true);
             }
         }
     }

@@ -15,12 +15,9 @@ public class FloatingOrigin : MonoBehaviour
         
         cameraPosition.z += 10;
         foreach (var g in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (g.layer == 9)
-                g.transform.position -= cameraPosition;
-        }
+            if (g.layer == 9) g.transform.position -= cameraPosition;
 
-        FindObjectOfType<TileManager>().zSpawn = 60;
+        foreach (var tileManager in FindObjectsOfType<TileManager>()) tileManager.zSpawn = 60;
 
     }
 }

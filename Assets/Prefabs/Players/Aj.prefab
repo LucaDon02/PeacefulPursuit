@@ -73,18 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cce17ed4ca77d643aac954a389c0b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 17
+  forwardSpeed: 16
   maxSpeed: 26
   laneDistance: 2.5
   isGrounded: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   groundCheck: {fileID: 6003992477842305225}
   gravity: -14
   jumpHeight: 1.8
   animator: {fileID: 4660699460573545756}
   slideDuration: 2.7
+  isPlayer1: 0
 --- !u!1 &6003992477842305224
 GameObject:
   m_ObjectHideFlags: 0

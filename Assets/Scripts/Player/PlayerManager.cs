@@ -9,41 +9,36 @@ public class PlayerManager : MonoBehaviour
 
     public static bool isGameStarted;
     public GameObject newRecordPanel;
-
-    public static int score;
-    public TextMeshProUGUI scoreText;
+    
     public TextMeshProUGUI newRecordText;
 
     public static bool isGamePaused;
-    public GameObject[] characterPrefabs;
+    
+    public Player player1;
+    public Player player2;
 
-    private void Awake()
-    {
-        var index = PlayerPrefs.GetInt("SelectedCharacter");
-        Instantiate(characterPrefabs[index], transform.position, Quaternion.identity);
-    }
+    private float countdownTime = 3.5f;
+    public TextMeshProUGUI countdownTextPlayer1;
+    public TextMeshProUGUI countdownTextPlayer2;
 
     void Start()
     {
-        score = 0;
         Time.timeScale = 1;
         gameOver = isGameStarted = isGamePaused = false;
     }
 
     void Update()
     {
-        //Update UI
-        scoreText.text = score.ToString();
-
         //Game Over
         if (gameOver)
         {
             Time.timeScale = 0;
-            if (score > PlayerPrefs.GetInt("HighScore", 0))
+            var highestScore = player1.score > player2.score ? player1.score : player2.score;
+            if (highestScore > PlayerPrefs.GetInt("HighScore", 0))
             {
                 newRecordPanel.SetActive(true);
-                newRecordText.text = "New \nRecord\n" + score;
-                PlayerPrefs.SetInt("HighScore", score);
+                newRecordText.text = "New \nRecord\n" + highestScore;
+                PlayerPrefs.SetInt("HighScore", highestScore);
             }
 
             gameOverPanel.SetActive(true);
@@ -53,7 +48,18 @@ public class PlayerManager : MonoBehaviour
         //Start Game
         if (!isGameStarted)
         {
-            isGameStarted = true;
+            countdownTime -= 1 * Time.deltaTime;
+            countdownTextPlayer1.text = countdownTime.ToString("0");
+            countdownTextPlayer2.text = countdownTime.ToString("0");
+
+            if (countdownTime <= 0)
+            {
+                countdownTextPlayer1.gameObject.SetActive(false);
+                countdownTextPlayer2.gameObject.SetActive(false);
+                isGameStarted = true;
+            }
         }
     }
+
+    public void AddPoint(string playerName){ (playerName == "Player1" ? player1 : player2).score++; }
 }

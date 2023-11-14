@@ -11,8 +11,8 @@ public class WorldCurver : MonoBehaviour
 
     private void OnEnable()
     {
-		curveStrength = Random.Range(0, 1f) * 0.004f;
-		curveStrength2 = Random.Range(-1f, 1f) * 0.003f;
+	    curveStrength = 0.002f; //Random.Range(0, 1f) * 0.004f;
+		curveStrength2 = 0; //Random.Range(-1f, 1f) * 0.003f;
 
 		m_CurveStrengthID = Shader.PropertyToID("_CurveStrength");
         m_CurveStrengthID2 = Shader.PropertyToID("_CurveStrength2");

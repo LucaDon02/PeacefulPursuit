@@ -12,6 +12,8 @@ public class TileManager : MonoBehaviour
 
     public float zSpawn = 0;
 
+    public bool isForPlayer1;
+
     private Transform playerTransform;
 
     private int previousIndex;
@@ -21,13 +23,11 @@ public class TileManager : MonoBehaviour
         activeTiles = new List<GameObject>();
         for (var i = 0; i < numberOfTiles; i++)
         {
-            if(i==0)
-                SpawnTile();
-            else
-                SpawnTile(Random.Range(0, totalNumOfTiles));
+            if(i==0) SpawnTile();
+            else SpawnTile(Random.Range(0, totalNumOfTiles));
         }
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.Find(isForPlayer1 ? "Player1" : "Player2").transform;
 
     }
     void Update()
@@ -44,30 +44,12 @@ public class TileManager : MonoBehaviour
 
     public void SpawnTile(int index = 0)
     {
-        // ToDo: Clean this up into a loop
         var tile = tilePrefabs[index];
-        if (tile.activeInHierarchy)
-            tile = tilePrefabs[index + 8];
+        
+        for (var i = 8; i <= 56 && tile.activeInHierarchy; i += 8) 
+            tile = tilePrefabs[index + i];
 
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 16];
-        
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 24];
-        
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 32];
-        
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 40];
-        
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 48];
-        
-        if(tile.activeInHierarchy)
-            tile = tilePrefabs[index + 56];
-
-        tile.transform.position = Vector3.forward * zSpawn;
+        tile.transform.position = Vector3.forward * zSpawn + (isForPlayer1 ? new Vector3(25, 0, 0) : new Vector3(-25, 0, 0));
         tile.transform.rotation = Quaternion.identity;
         tile.SetActive(true);
 
@@ -80,6 +62,5 @@ public class TileManager : MonoBehaviour
     {
         activeTiles[0].SetActive(false);
         activeTiles.RemoveAt(0);
-        // PlayerManager.score += 3;
     }
 }

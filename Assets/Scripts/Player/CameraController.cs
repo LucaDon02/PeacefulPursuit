@@ -2,12 +2,14 @@
 
 public class CameraController : MonoBehaviour
 {
+    public bool isForPlayer1;
+    
     private Transform target;
     private Vector3 offset;
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = (isForPlayer1 ? GameObject.Find("Player1") : GameObject.Find("Player2")).transform;
         offset = transform.position - target.position;
     }
 
