@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerManager : MonoBehaviour
@@ -21,13 +20,13 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI countdownTextPlayer1;
     public TextMeshProUGUI countdownTextPlayer2;
 
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1;
         gameOver = isGameStarted = isGamePaused = false;
     }
 
-    void Update()
+    private void Update()
     {
         //Game Over
         if (gameOver)
@@ -61,5 +60,5 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void AddPoint(string playerName){ (playerName == "Player1" ? player1 : player2).score++; }
+    public void AddPoint(string playerName, int amount = 1){ (playerName == "Player1" ? player1 : player2).score += amount; }
 }

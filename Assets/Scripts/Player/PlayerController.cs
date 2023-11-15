@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float forwardSpeed;
     public float maxSpeed;
 
-    private int desiredLane = 1;//0:left, 1:middle, 2:right
+    public int desiredLane = 1;//0:left, 1:middle, 2:right
     public float laneDistance = 2.5f;//The distance between tow lanes
 
     public bool isGrounded;
