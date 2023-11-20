@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using TMPro;
 
 public class PlayerManager : MonoBehaviour
@@ -19,6 +20,16 @@ public class PlayerManager : MonoBehaviour
     private float countdownTime = 3.5f;
     public TextMeshProUGUI countdownTextPlayer1;
     public TextMeshProUGUI countdownTextPlayer2;
+    
+    public TextMeshProUGUI buffTextPlayer1;
+    public TextMeshProUGUI debuffTextPlayer1;
+    [NonSerialized] public float buffMultiplierPlayer1 = 1;
+    [NonSerialized] public float debuffMultiplierPlayer1 = 1;
+    
+    public TextMeshProUGUI buffTextPlayer2;
+    public TextMeshProUGUI debuffTextPlayer2;
+    [NonSerialized] public float buffMultiplierPlayer2 = 1;
+    [NonSerialized] public float debuffMultiplierPlayer2 = 1;
 
     private void Start()
     {
@@ -28,6 +39,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        buffTextPlayer1.text = buffMultiplierPlayer1.ToString("0.0");
+        debuffTextPlayer1.text = debuffMultiplierPlayer1.ToString("0.0");
+        buffTextPlayer2.text = buffMultiplierPlayer2.ToString("0.0");
+        debuffTextPlayer2.text = debuffMultiplierPlayer2.ToString("0.0");
+        
         //Game Over
         if (gameOver)
         {
