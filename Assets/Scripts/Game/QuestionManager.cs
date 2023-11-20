@@ -86,25 +86,25 @@ public class QuestionManager : MonoBehaviour
 
     private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<Question> questions, int currentQuestionIndex, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
-        if (answerTime > 0)
-        {
-            answerTime -= 1 * Time.deltaTime;
-
-            if (answerTime <= 0)
-            {
-                ResetAnswerColors(answerAText, answerBText, answerCText);
+        if (!(answerTime > 0)) return;
+        
+        answerTime -= 1 * Time.deltaTime;
+        
+        if (!(answerTime <= 0)) return;
+        
+        ResetAnswerColors(answerAText, answerBText, answerCText);
                 
-                if (playerNumber == 1)
-                {
-                    currentQuestionPlayer1++;
-                    SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
-                }
-                else if (playerNumber == 2)
-                {
-                    currentQuestionPlayer2++;
-                    SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
-                }
-            }
+        if (playerNumber == 1)
+        {
+            currentQuestionPlayer1++;
+            if (currentQuestionPlayer1 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
+            else PlayerManager.gameOverPlayer1 = true;
+        }
+        else if (playerNumber == 2)
+        {
+            currentQuestionPlayer2++;
+            if (currentQuestionPlayer2 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
+            else PlayerManager.gameOverPlayer2 = true;
         }
     }
 
@@ -135,10 +135,7 @@ public class QuestionManager : MonoBehaviour
 
         SetAnswerColor(correctAnswer ? Color.green : Color.red, selectedAnswer, answerAText, answerBText, answerCText);
 
-        if (correctAnswer)
-        {
-            playerManager.AddPoint(playerName, 25);
-        }
+        if (correctAnswer) playerManager.AddPoint(playerName, 25);
 
         answerTime = answerShowTime;
     }

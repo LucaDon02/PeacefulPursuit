@@ -4,14 +4,19 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static bool gameOver;
-    public GameObject gameOverPanel;
+    [NonSerialized] public static bool gameOver;
+    
+    [NonSerialized] public static bool gameOverPlayer1;
+    public GameObject gameOverPanelPlayer1;
+    public GameObject newRecordPanelPlayer1;
+    public TextMeshProUGUI newRecordTextPlayer1;
+    
+    [NonSerialized] public static bool gameOverPlayer2;
+    public GameObject gameOverPanelPlayer2;
+    public GameObject newRecordPanelPlayer2;
+    public TextMeshProUGUI newRecordTextPlayer2;
 
     public static bool isGameStarted;
-    public GameObject newRecordPanel;
-    
-    public TextMeshProUGUI newRecordText;
-
     public static bool isGamePaused;
     
     public Player player1;
@@ -30,18 +35,37 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         //Game Over
+        if (gameOverPlayer1)
+        {
+            if (gameOverPlayer2) gameOver = true;
+            if (player1.score > PlayerPrefs.GetInt("HighScore", 0))
+            {
+                newRecordPanelPlayer1.SetActive(true);
+                newRecordTextPlayer1.text = "New \nRecord\n" + player1.score;
+                PlayerPrefs.SetInt("HighScore", player1.score);
+            }
+
+            gameOverPanelPlayer1.SetActive(true);
+            Destroy(player1);
+        }
+        
+        if (gameOverPlayer2)
+        {
+            if (gameOverPlayer1) gameOver = true;
+            if (player2.score > PlayerPrefs.GetInt("HighScore", 0))
+            {
+                newRecordPanelPlayer2.SetActive(true);
+                newRecordTextPlayer2.text = "New \nRecord\n" + player2.score;
+                PlayerPrefs.SetInt("HighScore", player2.score);
+            }
+
+            gameOverPanelPlayer2.SetActive(true);
+            Destroy(player2);
+        }
+        
         if (gameOver)
         {
             Time.timeScale = 0;
-            var highestScore = player1.score > player2.score ? player1.score : player2.score;
-            if (highestScore > PlayerPrefs.GetInt("HighScore", 0))
-            {
-                newRecordPanel.SetActive(true);
-                newRecordText.text = "New \nRecord\n" + highestScore;
-                PlayerPrefs.SetInt("HighScore", highestScore);
-            }
-
-            gameOverPanel.SetActive(true);
             Destroy(gameObject);
         }
 
