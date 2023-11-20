@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    public int score;
+    [NonSerialized] public int score;
+    [NonSerialized] public int buff;
+    [NonSerialized] public int debuff;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI buffText;
+    public TextMeshProUGUI debuffText;
+    public TextMeshProUGUI totalBuffText;
     public GameObject[] characterPrefabs;
     public bool isPlayer1;
 
@@ -21,5 +27,11 @@ public class Player : MonoBehaviour
 
     void Start() { score = 0; }
 
-    void Update() { scoreText.text = score.ToString(); }
+    void Update()
+    {
+        scoreText.text = score.ToString();
+        buffText.text = buff.ToString();
+        debuffText.text = debuff.ToString();
+        totalBuffText.text = ((buff - debuff) / 10f + 1).ToString("0.0");
+    }
 }

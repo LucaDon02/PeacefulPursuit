@@ -20,16 +20,6 @@ public class PlayerManager : MonoBehaviour
     private float countdownTime = 3.5f;
     public TextMeshProUGUI countdownTextPlayer1;
     public TextMeshProUGUI countdownTextPlayer2;
-    
-    public TextMeshProUGUI buffTextPlayer1;
-    public TextMeshProUGUI debuffTextPlayer1;
-    [NonSerialized] public float buffMultiplierPlayer1 = 1;
-    [NonSerialized] public float debuffMultiplierPlayer1 = 1;
-    
-    public TextMeshProUGUI buffTextPlayer2;
-    public TextMeshProUGUI debuffTextPlayer2;
-    [NonSerialized] public float buffMultiplierPlayer2 = 1;
-    [NonSerialized] public float debuffMultiplierPlayer2 = 1;
 
     private void Start()
     {
@@ -39,11 +29,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        buffTextPlayer1.text = buffMultiplierPlayer1.ToString("0.0");
-        debuffTextPlayer1.text = debuffMultiplierPlayer1.ToString("0.0");
-        buffTextPlayer2.text = buffMultiplierPlayer2.ToString("0.0");
-        debuffTextPlayer2.text = debuffMultiplierPlayer2.ToString("0.0");
-        
         //Game Over
         if (gameOver)
         {
@@ -77,4 +62,22 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void AddPoint(string playerName, int amount = 1){ (playerName == "Player1" ? player1 : player2).score += amount; }
+
+    public void PearPickup(string playerName){ (playerName == "Player1" ? player1 : player2).buff += 1; }
+
+    public void ApplePickup(string playerName){ (playerName == "Player1" ? player2 : player1).debuff += 1; }
+
+    public void PlayerHitObstacle(bool isPlayer1)
+    {
+        if (isPlayer1)
+        {
+            player1.buff = 0;
+            player2.debuff = 0;
+        }
+        else
+        {
+            player2.buff = 0;
+            player1.debuff = 0;
+        }
+    }
 }

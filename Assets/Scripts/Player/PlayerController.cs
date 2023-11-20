@@ -135,11 +135,12 @@ public class PlayerController : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * 2 * -gravity);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        if (hit.transform.tag != "Obstacle") return;
-        PlayerManager.gameOver = true;
-        FindObjectOfType<AudioManager>().PlaySound("GameOver");
+        if (other.transform.tag != "Obstacle") return;
+        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().PlayerHitObstacle(isPlayer1);
+        // PlayerManager.gameOver = true;
+        FindObjectOfType<AudioManager>().PlaySound("PlayerDamage");
     }
 
     private IEnumerator Slide()
