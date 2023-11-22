@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DamageAnimation : MonoBehaviour
 {
     public bool start = false;
-    public float animationDuration = 0.75f;
+    public float animationDuration = 0.125f;
 
     private Image image;
     private float timer = 0f;
@@ -19,7 +19,7 @@ public class DamageAnimation : MonoBehaviour
     private void Update()
     {
         if (!start) return;
-        timer += Time.deltaTime;
+        timer += Time.unscaledDeltaTime;
         
         if (timer > animationDuration)
         {

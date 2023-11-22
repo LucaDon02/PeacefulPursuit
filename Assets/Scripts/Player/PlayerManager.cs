@@ -28,14 +28,37 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI countdownTextPlayer1;
     public TextMeshProUGUI countdownTextPlayer2;
 
+    public float changeTimerDuration = 45.49f;
+    public float intervalChangeTimerDuration = 10.49f;
+    public TextMeshProUGUI timerText;
+    public GameObject changePlayerPanel;
+    private float timer;
+    private bool isChanging;
+
     private void Start()
     {
         Time.timeScale = 1;
         gameOver = isGameStarted = isGamePaused = false;
+        timer = changeTimerDuration;
     }
 
     private void Update()
     {
+        if (isGameStarted && !isGamePaused) timer -= Time.unscaledDeltaTime;
+        
+        if (timer <= 0)
+        {
+            timer = isChanging ? changeTimerDuration : intervalChangeTimerDuration;
+            
+            isChanging = !isChanging;
+            changePlayerPanel.SetActive(isChanging);
+            Time.timeScale = isChanging ? 0 : 1;
+        }
+
+        timerText.text = timer.ToString("00");
+        
+        
+        
         //Game Over
         if (gameOverPlayer1)
         {
@@ -74,7 +97,7 @@ public class PlayerManager : MonoBehaviour
         //Start Game
         if (!isGameStarted)
         {
-            countdownTime -= 1 * Time.deltaTime;
+            countdownTime -= Time.deltaTime;
             countdownTextPlayer1.text = countdownTime.ToString("0");
             countdownTextPlayer2.text = countdownTime.ToString("0");
 
