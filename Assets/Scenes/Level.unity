@@ -6566,6 +6566,7 @@ GameObject:
   - component: {fileID: 807605195}
   - component: {fileID: 807605197}
   - component: {fileID: 807605196}
+  - component: {fileID: 807605198}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -6621,7 +6622,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 10
+  m_PixelsPerUnitMultiplier: 1000
 --- !u!222 &807605197
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6630,6 +6631,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807605194}
   m_CullTransparentMesh: 1
+--- !u!114 &807605198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807605194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b747d593f613be5488719e27d6451e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 0
+  animationDuration: 0.75
 --- !u!1001 &809169217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11838,9 +11853,11 @@ MonoBehaviour:
   gameOverPanelPlayer1: {fileID: 664631330}
   newRecordPanelPlayer1: {fileID: 1432115767}
   newRecordTextPlayer1: {fileID: 494670722}
+  damageAnimationPlayer1: {fileID: 807605198}
   gameOverPanelPlayer2: {fileID: 210108396}
   newRecordPanelPlayer2: {fileID: 1128242007}
   newRecordTextPlayer2: {fileID: 1972915724}
+  damageAnimationPlayer2: {fileID: 2098351102}
   player1: {fileID: 1469877393}
   player2: {fileID: 1469877392}
   countdownTextPlayer1: {fileID: 348941941}
@@ -15989,6 +16006,7 @@ GameObject:
   - component: {fileID: 2098351099}
   - component: {fileID: 2098351101}
   - component: {fileID: 2098351100}
+  - component: {fileID: 2098351102}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -16044,7 +16062,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3.18
+  m_PixelsPerUnitMultiplier: 1000
 --- !u!222 &2098351101
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16053,6 +16071,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098351098}
   m_CullTransparentMesh: 1
+--- !u!114 &2098351102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098351098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b747d593f613be5488719e27d6451e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 0
+  animationDuration: 0.75
 --- !u!1 &2113798322
 GameObject:
   m_ObjectHideFlags: 0
