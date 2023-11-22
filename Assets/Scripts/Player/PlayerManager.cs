@@ -10,11 +10,13 @@ public class PlayerManager : MonoBehaviour
     public GameObject gameOverPanelPlayer1;
     public GameObject newRecordPanelPlayer1;
     public TextMeshProUGUI newRecordTextPlayer1;
+    public DamageAnimation damageAnimationPlayer1;
     
     [NonSerialized] public static bool gameOverPlayer2;
     public GameObject gameOverPanelPlayer2;
     public GameObject newRecordPanelPlayer2;
     public TextMeshProUGUI newRecordTextPlayer2;
+    public DamageAnimation damageAnimationPlayer2;
 
     public static bool isGameStarted;
     public static bool isGamePaused;
@@ -95,11 +97,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (isPlayer1)
         {
+            damageAnimationPlayer1.start = true;
             player1.buff = 0;
             player2.debuff = 0;
         }
         else
         {
+            damageAnimationPlayer2.start = true;
             player2.buff = 0;
             player1.debuff = 0;
         }
