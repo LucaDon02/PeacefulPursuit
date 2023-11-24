@@ -32,6 +32,6 @@ public class Player : MonoBehaviour
         scoreText.text = score.ToString();
         buffText.text = buff.ToString();
         debuffText.text = debuff.ToString();
-        totalBuffText.text = ((buff - debuff) / 10f + 1).ToString("0.0");
+        totalBuffText.text = ((buff - debuff) / 10f + 1).ToString("0.0") + "X";
     }
 }

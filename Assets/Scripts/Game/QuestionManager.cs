@@ -20,12 +20,20 @@ public class QuestionManager : MonoBehaviour
     private TextMeshProUGUI answerCPlayer2;
 
     private List<Question> questionsPlayer1;
-    private int currentQuestionPlayer1 = 0;
+    private List<char> answersPlayer1 = new();
+    private readonly List<Question> wrongQuestionsPlayer1 = new();
+    private int currentQuestionPlayer1;
     private float answerTimePlayer1;
     
     private List<Question> questionsPlayer2;
-    private int currentQuestionPlayer2 = 0;
+    private List<char> answersPlayer2 = new();
+    private readonly List<Question> wrongQuestionsPlayer2 = new();
+    private int currentQuestionPlayer2;
     private float answerTimePlayer2;
+
+    public GameObject questionPrefab;
+    public GameObject questionContainerPlayer1;
+    public GameObject questionContainerPlayer2;
 
     private void Awake()
     {
@@ -50,19 +58,19 @@ public class QuestionManager : MonoBehaviour
     {
         questionsPlayer1 = new List<Question>()
         {
-            new Question("Welke kleur heeft een appel?", "Rood", "Geel", "bruin", 'A'),
-            new Question("Welke kleur heeft een banaan?", "Rood", "Geel", "bruin", 'B'),
-            new Question("Welke kleur heeft een kiwi?", "Rood", "Geel", "bruin", 'C'),
-            new Question("Welke kleur heeft een aardbei?", "Rood", "Geel", "Groen", 'A'),
+            new ("Welke kleur heeft een appel?", "Rood", "Geel", "bruin", 'A'),
+            new ("Welke kleur heeft een banaan?", "Rood", "Geel", "bruin", 'B'),
+            new ("Welke kleur heeft een kiwi?", "Rood", "Geel", "bruin", 'C'),
+            new ("Welke kleur heeft een aardbei?", "Rood", "Geel", "Groen", 'A'),
             // Add more questions here...
         };
         
         questionsPlayer2 = new List<Question>()
         {
-            new Question("Welke kleur heeft een peer?", "Groen", "Oranje", "Wit", 'A'),
-            new Question("Welke kleur heeft een sinasappel?", "Groen", "Oranje", "Wit", 'B'),
-            new Question("Welke kleur heeft een witte druif?", "Groen", "Oranje", "Wit", 'C'),
-            new Question("Welke kleur heeft een watermeloen?", "Groen", "Oranje", "Wit", 'A'),
+            new ("Welke kleur heeft een peer?", "Groen", "Oranje", "Wit", 'A'),
+            new ("Welke kleur heeft een sinasappel?", "Groen", "Oranje", "Wit", 'B'),
+            new ("Welke kleur heeft een witte druif?", "Groen", "Oranje", "Wit", 'C'),
+            new ("Welke kleur heeft een watermeloen?", "Groen", "Oranje", "Wit", 'A'),
             // Add more questions here...
         };
         
@@ -80,11 +88,11 @@ public class QuestionManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateAnswerTimeAndDisplay(1, ref answerTimePlayer1, questionsPlayer1, currentQuestionPlayer1, questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, currentQuestionPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+        UpdateAnswerTimeAndDisplay(1, ref answerTimePlayer1, questionsPlayer1, questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
+        UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<Question> questions, int currentQuestionIndex, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         if (!(answerTime > 0)) return;
         
@@ -94,18 +102,27 @@ public class QuestionManager : MonoBehaviour
         
         ResetAnswerColors(answerAText, answerBText, answerCText);
                 
-        if (playerNumber == 1)
+        switch (playerNumber)
         {
-            currentQuestionPlayer1++;
-            if (currentQuestionPlayer1 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
-            else PlayerManager.gameOverPlayer1 = true;
+            case 1:
+            {
+                currentQuestionPlayer1++;
+                if (currentQuestionPlayer1 == questions.Count) AddWrongQuestions();
+                if (currentQuestionPlayer1 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
+                else PlayerManager.gameOverPlayer1 = true;
+                break;
+            }
+            case 2:
+            {
+                currentQuestionPlayer2++;
+                if (currentQuestionPlayer2 == questions.Count) AddWrongQuestions();
+                if (currentQuestionPlayer2 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
+                else PlayerManager.gameOverPlayer2 = true;
+                break;
+            }
         }
-        else if (playerNumber == 2)
-        {
-            currentQuestionPlayer2++;
-            if (currentQuestionPlayer2 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
-            else PlayerManager.gameOverPlayer2 = true;
-        }
+        
+        if (PlayerManager.gameOverPlayer1 || PlayerManager.gameOverPlayer2) Debug.Log("Total questions count Player1: " + questionsPlayer1.Count + ". Total questions count Player2: " + questionsPlayer2.Count);
     }
 
     private void ResetAnswerColors(TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
@@ -117,25 +134,47 @@ public class QuestionManager : MonoBehaviour
 
     public void AnswerQuestionPlayer1(int lane) // 0:left, 1:middle, 2:right
     {
-        AnswerQuestion(lane, questionsPlayer1, currentQuestionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1, ref answerTimePlayer1, playerManagerPlayer, "Player1");
+        AnswerQuestion(lane, questionsPlayer1, currentQuestionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1, ref answerTimePlayer1, "Player1");
     }
     
     public void AnswerQuestionPlayer2(int lane) // 0:left, 1:middle, 2:right
     {
-        AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, playerManagerPlayer, "Player2");
+        AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, "Player2");
     }
 
-    private void AnswerQuestion(int lane, List<Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, PlayerManager playerManager, string playerName)
+    private void AnswerQuestion(int lane, List<Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
     {
         char[] answerOptions = { 'A', 'B', 'C' };
         var selectedAnswer = answerOptions[lane];
 
         var question = questions[currentQuestionIndex];
         var correctAnswer = selectedAnswer == question.correctAnswer;
+        
+        var questionItem = playerName == "Player1" ? Instantiate(questionPrefab, questionContainerPlayer1.transform) : Instantiate(questionPrefab, questionContainerPlayer2.transform);
+        
+        questionItem.transform.Find("Question").GetComponent<TextMeshProUGUI>().text = question.question;
+                
+        var answer = questionItem.transform.Find("Answer").GetComponent<TextMeshProUGUI>();
+        answer.text = selectedAnswer.ToString();
+        answer.color = correctAnswer ? Color.green : Color.red;
+                
+        questionItem.transform.Find("Correct answer").GetComponent<TextMeshProUGUI>().text = question.correctAnswer.ToString();
+        
+        switch (playerName)
+        {
+            case "Player1":
+                answersPlayer1.Add(selectedAnswer);
+                if (!correctAnswer) wrongQuestionsPlayer1.Add(question);
+                break;
+            case "Player2":
+                answersPlayer2.Add(selectedAnswer);
+                if (!correctAnswer) wrongQuestionsPlayer2.Add(question);
+                break;
+        }
 
         SetAnswerColor(correctAnswer ? Color.green : Color.red, selectedAnswer, answerAText, answerBText, answerCText);
 
-        if (correctAnswer) playerManager.AddPoint(playerName, 25);
+        if (correctAnswer) playerManagerPlayer.AddPoint(playerName, 25);
 
         answerTime = answerShowTime;
     }
@@ -153,6 +192,26 @@ public class QuestionManager : MonoBehaviour
             case 'C':
                 answerCText.color = color;
                 break;
+        }
+    }
+    
+    private void AddWrongQuestions()
+    {
+        var lowestWrongQuestionCount = wrongQuestionsPlayer1.Count < wrongQuestionsPlayer2.Count
+            ? wrongQuestionsPlayer1.Count
+            : wrongQuestionsPlayer2.Count;
+
+        for (var i = 0; i < lowestWrongQuestionCount; i++)
+        {
+            // Player1
+            var randomQuestionPlayer1 = wrongQuestionsPlayer1[Random.Range(0, wrongQuestionsPlayer1.Count)];
+            questionsPlayer1.Add(randomQuestionPlayer1);
+            wrongQuestionsPlayer1.Remove(randomQuestionPlayer1);
+            
+            // Player2
+            var randomQuestionPlayer2 = wrongQuestionsPlayer2[Random.Range(0, wrongQuestionsPlayer2.Count)];
+            questionsPlayer2.Add(randomQuestionPlayer2);
+            wrongQuestionsPlayer2.Remove(randomQuestionPlayer2);
         }
     }
 }

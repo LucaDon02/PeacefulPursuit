@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject changePlayerPanel;
     private float timer;
     private bool isChanging;
+    private float previousTimeScale;
 
     private void Start()
     {
@@ -50,9 +51,11 @@ public class PlayerManager : MonoBehaviour
         {
             timer = isChanging ? changeTimerDuration : intervalChangeTimerDuration;
             
+            changePlayerPanel.SetActive(!isChanging);
+            if (!isChanging) previousTimeScale = Time.timeScale;
+            Time.timeScale = isChanging ? previousTimeScale : 0;
+            
             isChanging = !isChanging;
-            changePlayerPanel.SetActive(isChanging);
-            Time.timeScale = isChanging ? 0 : 1;
         }
 
         timerText.text = timer.ToString("00");
