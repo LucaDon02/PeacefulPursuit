@@ -13021,6 +13021,7 @@ MonoBehaviour:
   intervalChangeTimerDuration: 10.49
   timerText: {fileID: 827192024}
   changePlayerPanel: {fileID: 1041412907}
+  defaultCorrectQuestionBonus: 25
 --- !u!4 &1469877391
 Transform:
   m_ObjectHideFlags: 0
@@ -14930,7 +14931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerShowTime: 3.5
-  playerManagerPlayer: {fileID: 1469877390}
+  playerManager: {fileID: 1469877390}
   questionBannerPlayer1: {fileID: 750638061}
   questionBannerPlayer2: {fileID: 201335027}
   questionPrefab: {fileID: 3689077418263745836, guid: 48c73ba6bdf01814cbe51b3227a0a9ac, type: 3}

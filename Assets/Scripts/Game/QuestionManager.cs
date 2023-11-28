@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class QuestionManager : MonoBehaviour
 {
     public float answerShowTime = 3.5f;
-    public PlayerManager playerManagerPlayer;
+    public PlayerManager playerManager;
     
     public GameObject questionBannerPlayer1;
     private TextMeshProUGUI questionPlayer1;
@@ -174,7 +175,7 @@ public class QuestionManager : MonoBehaviour
 
         SetAnswerColor(correctAnswer ? Color.green : Color.red, selectedAnswer, answerAText, answerBText, answerCText);
 
-        if (correctAnswer) playerManagerPlayer.AddPoint(playerName, 25);
+        if (correctAnswer) playerManager.CorrectQuestion(playerName);
 
         answerTime = answerShowTime;
     }

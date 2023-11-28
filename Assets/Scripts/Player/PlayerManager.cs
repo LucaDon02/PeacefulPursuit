@@ -36,6 +36,8 @@ public class PlayerManager : MonoBehaviour
     private bool isChanging;
     private float previousTimeScale;
 
+    public int defaultCorrectQuestionBonus = 25;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -133,5 +135,11 @@ public class PlayerManager : MonoBehaviour
             player2.buff = 0;
             player1.debuff = 0;
         }
+    }
+    
+    public void CorrectQuestion(string playerName)
+    {
+        var player = playerName == "Player1" ? player1 : player2;
+        player.score += defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10 + 1);
     }
 }
