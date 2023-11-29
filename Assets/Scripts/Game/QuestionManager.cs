@@ -122,8 +122,6 @@ public class QuestionManager : MonoBehaviour
                 break;
             }
         }
-        
-        if (PlayerManager.gameOverPlayer1 || PlayerManager.gameOverPlayer2) Debug.Log("Total questions count Player1: " + questionsPlayer1.Count + ". Total questions count Player2: " + questionsPlayer2.Count);
     }
 
     private void ResetAnswerColors(TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)

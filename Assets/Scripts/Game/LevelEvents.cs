@@ -31,12 +31,7 @@ public class LevelEvents : MonoBehaviour
             gamePausedPanel.SetActive(true);
         }
     }
-    
-    public void ReplayGame()
-    {
-        SceneManager.LoadScene("Level");
-    }
-    
+
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");

@@ -5,6 +5,7 @@ using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     [NonSerialized] public static bool gameOver;
+    public GameObject menuButton;
     
     [NonSerialized] public static bool gameOverPlayer1;
     public GameObject gameOverPanelPlayer1;
@@ -41,7 +42,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        gameOver = isGameStarted = isGamePaused = false;
+        gameOver = isGameStarted = isGamePaused = gameOverPlayer1 = gameOverPlayer2 = false;
         timer = changeTimerDuration;
     }
 
@@ -71,7 +72,7 @@ public class PlayerManager : MonoBehaviour
             if (player1.score > PlayerPrefs.GetInt("HighScore", 0))
             {
                 newRecordPanelPlayer1.SetActive(true);
-                newRecordTextPlayer1.text = "New \nRecord\n" + player1.score;
+                newRecordTextPlayer1.text = "New Record!\n" + player1.score;
                 PlayerPrefs.SetInt("HighScore", player1.score);
             }
 
@@ -85,7 +86,7 @@ public class PlayerManager : MonoBehaviour
             if (player2.score > PlayerPrefs.GetInt("HighScore", 0))
             {
                 newRecordPanelPlayer2.SetActive(true);
-                newRecordTextPlayer2.text = "New \nRecord\n" + player2.score;
+                newRecordTextPlayer2.text = "New Record!\n" + player2.score;
                 PlayerPrefs.SetInt("HighScore", player2.score);
             }
 
@@ -95,6 +96,7 @@ public class PlayerManager : MonoBehaviour
         
         if (gameOver)
         {
+            menuButton.SetActive(true);
             Time.timeScale = 0;
             Destroy(gameObject);
         }
@@ -140,6 +142,6 @@ public class PlayerManager : MonoBehaviour
     public void CorrectQuestion(string playerName)
     {
         var player = playerName == "Player1" ? player1 : player2;
-        player.score += defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10 + 1);
+        player.score += (int)(defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10f + 1) + 0.5);
     }
 }
