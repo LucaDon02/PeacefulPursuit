@@ -8,7 +8,7 @@ public class Gem : MonoBehaviour
         
         var effect = ObjectPool.instance.GetPooledObject();
 
-        if(effect!= null)
+        if (effect!= null)
         {
             effect.transform.position = transform.position;
             effect.transform.rotation = effect.transform.rotation;

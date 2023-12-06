@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,15 +22,15 @@ public class QuestionManager : MonoBehaviour
     private TextMeshProUGUI answerBPlayer2;
     private TextMeshProUGUI answerCPlayer2;
 
-    private List<Question> questionsPlayer1;
-    private List<char> answersPlayer1 = new();
-    private readonly List<Question> wrongQuestionsPlayer1 = new();
+    private List<JSONReader.Question> questionsPlayer1 = new List<JSONReader.Question>();
+    private List<string> answersPlayer1 = new();
+    private readonly List<JSONReader.Question> wrongQuestionsPlayer1 = new();
     private int currentQuestionPlayer1;
     private float answerTimePlayer1;
     
-    private List<Question> questionsPlayer2;
-    private List<char> answersPlayer2 = new();
-    private readonly List<Question> wrongQuestionsPlayer2 = new();
+    private List<JSONReader.Question> questionsPlayer2 = new List<JSONReader.Question>();
+    private List<string> answersPlayer2 = new();
+    private readonly List<JSONReader.Question> wrongQuestionsPlayer2 = new();
     private int currentQuestionPlayer2;
     private float answerTimePlayer2;
 
@@ -39,7 +41,7 @@ public class QuestionManager : MonoBehaviour
     private void Awake()
     {
         InitializeUIReferences();
-        InitializeQuestions();
+        StartCoroutine(WaitUntilInitializeQuestions());
     }
 
     private void InitializeUIReferences()
@@ -54,32 +56,31 @@ public class QuestionManager : MonoBehaviour
         answerBPlayer2 = questionBannerPlayer2.transform.Find("Answer B").GetComponent<TextMeshProUGUI>();
         answerCPlayer2 = questionBannerPlayer2.transform.Find("Answer C").GetComponent<TextMeshProUGUI>();
     }
-
-    private void InitializeQuestions()
+    
+    private bool IsInitialized() { return JSONReader.playerQuestions.questions != null; }
+    
+    private IEnumerator WaitUntilInitializeQuestions()
     {
-        questionsPlayer1 = new List<Question>()
-        {
-            new ("Welke kleur heeft een appel?", "Rood", "Geel", "bruin", 'A'),
-            new ("Welke kleur heeft een banaan?", "Rood", "Geel", "bruin", 'B'),
-            new ("Welke kleur heeft een kiwi?", "Rood", "Geel", "bruin", 'C'),
-            new ("Welke kleur heeft een aardbei?", "Rood", "Geel", "Groen", 'A'),
-            // Add more questions here...
-        };
+        yield return new WaitUntil(IsInitialized);
+
+        var questions = JSONReader.playerQuestions.questions.ToList();
         
-        questionsPlayer2 = new List<Question>()
+        for (var i = questions.Count; i > 0; i--)
         {
-            new ("Welke kleur heeft een peer?", "Groen", "Oranje", "Wit", 'A'),
-            new ("Welke kleur heeft een sinasappel?", "Groen", "Oranje", "Wit", 'B'),
-            new ("Welke kleur heeft een witte druif?", "Groen", "Oranje", "Wit", 'C'),
-            new ("Welke kleur heeft een watermeloen?", "Groen", "Oranje", "Wit", 'A'),
-            // Add more questions here...
-        };
-        
+            var random = Random.Range(0, questions.Count);
+            var question = questions[random];
+            
+            if (i % 2 == 0) questionsPlayer1.Add(question);
+            else questionsPlayer2.Add(question);
+            
+            questions.Remove(question);
+        }
+
         SetQuestionUI(questionsPlayer1[currentQuestionPlayer1], questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
         SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void SetQuestionUI(Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void SetQuestionUI(JSONReader.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         questionText.text = question.question;
         answerAText.text = question.answerA;
@@ -93,7 +94,7 @@ public class QuestionManager : MonoBehaviour
         UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JSONReader.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         if (!(answerTime > 0)) return;
         
@@ -141,9 +142,9 @@ public class QuestionManager : MonoBehaviour
         AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, "Player2");
     }
 
-    private void AnswerQuestion(int lane, List<Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
+    private void AnswerQuestion(int lane, List<JSONReader.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
     {
-        char[] answerOptions = { 'A', 'B', 'C' };
+        string[] answerOptions = { "A", "B", "C" };
         var selectedAnswer = answerOptions[lane];
 
         var question = questions[currentQuestionIndex];
@@ -154,7 +155,7 @@ public class QuestionManager : MonoBehaviour
         questionItem.transform.Find("Question").GetComponent<TextMeshProUGUI>().text = question.question;
                 
         var answer = questionItem.transform.Find("Answer").GetComponent<TextMeshProUGUI>();
-        answer.text = selectedAnswer.ToString();
+        answer.text = selectedAnswer;
         answer.color = correctAnswer ? Color.green : Color.red;
                 
         questionItem.transform.Find("Correct answer").GetComponent<TextMeshProUGUI>().text = question.correctAnswer.ToString();
@@ -178,17 +179,17 @@ public class QuestionManager : MonoBehaviour
         answerTime = answerShowTime;
     }
 
-    private void SetAnswerColor(Color color, char selectedAnswer, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void SetAnswerColor(Color color, string selectedAnswer, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         switch (selectedAnswer)
         {
-            case 'A':
+            case "A":
                 answerAText.color = color;
                 break;
-            case 'B':
+            case "B":
                 answerBText.color = color;
                 break;
-            case 'C':
+            case "C":
                 answerCText.color = color;
                 break;
         }
@@ -212,23 +213,5 @@ public class QuestionManager : MonoBehaviour
             questionsPlayer2.Add(randomQuestionPlayer2);
             wrongQuestionsPlayer2.Remove(randomQuestionPlayer2);
         }
-    }
-}
-
-internal class Question
-{
-    internal readonly string question;
-    internal readonly string answerA;
-    internal readonly string answerB;
-    internal readonly string answerC;
-    internal readonly char correctAnswer;
-
-    protected internal Question(string question, string answerA, string answerB, string answerC, char correctAnswer)
-    {
-        this.question = question;
-        this.answerA = answerA;
-        this.answerB = answerB;
-        this.answerC = answerC;
-        this.correctAnswer = correctAnswer;
     }
 }
