@@ -1,60 +1,60 @@
 {
-  "questions": [
-    {
-      "question": "Welke kleur heeft een appel?",
-      "answerA": "Rood",
-      "answerB": "Geel",
-      "answerC": "Bruin",
-      "correctAnswer": "A"
-    },
-    {
-      "question": "Welke kleur heeft een banaan?",
-      "answerA": "Rood",
-      "answerB": "Geel",
-      "answerC": "Bruin",
-      "correctAnswer": "B"
-    },
-    {
-      "question": "Welke kleur heeft een kiwi?",
-      "answerA": "Rood",
-      "answerB": "Geel",
-      "answerC": "Bruin",
-      "correctAnswer": "C"
-    },
-    {
-      "question": "Welke kleur heeft een aardbei?",
-      "answerA": "Rood",
-      "answerB": "Geel",
-      "answerC": "Bruin",
-      "correctAnswer": "A"
-    },
-    {
-      "question": "Welke kleur heeft een peer?",
-      "answerA": "Groen",
-      "answerB": "Oranje",
-      "answerC": "Wit",
-      "correctAnswer": "A"
-    },
-    {
-      "question": "Welke kleur heeft een sinasappel?",
-      "answerA": "Groen",
-      "answerB": "Oranje",
-      "answerC": "Wit",
-      "correctAnswer": "B"
-    },
-    {
-      "question": "Welke kleur heeft een witte druif?",
-      "answerA": "Groen",
-      "answerB": "Oranje",
-      "answerC": "Wit",
-      "correctAnswer": "C"
-    },
-    {
-      "question": "Welke kleur heeft een watermeloen?",
-      "answerA": "Groen",
-      "answerB": "Oranje",
-      "answerC": "Wit",
-      "correctAnswer": "A"
-    }
-  ]
+    "questions": [
+        {
+            "question": "Welke kleur heeft een appel?",
+            "answerA": "Rood",
+            "answerB": "Geel",
+            "answerC": "Bruin",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welke kleur heeft een banaan?",
+            "answerA": "Rood",
+            "answerB": "Geel",
+            "answerC": "Bruin",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Welke kleur heeft een kiwi?",
+            "answerA": "Rood",
+            "answerB": "Geel",
+            "answerC": "Bruin",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Welke kleur heeft een aardbei?",
+            "answerA": "Rood",
+            "answerB": "Geel",
+            "answerC": "Bruin",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welke kleur heeft een peer?",
+            "answerA": "Groen",
+            "answerB": "Oranje",
+            "answerC": "Wit",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welke kleur heeft een sinasappel?",
+            "answerA": "Groen",
+            "answerB": "Oranje",
+            "answerC": "Wit",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Welke kleur heeft een witte druif?",
+            "answerA": "Groen",
+            "answerB": "Oranje",
+            "answerC": "Wit",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Welke kleur heeft een watermeloen?",
+            "answerA": "Groen",
+            "answerB": "Oranje",
+            "answerC": "Wit",
+            "correctAnswer": "A"
+        }
+    ]
 }

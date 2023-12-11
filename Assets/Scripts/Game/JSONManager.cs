@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Windows;
 
-public class JSONReader : MonoBehaviour
+public class JSONManager : MonoBehaviour
 {
     public TextAsset questionsJson;
     
@@ -22,4 +23,11 @@ public class JSONReader : MonoBehaviour
     public static PlayerQuestions playerQuestions = new PlayerQuestions();
 
     private void Start() { playerQuestions = JsonUtility.FromJson<PlayerQuestions>(questionsJson.text); }
+
+    public static void OutputJSON()
+    {
+        var strOutput = JsonUtility.ToJson(playerQuestions, true);
+        
+        System.IO.File.WriteAllText(Application.dataPath + "/Resources/Jsons/Questions.json", strOutput);
+    }
 }

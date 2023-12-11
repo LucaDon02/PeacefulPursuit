@@ -22,15 +22,15 @@ public class QuestionManager : MonoBehaviour
     private TextMeshProUGUI answerBPlayer2;
     private TextMeshProUGUI answerCPlayer2;
 
-    private List<JSONReader.Question> questionsPlayer1 = new List<JSONReader.Question>();
+    private List<JSONManager.Question> questionsPlayer1 = new List<JSONManager.Question>();
     private List<string> answersPlayer1 = new();
-    private readonly List<JSONReader.Question> wrongQuestionsPlayer1 = new();
+    private readonly List<JSONManager.Question> wrongQuestionsPlayer1 = new();
     private int currentQuestionPlayer1;
     private float answerTimePlayer1;
     
-    private List<JSONReader.Question> questionsPlayer2 = new List<JSONReader.Question>();
+    private List<JSONManager.Question> questionsPlayer2 = new List<JSONManager.Question>();
     private List<string> answersPlayer2 = new();
-    private readonly List<JSONReader.Question> wrongQuestionsPlayer2 = new();
+    private readonly List<JSONManager.Question> wrongQuestionsPlayer2 = new();
     private int currentQuestionPlayer2;
     private float answerTimePlayer2;
 
@@ -57,13 +57,13 @@ public class QuestionManager : MonoBehaviour
         answerCPlayer2 = questionBannerPlayer2.transform.Find("Answer C").GetComponent<TextMeshProUGUI>();
     }
     
-    private bool IsInitialized() { return JSONReader.playerQuestions.questions != null; }
+    private bool IsInitialized() { return JSONManager.playerQuestions.questions != null; }
     
     private IEnumerator WaitUntilInitializeQuestions()
     {
         yield return new WaitUntil(IsInitialized);
 
-        var questions = JSONReader.playerQuestions.questions.ToList();
+        var questions = JSONManager.playerQuestions.questions.ToList();
         
         for (var i = questions.Count; i > 0; i--)
         {
@@ -80,7 +80,7 @@ public class QuestionManager : MonoBehaviour
         SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void SetQuestionUI(JSONReader.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void SetQuestionUI(JSONManager.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         questionText.text = question.question;
         answerAText.text = question.answerA;
@@ -94,7 +94,7 @@ public class QuestionManager : MonoBehaviour
         UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JSONReader.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JSONManager.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         if (!(answerTime > 0)) return;
         
@@ -142,7 +142,7 @@ public class QuestionManager : MonoBehaviour
         AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, "Player2");
     }
 
-    private void AnswerQuestion(int lane, List<JSONReader.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
+    private void AnswerQuestion(int lane, List<JSONManager.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
     {
         string[] answerOptions = { "A", "B", "C" };
         var selectedAnswer = answerOptions[lane];

@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     private bool player2Ready;
 
     public TextMeshProUGUI highScoreText;
+    public GameObject cms;
 
     private void Start()
     {
@@ -100,4 +101,6 @@ public class MainMenu : MonoBehaviour
         
         if (player1Ready && player2Ready) SceneManager.LoadScene("Level");
     }
+
+    public void OpenCMS() { cms.SetActive(true); }
 }
