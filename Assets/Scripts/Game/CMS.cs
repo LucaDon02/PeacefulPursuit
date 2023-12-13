@@ -23,7 +23,7 @@ public class CMS : MonoBehaviour
     {
         container = questionsGameObject.transform.GetChild(0).gameObject;
         modalInputField = questionModal.transform.GetChild(0).Find("InputField").GetComponent<TMP_InputField>();
-        StartCoroutine(WaitUntilInitializeQuestions());
+        InitializeQuestions();
     }
 
     private void Update() {
@@ -33,13 +33,9 @@ public class CMS : MonoBehaviour
         else CloseCMS();
     }
 
-    private bool IsInitialized() { return JSONManager.playerQuestions.questions != null; }
-
-    private IEnumerator WaitUntilInitializeQuestions()
+    private void InitializeQuestions()
     {
-        yield return new WaitUntil(IsInitialized);
-        
-        questions = JSONManager.playerQuestions.questions.ToList();
+        questions = JSONManager.GetQuestions();
         foreach (var question in questions)
         {
             var questionItem = Instantiate(questionPrefab, container.transform);
@@ -131,9 +127,9 @@ public class CMS : MonoBehaviour
         }
     }
 
-    internal void ChangeCorrectQuestion(GameObject questionItem, JSONManager.Question question, string newCorrectQuestion)
+    internal void ChangeCorrectAnswer(GameObject questionItem, JSONManager.Question question, string newCorrectAnswer)
     {
-        if (question.correctAnswer == newCorrectQuestion) return;
+        if (question.correctAnswer == newCorrectAnswer) return;
 
         var toggleOld = question.correctAnswer switch
         {
@@ -143,7 +139,7 @@ public class CMS : MonoBehaviour
             _ => throw new ArgumentOutOfRangeException()
         };
         
-        var toggleNew = newCorrectQuestion switch
+        var toggleNew = newCorrectAnswer switch
         {
             "A" => questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>(),
             "B" => questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>(),
@@ -157,8 +153,7 @@ public class CMS : MonoBehaviour
         toggleNew.interactable = false;
         toggleNew.isOn = true;
 
-        question.correctAnswer = newCorrectQuestion;
-        JSONManager.OutputJSONQuestions();
+        JSONManager.EditCorrectAnswer(question, newCorrectAnswer);
     }
 
     internal void OpenModal(JSONManager.Question question, string item) //A:Answer A, B:Answer B, C:Answer C, "":Question
@@ -183,20 +178,19 @@ public class CMS : MonoBehaviour
         switch (modalItem)
         {
             case "A":
-                modalQuestion.answerA = modalInputField.text;
+                JSONManager.EditAnswerA(modalQuestion, modalInputField.text);
                 break;
             case "B":
-                modalQuestion.answerB = modalInputField.text;
+                JSONManager.EditAnswerB(modalQuestion, modalInputField.text);
                 break;
             case "C":
-                modalQuestion.answerC = modalInputField.text;
+                JSONManager.EditAnswerC(modalQuestion, modalInputField.text);
                 break;
             case "":
-                modalQuestion.question = modalInputField.text;
+                JSONManager.EditQuestion(modalQuestion, modalInputField.text);
                 break;
         }
-        
-        JSONManager.OutputJSONQuestions();
+
         CloseModal();
         RefreshList();
     }

@@ -33,10 +33,7 @@ public class MainMenu : MonoBehaviour
     
     private void Update()
     {
-        var highscorePlayer1 = JSONManager.scores.scoresPlayer1.Max();
-        var highscorePlayer2 = JSONManager.scores.scoresPlayer2.Max();
-        var highscore = highscorePlayer1 > highscorePlayer2 ? highscorePlayer1 : highscorePlayer2;
-        highScoreText.text = "High Score\n" + highscore;
+        highScoreText.text = "High Score\n" + JSONManager.GetHighscore();
     }
 
     public void ChangeNextCharacter(GameObject parentObject)

@@ -41,7 +41,7 @@ public class QuestionManager : MonoBehaviour
     private void Awake()
     {
         InitializeUIReferences();
-        StartCoroutine(WaitUntilInitializeQuestions());
+        InitializeQuestions();
     }
 
     private void InitializeUIReferences()
@@ -57,14 +57,11 @@ public class QuestionManager : MonoBehaviour
         answerCPlayer2 = questionBannerPlayer2.transform.Find("Answer C").GetComponent<TextMeshProUGUI>();
     }
     
-    private bool IsInitialized() { return JSONManager.playerQuestions.questions != null; }
     private bool IsGameStarted() { return PlayerManager.isGameStarted && !PlayerManager.isGamePaused && !PlayerManager.gameOver; }
     
-    private IEnumerator WaitUntilInitializeQuestions()
+    private void InitializeQuestions()
     {
-        yield return new WaitUntil(IsInitialized);
-
-        var questions = JSONManager.playerQuestions.questions.ToList();
+        var questions = JSONManager.GetQuestions();
         
         for (var i = questions.Count; i > 0; i--)
         {

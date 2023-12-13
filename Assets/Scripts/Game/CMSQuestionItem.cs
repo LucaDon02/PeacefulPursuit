@@ -6,9 +6,9 @@ public class CMSQuestionItem : MonoBehaviour
 {
     internal CMS cms;
     internal JSONManager.Question question;
-    public void SwitchCorrectAnswerA(bool value){ if (value) cms.ChangeCorrectQuestion(gameObject, question, "A"); }
-    public void SwitchCorrectAnswerB(bool value){ if (value) cms.ChangeCorrectQuestion(gameObject, question, "B"); }
-    public void SwitchCorrectAnswerC(bool value){ if (value) cms.ChangeCorrectQuestion(gameObject, question, "C"); }
+    public void SwitchCorrectAnswerA(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "A"); }
+    public void SwitchCorrectAnswerB(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "B"); }
+    public void SwitchCorrectAnswerC(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "C"); }
 
     public void EditQuestion(){ cms.OpenModal(question, ""); }
     public void EditAnswerA(){ cms.OpenModal(question, "A"); }
