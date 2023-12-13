@@ -158,7 +158,7 @@ public class CMS : MonoBehaviour
         toggleNew.isOn = true;
 
         question.correctAnswer = newCorrectQuestion;
-        JSONManager.OutputJSON();
+        JSONManager.OutputJSONQuestions();
     }
 
     internal void OpenModal(JSONManager.Question question, string item) //A:Answer A, B:Answer B, C:Answer C, "":Question
@@ -196,7 +196,7 @@ public class CMS : MonoBehaviour
                 break;
         }
         
-        JSONManager.OutputJSON();
+        JSONManager.OutputJSONQuestions();
         CloseModal();
         RefreshList();
     }

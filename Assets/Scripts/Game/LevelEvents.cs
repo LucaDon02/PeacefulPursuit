@@ -5,7 +5,8 @@ using UnityEngine;
 public class LevelEvents : MonoBehaviour
 {
     public GameObject gamePausedPanel;
-    public Button pauseButton; 
+    public Button pauseButton;
+    public QuestionManager questionManager;
 
     private void Update()
     {
@@ -42,6 +43,7 @@ public class LevelEvents : MonoBehaviour
         if (PlayerManager.isGamePaused || PlayerManager.gameOver) return;
         Time.timeScale = 0;
         PlayerManager.isGamePaused = true;
+        questionManager.BlankQuestionUI();
     }
     
     public void ResumeGame()
@@ -49,6 +51,7 @@ public class LevelEvents : MonoBehaviour
         if (!PlayerManager.isGamePaused) return;
         Time.timeScale = 1;
         PlayerManager.isGamePaused = false;
+        questionManager.ResetQuestionUI();
     }
     
     public void QuitGame()

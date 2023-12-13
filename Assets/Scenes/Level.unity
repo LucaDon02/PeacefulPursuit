@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0026701787, g: 0.067902364, b: 0.29606497, a: 1}
+  m_IndirectSpecularColor: {r: 0.031870626, g: 0.21818012, b: 0.73022985, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -725,9 +725,9 @@ RectTransform:
   - {fileID: 2145905090}
   m_Father: {fileID: 141497197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -160}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 100, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41551280
@@ -2310,6 +2310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePausedPanel: {fileID: 425472895}
   pauseButton: {fileID: 747767367}
+  questionManager: {fileID: 1759436383}
 --- !u!4 &217545815
 Transform:
   m_ObjectHideFlags: 0
@@ -12549,6 +12550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuButton: {fileID: 41551278}
+  pauseButton: {fileID: 747767365}
   gameOverPanelPlayer1: {fileID: 664631330}
   newRecordPanelPlayer1: {fileID: 1432115767}
   newRecordTextPlayer1: {fileID: 494670722}
@@ -13136,6 +13138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionsJson: {fileID: 4900000, guid: fa4f1d0de291f854584ed38c9c1f3574, type: 3}
+  scoresJson: {fileID: 4900000, guid: 16b3902da44ce2e45ad3d2469bc8eefa, type: 3}
 --- !u!1001 &1614219216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13914,7 +13917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Give the controller to the next player
+  m_text: Geef de controler door aan de volgende speler
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}

@@ -58,6 +58,7 @@ public class QuestionManager : MonoBehaviour
     }
     
     private bool IsInitialized() { return JSONManager.playerQuestions.questions != null; }
+    private bool IsGameStarted() { return PlayerManager.isGameStarted && !PlayerManager.isGamePaused && !PlayerManager.gameOver; }
     
     private IEnumerator WaitUntilInitializeQuestions()
     {
@@ -75,6 +76,14 @@ public class QuestionManager : MonoBehaviour
             
             questions.Remove(question);
         }
+        
+        BlankQuestionUI();
+        StartCoroutine(WaitUntilGameStarted());
+    }
+    
+    private IEnumerator WaitUntilGameStarted()
+    {
+        yield return new WaitUntil(IsGameStarted);
 
         SetQuestionUI(questionsPlayer1[currentQuestionPlayer1], questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
         SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
@@ -87,6 +96,18 @@ public class QuestionManager : MonoBehaviour
         answerBText.text = question.answerB;
         answerCText.text = question.answerC;
     }
+    
+    public void ResetQuestionUI()
+    {
+        SetQuestionUI(questionsPlayer1[currentQuestionPlayer1], questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
+        SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+    }
+    
+    public void BlankQuestionUI()
+    {
+        SetQuestionUI(new JSONManager.Question(), questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
+        SetQuestionUI(new JSONManager.Question(), questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+    }
 
     private void Update()
     {
@@ -96,11 +117,11 @@ public class QuestionManager : MonoBehaviour
 
     private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JSONManager.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
-        if (!(answerTime > 0)) return;
+        if (answerTime <= 0) return;
         
         answerTime -= 1 * Time.deltaTime;
         
-        if (!(answerTime <= 0)) return;
+        if (answerTime > 0) return;
         
         ResetAnswerColors(answerAText, answerBText, answerCText);
                 
@@ -111,7 +132,7 @@ public class QuestionManager : MonoBehaviour
                 currentQuestionPlayer1++;
                 if (currentQuestionPlayer1 == questions.Count) AddWrongQuestions();
                 if (currentQuestionPlayer1 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
-                else PlayerManager.gameOverPlayer1 = true;
+                else PlayerManager.gameOver = true;
                 break;
             }
             case 2:
@@ -119,7 +140,7 @@ public class QuestionManager : MonoBehaviour
                 currentQuestionPlayer2++;
                 if (currentQuestionPlayer2 == questions.Count) AddWrongQuestions();
                 if (currentQuestionPlayer2 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
-                else PlayerManager.gameOverPlayer2 = true;
+                else PlayerManager.gameOver = true;
                 break;
             }
         }

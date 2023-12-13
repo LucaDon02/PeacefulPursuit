@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -6,14 +7,13 @@ public class PlayerManager : MonoBehaviour
 {
     [NonSerialized] public static bool gameOver;
     public GameObject menuButton;
+    public GameObject pauseButton;
     
-    [NonSerialized] public static bool gameOverPlayer1;
     public GameObject gameOverPanelPlayer1;
     public GameObject newRecordPanelPlayer1;
     public TextMeshProUGUI newRecordTextPlayer1;
     public DamageAnimation damageAnimationPlayer1;
     
-    [NonSerialized] public static bool gameOverPlayer2;
     public GameObject gameOverPanelPlayer2;
     public GameObject newRecordPanelPlayer2;
     public TextMeshProUGUI newRecordTextPlayer2;
@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        gameOver = isGameStarted = isGamePaused = gameOverPlayer1 = gameOverPlayer2 = false;
+        gameOver = isGameStarted = isGamePaused = false;
         timer = changeTimerDuration;
     }
 
@@ -62,41 +62,50 @@ public class PlayerManager : MonoBehaviour
         }
 
         timerText.text = timer.ToString("00");
-        
-        
-        
+
         //Game Over
-        if (gameOverPlayer1)
-        {
-            if (gameOverPlayer2) gameOver = true;
-            if (player1.score > PlayerPrefs.GetInt("HighScore", 0))
-            {
-                newRecordPanelPlayer1.SetActive(true);
-                newRecordTextPlayer1.text = "New Record!\n" + player1.score;
-                PlayerPrefs.SetInt("HighScore", player1.score);
-            }
-
-            gameOverPanelPlayer1.SetActive(true);
-            Destroy(player1);
-        }
-        
-        if (gameOverPlayer2)
-        {
-            if (gameOverPlayer1) gameOver = true;
-            if (player2.score > PlayerPrefs.GetInt("HighScore", 0))
-            {
-                newRecordPanelPlayer2.SetActive(true);
-                newRecordTextPlayer2.text = "New Record!\n" + player2.score;
-                PlayerPrefs.SetInt("HighScore", player2.score);
-            }
-
-            gameOverPanelPlayer2.SetActive(true);
-            Destroy(player2);
-        }
-        
         if (gameOver)
         {
+            var highscorePlayer1 = JSONManager.scores.scoresPlayer1.Max();
+            var highscorePlayer2 = JSONManager.scores.scoresPlayer2.Max();
+            var highscore = highscorePlayer1 > highscorePlayer2 ? highscorePlayer1 : highscorePlayer2;
+            if (player1.score == player2.score)
+            {
+                if (player1.score > highscore)
+                {
+                    newRecordPanelPlayer1.SetActive(true);
+                    newRecordTextPlayer1.text = "Nieuw Record!\n" + player1.score;
+
+                    newRecordPanelPlayer2.SetActive(true);
+                    newRecordTextPlayer2.text = "Nieuw Record!\n" + player2.score;
+                }
+            }
+            else
+            {
+                if (player1.score > player2.score && player1.score > highscore)
+                {
+                    newRecordPanelPlayer1.SetActive(true);
+                    newRecordTextPlayer1.text = "Nieuw Record!\n" + player1.score;
+                }
+                else if (player2.score > highscore)
+                {
+                    newRecordPanelPlayer2.SetActive(true);
+                    newRecordTextPlayer2.text = "Nieuw Record!\n" + player2.score;
+                }
+            }
+            timerText.gameObject.transform.parent.gameObject.SetActive(false);
+            gameOverPanelPlayer1.SetActive(true);
+            gameOverPanelPlayer2.SetActive(true);
+            pauseButton.SetActive(false);
             menuButton.SetActive(true);
+            
+            Destroy(player1);
+            Destroy(player2);
+
+            JSONManager.scores.scoresPlayer1.Add(player1.score);
+            JSONManager.scores.scoresPlayer2.Add(player2.score);
+            JSONManager.OutputJSONScores();
+
             Time.timeScale = 0;
             Destroy(gameObject);
         }

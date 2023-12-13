@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System.Linq;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -32,7 +33,10 @@ public class MainMenu : MonoBehaviour
     
     private void Update()
     {
-        highScoreText.text = "High Score\n" + PlayerPrefs.GetInt("HighScore", 0);
+        var highscorePlayer1 = JSONManager.scores.scoresPlayer1.Max();
+        var highscorePlayer2 = JSONManager.scores.scoresPlayer2.Max();
+        var highscore = highscorePlayer1 > highscorePlayer2 ? highscorePlayer1 : highscorePlayer2;
+        highScoreText.text = "High Score\n" + highscore;
     }
 
     public void ChangeNextCharacter(GameObject parentObject)
