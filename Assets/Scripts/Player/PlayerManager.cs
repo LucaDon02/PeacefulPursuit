@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (player1.score == player2.score)
             {
-                if (player1.score > JSONManager.GetHighscore())
+                if (player1.score > JsonManager.GetHighScore())
                 {
                     newRecordPanelPlayer1.SetActive(true);
                     newRecordTextPlayer1.text = "Nieuw Record!\n" + player1.score;
@@ -79,12 +79,12 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                if (player1.score > player2.score && player1.score > JSONManager.GetHighscore())
+                if (player1.score > player2.score && player1.score > JsonManager.GetHighScore())
                 {
                     newRecordPanelPlayer1.SetActive(true);
                     newRecordTextPlayer1.text = "Nieuw Record!\n" + player1.score;
                 }
-                else if (player2.score > JSONManager.GetHighscore())
+                else if (player2.score > JsonManager.GetHighScore())
                 {
                     newRecordPanelPlayer2.SetActive(true);
                     newRecordTextPlayer2.text = "Nieuw Record!\n" + player2.score;
@@ -99,7 +99,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(player1);
             Destroy(player2);
 
-            JSONManager.AddScores(player1.score, player2.score);
+            JsonManager.AddScores(player1.score, player2.score);
 
             Time.timeScale = 0;
             Destroy(gameObject);

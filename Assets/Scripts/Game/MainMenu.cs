@@ -22,18 +22,18 @@ public class MainMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         
-        characterIndexPlayer1 = PlayerPrefs.GetInt("SelectedCharacterPlayer1", 0);
+        characterIndexPlayer1 = JsonManager.GetSelectedCharacterPlayer1();
         foreach (var ch in charactersPlayer1) ch.SetActive(false);
         charactersPlayer1[characterIndexPlayer1].SetActive(true);
         
-        characterIndexPlayer2 = PlayerPrefs.GetInt("SelectedCharacterPlayer2", 0);
+        characterIndexPlayer2 = JsonManager.GetSelectedCharacterPlayer2();
         foreach (var ch in charactersPlayer2) ch.SetActive(false);
         charactersPlayer2[characterIndexPlayer2].SetActive(true);
     }
     
     private void Update()
     {
-        highScoreText.text = "High Score\n" + JSONManager.GetHighscore();
+        highScoreText.text = "High Score\n" + JsonManager.GetHighScore();
     }
 
     public void ChangeNextCharacter(GameObject parentObject)
@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
                 if (characterIndexPlayer1 == charactersPlayer1.Length) characterIndexPlayer1 = 0;
 
                 charactersPlayer1[characterIndexPlayer1].SetActive(true);
-                PlayerPrefs.SetInt("SelectedCharacterPlayer1", characterIndexPlayer1);
+                JsonManager.SetSelectedCharacterPlayer1(characterIndexPlayer1);
                 break;
             case "MainMenu Player2":
                 charactersPlayer2[characterIndexPlayer2].SetActive(false);
@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
                 if (characterIndexPlayer2 == charactersPlayer2.Length) characterIndexPlayer2 = 0;
 
                 charactersPlayer2[characterIndexPlayer2].SetActive(true);
-                PlayerPrefs.SetInt("SelectedCharacterPlayer2", characterIndexPlayer2);
+                JsonManager.SetSelectedCharacterPlayer2(characterIndexPlayer2);
                 break;
         }
     }
@@ -72,7 +72,7 @@ public class MainMenu : MonoBehaviour
                 if (characterIndexPlayer1 == -1) characterIndexPlayer1 = charactersPlayer1.Length - 1;
 
                 charactersPlayer1[characterIndexPlayer1].SetActive(true);
-                PlayerPrefs.SetInt("SelectedCharacterPlayer1", characterIndexPlayer1);
+                JsonManager.SetSelectedCharacterPlayer1(characterIndexPlayer1);
                 break;
             case "MainMenu Player2":
                 charactersPlayer2[characterIndexPlayer2].SetActive(false);
@@ -81,7 +81,7 @@ public class MainMenu : MonoBehaviour
                 if (characterIndexPlayer2 == -1) characterIndexPlayer2 = charactersPlayer2.Length - 1;
 
                 charactersPlayer2[characterIndexPlayer2].SetActive(true);
-                PlayerPrefs.SetInt("SelectedCharacterPlayer2", characterIndexPlayer2);
+                JsonManager.SetSelectedCharacterPlayer2(characterIndexPlayer2);
                 break;
         }
     }

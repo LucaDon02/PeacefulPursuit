@@ -1434,6 +1434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionsJson: {fileID: 4900000, guid: fa4f1d0de291f854584ed38c9c1f3574, type: 3}
   scoresJson: {fileID: 4900000, guid: 16b3902da44ce2e45ad3d2469bc8eefa, type: 3}
+  gameDataJson: {fileID: 4900000, guid: 3f9e8f44315547aeb55b7a2b69c30caa, type: 3}
 --- !u!4 &448579572
 Transform:
   m_ObjectHideFlags: 0

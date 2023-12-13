@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.031870626, g: 0.21818012, b: 0.73022985, a: 1}
+  m_IndirectSpecularColor: {r: 0.0028419457, g: 0.07239382, b: 0.31545386, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 2.5
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1014821179}
@@ -8065,7 +8065,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 2.5
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 489196841}
@@ -13137,8 +13137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfd261f6fb0aae40bfeb3661d30bf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionsJson: {fileID: 4900000, guid: fa4f1d0de291f854584ed38c9c1f3574, type: 3}
-  scoresJson: {fileID: 4900000, guid: 16b3902da44ce2e45ad3d2469bc8eefa, type: 3}
 --- !u!1001 &1614219216
 PrefabInstance:
   m_ObjectHideFlags: 0

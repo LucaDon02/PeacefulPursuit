@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Windows;
 
-public class JSONManager : MonoBehaviour
+public class JsonManager : MonoBehaviour
 {
-    public TextAsset questionsJson;
-    public TextAsset scoresJson;
+    private static readonly string MainDataPath = Application.dataPath + "/Resources/Jsons/";
+    private static readonly string QuestionsDataPath = MainDataPath + "Questions.json";
+    private static readonly string ScoresDataPath = MainDataPath + "Scores.json";
+    private static readonly string GameDataDataPath = MainDataPath + "GameData.json";
     
     [Serializable]
     public class Question
@@ -21,7 +23,7 @@ public class JSONManager : MonoBehaviour
     }
 
     [Serializable]
-    public class PlayerQuestions { public Question[] questions; }
+    public class Questions { public Question[] questions; }
     
     [Serializable]
     public class Scores
@@ -29,19 +31,28 @@ public class JSONManager : MonoBehaviour
         public List<int> scoresPlayer1;
         public List<int> scoresPlayer2;
     }
+    
+    [Serializable]
+    public class GameData
+    {
+        public int selectedCharacterPlayer1;
+        public int selectedCharacterPlayer2;
+    }
 
-    private static PlayerQuestions playerQuestions = new PlayerQuestions();
-    private static Scores scores = new Scores();
+    private static Questions _questions = new Questions();
+    private static Scores _scores = new Scores();
+    private static GameData _gameData = new GameData();
 
     private void Start()
     {
-        playerQuestions = JsonUtility.FromJson<PlayerQuestions>(questionsJson.text);
-        scores = JsonUtility.FromJson<Scores>(scoresJson.text);
+        _questions = JsonUtility.FromJson<Questions>(System.IO.File.ReadAllText(QuestionsDataPath));
+        _scores = JsonUtility.FromJson<Scores>(System.IO.File.ReadAllText(ScoresDataPath));
+        _gameData = JsonUtility.FromJson<GameData>(System.IO.File.ReadAllText(GameDataDataPath));
     }
 
     public static List<Question> GetQuestions()
     {
-        return playerQuestions.questions.ToList();
+        return _questions.questions.ToList();
     }
 
     public static void EditQuestion(Question question, string newQuestion)
@@ -49,7 +60,7 @@ public class JSONManager : MonoBehaviour
         if (string.IsNullOrEmpty(newQuestion)) throw new ArgumentException();
 
         question.question = newQuestion;
-        OutputJSONQuestions();
+        OutputJsonQuestions();
     }
     
     public static void EditAnswerA(Question question, string newAnswer)
@@ -57,7 +68,7 @@ public class JSONManager : MonoBehaviour
         if (string.IsNullOrEmpty(newAnswer)) throw new ArgumentException();
 
         question.answerA = newAnswer;
-        OutputJSONQuestions();
+        OutputJsonQuestions();
     }
     
     public static void EditAnswerB(Question question, string newAnswer)
@@ -65,7 +76,7 @@ public class JSONManager : MonoBehaviour
         if (string.IsNullOrEmpty(newAnswer)) throw new ArgumentException();
 
         question.answerB = newAnswer;
-        OutputJSONQuestions();
+        OutputJsonQuestions();
     }
     
     public static void EditAnswerC(Question question, string newAnswer)
@@ -73,7 +84,7 @@ public class JSONManager : MonoBehaviour
         if (string.IsNullOrEmpty(newAnswer)) throw new ArgumentException();
 
         question.answerC = newAnswer;
-        OutputJSONQuestions();
+        OutputJsonQuestions();
     }
 
     public static void EditCorrectAnswer(Question question, string newCorrectAnswer)
@@ -81,34 +92,55 @@ public class JSONManager : MonoBehaviour
         if (newCorrectAnswer != "A" && newCorrectAnswer != "B" && newCorrectAnswer != "C") throw new ArgumentOutOfRangeException();
 
         question.correctAnswer = newCorrectAnswer;
-        OutputJSONQuestions();
+        OutputJsonQuestions();
     }
 
     public static void AddScores(int scorePlayer1, int scorePlayer2)
     {
-        scores.scoresPlayer1.Add(scorePlayer1);
-        scores.scoresPlayer2.Add(scorePlayer2);
-        OutputJSONScores();
+        _scores.scoresPlayer1.Add(scorePlayer1);
+        _scores.scoresPlayer2.Add(scorePlayer2);
+        OutputJsonScores();
     }
 
-    public static int GetHighscore()
+    public static int GetHighScore()
     {
-        var highscorePlayer1 = scores.scoresPlayer1.Max();
-        var highscorePlayer2 = scores.scoresPlayer2.Max();
-        return highscorePlayer1 > highscorePlayer2 ? highscorePlayer1 : highscorePlayer2;
+        var highScorePlayer1 = _scores.scoresPlayer1.Max();
+        var highScorePlayer2 = _scores.scoresPlayer2.Max();
+        return highScorePlayer1 > highScorePlayer2 ? highScorePlayer1 : highScorePlayer2;
     }
     
-    private static void OutputJSONQuestions()
-    {
-        var strOutput = JsonUtility.ToJson(playerQuestions, true);
-        
-        System.IO.File.WriteAllText(Application.dataPath + "/Resources/Jsons/Questions.json", strOutput);
+    public static int GetSelectedCharacterPlayer1() { return _gameData.selectedCharacterPlayer1; }
+    
+    public static int GetSelectedCharacterPlayer2() { return _gameData.selectedCharacterPlayer2; }
+    
+    public static void SetSelectedCharacterPlayer1(int index) {
+        _gameData.selectedCharacterPlayer1 = index;
+        OutputJsonGameData();
     }
     
-    private static void OutputJSONScores()
+    public static void SetSelectedCharacterPlayer2(int index) {
+        _gameData.selectedCharacterPlayer2 = index;
+        OutputJsonGameData();
+    }
+    
+    private static void OutputJsonQuestions()
     {
-        var strOutput = JsonUtility.ToJson(scores, true);
+        var strOutput = JsonUtility.ToJson(_questions, true);
         
-        System.IO.File.WriteAllText(Application.dataPath + "/Resources/Jsons/Scores.json", strOutput);
+        System.IO.File.WriteAllText(QuestionsDataPath, strOutput);
+    }
+    
+    private static void OutputJsonScores()
+    {
+        var strOutput = JsonUtility.ToJson(_scores, true);
+        
+        System.IO.File.WriteAllText(ScoresDataPath, strOutput);
+    }
+    
+    private static void OutputJsonGameData()
+    {
+        var strOutput = JsonUtility.ToJson(_gameData, true);
+        
+        System.IO.File.WriteAllText(GameDataDataPath, strOutput);
     }
 }

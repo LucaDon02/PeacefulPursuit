@@ -10,13 +10,13 @@ public class CMS : MonoBehaviour
 {
     public GameObject questionsGameObject;
     private GameObject container;
-    private List<JSONManager.Question> questions;
+    private List<JsonManager.Question> questions;
     
     public GameObject questionPrefab;
     
     public GameObject questionModal;
     private TMP_InputField modalInputField;
-    private JSONManager.Question modalQuestion;
+    private JsonManager.Question modalQuestion;
     private string modalItem;
 
     private void Awake()
@@ -35,7 +35,7 @@ public class CMS : MonoBehaviour
 
     private void InitializeQuestions()
     {
-        questions = JSONManager.GetQuestions();
+        questions = JsonManager.GetQuestions();
         foreach (var question in questions)
         {
             var questionItem = Instantiate(questionPrefab, container.transform);
@@ -127,7 +127,7 @@ public class CMS : MonoBehaviour
         }
     }
 
-    internal void ChangeCorrectAnswer(GameObject questionItem, JSONManager.Question question, string newCorrectAnswer)
+    internal void ChangeCorrectAnswer(GameObject questionItem, JsonManager.Question question, string newCorrectAnswer)
     {
         if (question.correctAnswer == newCorrectAnswer) return;
 
@@ -153,10 +153,10 @@ public class CMS : MonoBehaviour
         toggleNew.interactable = false;
         toggleNew.isOn = true;
 
-        JSONManager.EditCorrectAnswer(question, newCorrectAnswer);
+        JsonManager.EditCorrectAnswer(question, newCorrectAnswer);
     }
 
-    internal void OpenModal(JSONManager.Question question, string item) //A:Answer A, B:Answer B, C:Answer C, "":Question
+    internal void OpenModal(JsonManager.Question question, string item) //A:Answer A, B:Answer B, C:Answer C, "":Question
     {
         modalQuestion = question;
         modalItem = item;
@@ -178,16 +178,16 @@ public class CMS : MonoBehaviour
         switch (modalItem)
         {
             case "A":
-                JSONManager.EditAnswerA(modalQuestion, modalInputField.text);
+                JsonManager.EditAnswerA(modalQuestion, modalInputField.text);
                 break;
             case "B":
-                JSONManager.EditAnswerB(modalQuestion, modalInputField.text);
+                JsonManager.EditAnswerB(modalQuestion, modalInputField.text);
                 break;
             case "C":
-                JSONManager.EditAnswerC(modalQuestion, modalInputField.text);
+                JsonManager.EditAnswerC(modalQuestion, modalInputField.text);
                 break;
             case "":
-                JSONManager.EditQuestion(modalQuestion, modalInputField.text);
+                JsonManager.EditQuestion(modalQuestion, modalInputField.text);
                 break;
         }
 

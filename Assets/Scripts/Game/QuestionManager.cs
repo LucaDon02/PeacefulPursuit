@@ -22,15 +22,15 @@ public class QuestionManager : MonoBehaviour
     private TextMeshProUGUI answerBPlayer2;
     private TextMeshProUGUI answerCPlayer2;
 
-    private List<JSONManager.Question> questionsPlayer1 = new List<JSONManager.Question>();
+    private List<JsonManager.Question> questionsPlayer1 = new List<JsonManager.Question>();
     private List<string> answersPlayer1 = new();
-    private readonly List<JSONManager.Question> wrongQuestionsPlayer1 = new();
+    private readonly List<JsonManager.Question> wrongQuestionsPlayer1 = new();
     private int currentQuestionPlayer1;
     private float answerTimePlayer1;
     
-    private List<JSONManager.Question> questionsPlayer2 = new List<JSONManager.Question>();
+    private List<JsonManager.Question> questionsPlayer2 = new List<JsonManager.Question>();
     private List<string> answersPlayer2 = new();
-    private readonly List<JSONManager.Question> wrongQuestionsPlayer2 = new();
+    private readonly List<JsonManager.Question> wrongQuestionsPlayer2 = new();
     private int currentQuestionPlayer2;
     private float answerTimePlayer2;
 
@@ -61,7 +61,7 @@ public class QuestionManager : MonoBehaviour
     
     private void InitializeQuestions()
     {
-        var questions = JSONManager.GetQuestions();
+        var questions = JsonManager.GetQuestions();
         
         for (var i = questions.Count; i > 0; i--)
         {
@@ -86,7 +86,7 @@ public class QuestionManager : MonoBehaviour
         SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void SetQuestionUI(JSONManager.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void SetQuestionUI(JsonManager.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         questionText.text = question.question;
         answerAText.text = question.answerA;
@@ -102,8 +102,8 @@ public class QuestionManager : MonoBehaviour
     
     public void BlankQuestionUI()
     {
-        SetQuestionUI(new JSONManager.Question(), questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        SetQuestionUI(new JSONManager.Question(), questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+        SetQuestionUI(new JsonManager.Question(), questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
+        SetQuestionUI(new JsonManager.Question(), questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
     private void Update()
@@ -112,7 +112,7 @@ public class QuestionManager : MonoBehaviour
         UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
     }
 
-    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JSONManager.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JsonManager.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
     {
         if (answerTime <= 0) return;
         
@@ -160,7 +160,7 @@ public class QuestionManager : MonoBehaviour
         AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, "Player2");
     }
 
-    private void AnswerQuestion(int lane, List<JSONManager.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
+    private void AnswerQuestion(int lane, List<JsonManager.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
     {
         string[] answerOptions = { "A", "B", "C" };
         var selectedAnswer = answerOptions[lane];

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CMSQuestionItem : MonoBehaviour
 {
     internal CMS cms;
-    internal JSONManager.Question question;
+    internal JsonManager.Question question;
     public void SwitchCorrectAnswerA(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "A"); }
     public void SwitchCorrectAnswerB(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "B"); }
     public void SwitchCorrectAnswerC(bool value){ if (value) cms.ChangeCorrectAnswer(gameObject, question, "C"); }
