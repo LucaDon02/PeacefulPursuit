@@ -5,21 +5,20 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerController playerController;
+    [NonSerialized] public PlayerController playerController;
+    [NonSerialized] public int index;
+    [NonSerialized] public bool isGameStarted = false;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerInput>().playerIndex switch
-        {
-            0 => GameObject.Find("Player1").GetComponent<PlayerController>(),
-            1 => GameObject.Find("Player2").GetComponent<PlayerController>(),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        DontDestroyOnLoad(gameObject);
+        index = GetComponent<PlayerInput>().playerIndex;
+        GameObject.Find("MainMenu Player" + (index + 1)).transform.Find("PressButtonPanel").gameObject.SetActive(false);
     }
 
     public void OnMove(CallbackContext callbackContext)
     {
-        if (!callbackContext.performed) return;
+        if (!callbackContext.performed || !isGameStarted) return;
         
         var v2 = callbackContext.ReadValue<Vector2>();
 

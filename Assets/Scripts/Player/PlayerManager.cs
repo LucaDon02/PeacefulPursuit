@@ -44,6 +44,18 @@ public class PlayerManager : MonoBehaviour
         Time.timeScale = 1;
         gameOver = isGameStarted = isGamePaused = false;
         timer = changeTimerDuration;
+        
+        foreach (var playerInput in GameObject.FindGameObjectsWithTag("PlayerInput"))
+        {
+            var inputHandler = playerInput.GetComponent<PlayerInputHandler>();
+            inputHandler.playerController = inputHandler.index switch
+            {
+                0 => player1.player.GetComponent<PlayerController>(),
+                1 => player2.player.GetComponent<PlayerController>(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            inputHandler.isGameStarted = true;
+        }
     }
 
     private void Update()

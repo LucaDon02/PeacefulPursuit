@@ -14,13 +14,14 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI totalBuffText;
     public GameObject[] characterPrefabs;
     public bool isPlayer1;
+    public GameObject player;
 
     private void Awake()
     {
         var playerName = isPlayer1 ? "Player1" : "Player2";
         var index = isPlayer1 ? JsonManager.GetSelectedCharacterPlayer1() : JsonManager.GetSelectedCharacterPlayer2();
         var position = transform.position + (isPlayer1 ? new Vector3(-25, 0, 0) : new Vector3(25, 0, 0));
-        var player = Instantiate(characterPrefabs[index], position, Quaternion.identity);
+        player = Instantiate(characterPrefabs[index], position, Quaternion.identity);
         player.name = playerName;
         player.GetComponent<PlayerController>().isPlayer1 = isPlayer1;
     }
