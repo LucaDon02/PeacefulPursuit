@@ -43,7 +43,7 @@ public class JsonManager : MonoBehaviour
     private static Scores _scores = new Scores();
     private static GameData _gameData = new GameData();
 
-    private void Start()
+    private void Awake()
     {
         _questions = JsonUtility.FromJson<Questions>(System.IO.File.ReadAllText(QuestionsDataPath));
         _scores = JsonUtility.FromJson<Scores>(System.IO.File.ReadAllText(ScoresDataPath));

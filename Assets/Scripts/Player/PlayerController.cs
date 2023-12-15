@@ -20,27 +20,18 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
 
     public Animator animator;
-    private bool isSliding = false;
+    public bool isSliding = false;
 
     public float slideDuration = 1.5f;
 
     bool toggle = false;
 
     public bool isPlayer1;
-    private KeyCode leftButton;
-    private KeyCode rightButton;
-    private KeyCode jumpButton;
-    private KeyCode slideButton;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         Time.timeScale = 1.2f;
-        
-        leftButton = isPlayer1 ? KeyCode.A : KeyCode.LeftArrow;
-        rightButton = isPlayer1 ? KeyCode.D : KeyCode.RightArrow;
-        jumpButton = isPlayer1 ? KeyCode.W : KeyCode.UpArrow;
-        slideButton = isPlayer1 ? KeyCode.S : KeyCode.DownArrow;
     }
 
     private void FixedUpdate()
@@ -71,34 +62,33 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isGrounded", isGrounded);
         if (isGrounded && velocity.y < 0) velocity.y = -1f;
 
-        if (isGrounded)
-        {
-            if (Input.GetKeyDown(jumpButton)) Jump();
-            if (Input.GetKeyDown(slideButton) && !isSliding) StartCoroutine(Slide());
-        }
-        else
-        {
-            velocity.y += gravity * Time.deltaTime;
-            if (Input.GetKeyDown(slideButton) && !isSliding)
-            {
-                StartCoroutine(Slide());
-                velocity.y = -10;
-            }                
-
-        }
+        // if (isGrounded)
+        // {
+        //     if (Input.GetKeyDown(jumpButton)) Jump();
+        //     if (Input.GetKeyDown(slideButton) && !isSliding) StartCoroutine(Slide());
+        // }
+        // else
+        // {
+        //     velocity.y += gravity * Time.deltaTime;
+        //     if (Input.GetKeyDown(slideButton) && !isSliding)
+        //     {
+        //         StartCoroutine(Slide());
+        //         velocity.y = -10;
+        //     }                
+        //
+        // }
+        if (!isGrounded) velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
         //Gather the inputs on which lane we should be
-        if (Input.GetKeyDown(rightButton))
-        {
-            desiredLane++;
-            if (desiredLane == 3) desiredLane = 2;
-        }
-        if (Input.GetKeyDown(leftButton))
-        {
-            desiredLane--;
-            if (desiredLane == -1) desiredLane = 0;
-        }
+        // if (Input.GetKeyDown(rightButton))
+        // {
+        //     MoveRight();
+        // }
+        // if (Input.GetKeyDown(leftButton))
+        // {
+        //     MoveLeft();
+        // }
 
         //Calculate where we should be in the future
         var targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
@@ -123,9 +113,11 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * Time.deltaTime);
     }
 
-    private void Jump()
-    {   
-        StopCoroutine(Slide());
+    public void Jump()
+    {
+        if (!isGrounded) return;
+        
+        StopCoroutine(SlideCoroutine());
         animator.SetBool("isSliding", false);
         animator.SetTrigger("jump");
         controller.center = Vector3.zero;
@@ -143,7 +135,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("PlayerDamage");
     }
 
-    private IEnumerator Slide()
+    private IEnumerator SlideCoroutine()
     {
         isSliding = true;
         animator.SetBool("isSliding", true);
@@ -159,5 +151,24 @@ public class PlayerController : MonoBehaviour
         controller.height = 2;
 
         isSliding = false;
+    }
+    
+    public void MoveLeft()
+    {
+        desiredLane--;
+        if (desiredLane == -1) desiredLane = 0;
+    }
+
+    public void MoveRight()
+    {
+        desiredLane++;
+        if (desiredLane == 3) desiredLane = 2;
+    }
+
+    public void Slide()
+    {
+        if (isSliding) return;
+        StartCoroutine(SlideCoroutine());
+        if (!isGrounded) velocity.y = -10;
     }
 }
