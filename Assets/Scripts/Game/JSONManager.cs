@@ -104,9 +104,9 @@ public class JsonManager : MonoBehaviour
 
     public static int GetHighScore()
     {
-        var highScorePlayer1 = _scores.scoresPlayer1.Max();
-        var highScorePlayer2 = _scores.scoresPlayer2.Max();
-        return highScorePlayer1 > highScorePlayer2 ? highScorePlayer1 : highScorePlayer2;
+        var highScorePlayer1 = _scores.scoresPlayer1.Any() ? _scores.scoresPlayer1.Max() : 0;
+        var highScorePlayer2 = _scores.scoresPlayer2.Any() ? _scores.scoresPlayer2.Max() : 0;
+        return Math.Max(highScorePlayer1, highScorePlayer2);
     }
     
     public static int GetSelectedCharacterPlayer1() { return _gameData.selectedCharacterPlayer1; }
