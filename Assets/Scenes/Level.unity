@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0026485748, g: 0.06734887, b: 0.29367042, a: 1}
+  m_IndirectSpecularColor: {r: 0.002665385, g: 0.0677248, b: 0.29531163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12632,7 +12632,7 @@ MonoBehaviour:
   newRecordTextPlayer1: {fileID: 494670722}
   damageAnimationPlayer1: {fileID: 807605198}
   gameOverPanelPlayer2: {fileID: 210108396}
-  newRecordPanelPlayer2: {fileID: 0}
+  newRecordPanelPlayer2: {fileID: 890168988}
   newRecordTextPlayer2: {fileID: 2119888626}
   damageAnimationPlayer2: {fileID: 2098351102}
   player1: {fileID: 1469877393}
@@ -12683,6 +12683,7 @@ MonoBehaviour:
   - {fileID: 6239046481350211349, guid: d19444cf8416d244592b0133dba3d2b5, type: 3}
   - {fileID: 1954673021442862711, guid: f4515e4ba2138df44b80befad018b201, type: 3}
   isPlayer1: 0
+  player: {fileID: 0}
 --- !u!114 &1469877393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12707,6 +12708,7 @@ MonoBehaviour:
   - {fileID: 6239046481350211349, guid: d19444cf8416d244592b0133dba3d2b5, type: 3}
   - {fileID: 1954673021442862711, guid: f4515e4ba2138df44b80befad018b201, type: 3}
   isPlayer1: 1
+  player: {fileID: 0}
 --- !u!1001 &1470261495
 PrefabInstance:
   m_ObjectHideFlags: 0

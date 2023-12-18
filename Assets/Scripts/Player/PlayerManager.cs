@@ -10,13 +10,15 @@ public class PlayerManager : MonoBehaviour
     public GameObject pauseButton;
     
     public GameObject gameOverPanelPlayer1;
-    public GameObject newRecordPanelPlayer1;
-    public TextMeshProUGUI newRecordTextPlayer1;
-    public DamageAnimation damageAnimationPlayer1;
-    
     public GameObject gameOverPanelPlayer2;
+    
+    public GameObject newRecordPanelPlayer1;
     public GameObject newRecordPanelPlayer2;
+    
+    public TextMeshProUGUI newRecordTextPlayer1;
     public TextMeshProUGUI newRecordTextPlayer2;
+    
+    public DamageAnimation damageAnimationPlayer1;
     public DamageAnimation damageAnimationPlayer2;
 
     public static bool isGameStarted;

@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI totalBuffText;
     public GameObject[] characterPrefabs;
     public bool isPlayer1;
-    public GameObject player;
+    [NonSerialized] public GameObject player;
 
     private void Awake()
     {
