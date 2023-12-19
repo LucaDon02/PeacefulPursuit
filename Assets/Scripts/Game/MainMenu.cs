@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class MainMenu : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class MainMenu : MonoBehaviour
 
     public TextMeshProUGUI highScoreText;
     public GameObject cms;
+
+    public PlayerInputManager playerInputManager;
 
     private void Start()
     {
@@ -76,10 +79,10 @@ public class MainMenu : MonoBehaviour
         switch (parentObject.name)
         {
             case "MainMenu Player1":
-                MoveUI(0, false);
+                ChangeCharacterUI(0, false);
                 break;
             case "MainMenu Player2":
-                MoveUI(1, false);
+                ChangeCharacterUI(1, false);
                 break;
         }
     }
@@ -89,10 +92,10 @@ public class MainMenu : MonoBehaviour
         switch (parentObject.name)
         {
             case "MainMenu Player1":
-                MoveUI(0, true);
+                ChangeCharacterUI(0, true);
                 break;
             case "MainMenu Player2":
-                MoveUI(1, true);
+                ChangeCharacterUI(1, true);
                 break;
         }
     }
@@ -161,7 +164,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenCMS() { cms.SetActive(true); }
 
-    public void MoveUI(int playerIndex, bool isLeft)
+    public void ChangeCharacterUI(int playerIndex, bool isLeft)
     {
         switch (playerIndex)
         {
@@ -212,6 +215,23 @@ public class MainMenu : MonoBehaviour
                     JsonManager.SetSelectedCharacterPlayer2(characterIndexPlayer2);
                 }
                 break;
+        }
+    }
+
+    public void LeavePlayer(bool isPlayer1)
+    {
+        if (isPlayer1)
+        {
+            playerInputManager.leav
+            player1Ready = false;
+            UnReady(unReadyButtonPlayer1.GetComponent<Button>());
+            pressButtonPanelPlayer1.SetActive(true);
+        }
+        else
+        {
+            player2Ready = false;
+            UnReady(unReadyButtonPlayer2.GetComponent<Button>());
+            pressButtonPanelPlayer2.SetActive(true);
         }
     }
 }

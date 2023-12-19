@@ -60,35 +60,18 @@ public class PlayerController : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.17f, groundLayer);
         animator.SetBool("isGrounded", isGrounded);
-        if (isGrounded && velocity.y < 0) velocity.y = -1f;
+        
+        switch (isGrounded)
+        {
+            case true when velocity.y < 0:
+                velocity.y = -1f;
+                break;
+            case false:
+                velocity.y += gravity * Time.deltaTime;
+                break;
+        }
 
-        // if (isGrounded)
-        // {
-        //     if (Input.GetKeyDown(jumpButton)) Jump();
-        //     if (Input.GetKeyDown(slideButton) && !isSliding) StartCoroutine(Slide());
-        // }
-        // else
-        // {
-        //     velocity.y += gravity * Time.deltaTime;
-        //     if (Input.GetKeyDown(slideButton) && !isSliding)
-        //     {
-        //         StartCoroutine(Slide());
-        //         velocity.y = -10;
-        //     }                
-        //
-        // }
-        if (!isGrounded) velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-
-        //Gather the inputs on which lane we should be
-        // if (Input.GetKeyDown(rightButton))
-        // {
-        //     MoveRight();
-        // }
-        // if (Input.GetKeyDown(leftButton))
-        // {
-        //     MoveLeft();
-        // }
 
         //Calculate where we should be in the future
         var targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
@@ -131,7 +114,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag != "Obstacle") return;
         GameObject.Find("PlayerManager").GetComponent<PlayerManager>().PlayerHitObstacle(isPlayer1);
-        // PlayerManager.gameOver = true;
         FindObjectOfType<AudioManager>().PlaySound("PlayerDamage");
     }
 

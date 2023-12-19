@@ -27,8 +27,8 @@ public class PlayerInputHandler : MonoBehaviour
         
         if (!isGameStarted)
         {
-            if (v2.x < -0.45) mainMenu.MoveUI(index, true);
-            else if (v2.x > 0.45) mainMenu.MoveUI(index, false);
+            if (v2.x < -0.45) mainMenu.ChangeCharacterUI(index, true);
+            else if (v2.x > 0.45) mainMenu.ChangeCharacterUI(index, false);
         }
         else
         {
@@ -45,5 +45,11 @@ public class PlayerInputHandler : MonoBehaviour
         if (!callbackContext.performed || isGameStarted) return;
         
         mainMenu.PressReadyButton(index == 0);
+    }
+
+    public void Leave(PlayerInput playerInput)
+    {
+        mainMenu.LeavePlayer(index == 0);
+        Destroy(gameObject);
     }
 }

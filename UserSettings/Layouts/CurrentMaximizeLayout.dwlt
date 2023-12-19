@@ -92,7 +92,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -238,7 +238,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: b0f7feff4a04ffff7c79ffff2afbfffff4ffffff28930000549300001494000084970000
+      m_ExpandedIDs: 2afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -290,7 +290,7 @@ MonoBehaviour:
   - {fileID: 9}
   - {fileID: 10}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 2
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -660,9 +660,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 707.20996, y: 409.2024, z: 1170.8647}
+    m_Target: {x: 541.4598, y: 393.03015, z: 1333.3204}
     speed: 2
-    m_Value: {x: 707.20996, y: 409.2024, z: 1170.8647}
+    m_Value: {x: 541.4598, y: 393.03015, z: 1333.3204}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -708,9 +708,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.06625917, y: -0.004497596, z: 0.0003051694, w: 0.9977682}
+    m_Target: {x: 0.06473662, y: -0.028443255, z: 0.0018525068, w: 0.9974712}
     speed: 2
-    m_Value: {x: 0.066260755, y: -0.0044977036, z: 0.0003051767, w: 0.9977921}
+    m_Value: {x: 0.06473817, y: -0.028443936, z: 0.0018525511, w: 0.9974951}
   m_Size:
     m_Target: 1118.3833
     speed: 2
@@ -880,13 +880,13 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 7}
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 338394c7
-    m_LastClickedID: -946568397
-    m_ExpandedIDs: d1eb37858b121789646c308bfb84b5997ad20dc2b09c6dc46b112bc74a836f122ebf6618a255fb3c78b254458d5db65a7702946c3ce64e76
+    m_SelectedIDs: 9c9f14db
+    m_LastClickedID: -619405412
+    m_ExpandedIDs: d1eb37856e71b1888b12178970f92d8a646c308bfb84b5997ad20dc2b09c6dc46b112bc725734fd0452f56de4a836f122ebf6618a255fb3c78b254458d5db65a9f6bd6647702946c3ce64e76
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -977,6 +977,10 @@ MonoBehaviour:
       \"id\": \"63582696-f5fe-4b15-8d3e-7f5647b8c942\",\n                    \"expectedControlType\":
       \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"Ready\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"57913926-f5e3-4856-87dd-adc3073e3c02\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       }\n            ],\n            \"bindings\": [\n                {\n                   
       \"name\": \"\",\n                    \"id\": \"cf85e5d8-3c5b-4264-ad81-3ea78cdbfc14\",\n                   
       \"path\": \"<Gamepad>/dpad\",\n                    \"interactions\": \"\",\n                   
@@ -1037,8 +1041,13 @@ MonoBehaviour:
       \"path\": \"<Gamepad>/leftStick\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Movement_Joystick\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
-      ],\n    \"controlSchemes\": []\n}"
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"3a772955-43ca-418e-bace-8c8cb93b612c\",\n                   
+      \"path\": \"<Gamepad>/buttonSouth\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Ready\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                }\n           
+      ]\n        }\n    ],\n    \"controlSchemes\": []\n}"
     m_IsDirty: 0
   m_Toolbar:
     m_IsDirty: 0
@@ -1064,7 +1073,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -1073,14 +1082,14 @@ MonoBehaviour:
     y: 584
     width: 1485
     height: 403
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 12}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 12}
   - {fileID: 13}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1126,7 +1135,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1134,16 +1143,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Gebruiker\Documents\GitHub\PeacefulPursuit
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 127}
-    m_SelectedIDs: 72920000
-    m_LastClickedID: 37490
-    m_ExpandedIDs: 00000000446d0000466d000000ca9a3bffffff7f
+    m_SelectedIDs: 6e920000
+    m_LastClickedID: 37486
+    m_ExpandedIDs: 00000000d86c0000da6c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1171,7 +1180,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000446d0000466d0000
+    m_ExpandedIDs: 00000000d86c0000da6c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1196,8 +1205,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 0a640000
+    m_LastClickedInstanceID: 25610
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300001262000098f200009af20000b673000000000000
     m_RenameOverlay:
@@ -1280,8 +1289,8 @@ MonoBehaviour:
     y: 0
     width: 435
     height: 987
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
