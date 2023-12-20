@@ -73,21 +73,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (isGameStarted && !isGamePaused) timer -= Time.unscaledDeltaTime;
-        
-        if (timer <= 0)
-        {
-            timer = isChanging ? changeTimerDuration : intervalChangeTimerDuration;
-            
-            changePlayerPanel.SetActive(!isChanging);
-            if (!isChanging) previousTimeScale = Time.timeScale;
-            Time.timeScale = isChanging ? previousTimeScale : 0;
-            
-            isChanging = !isChanging;
-        }
-
-        timerText.text = timer.ToString("00");
-
         //Game Over
         if (gameOver)
         {
@@ -116,6 +101,8 @@ public class PlayerManager : MonoBehaviour
                 }
             }
             timerText.gameObject.transform.parent.gameObject.SetActive(false);
+            gameOverPanelScrollRectPlayer1.scrollSensitivity = gameOverPanelContainerPlayer1.transform.childCount / 4f;
+            gameOverPanelScrollRectPlayer2.scrollSensitivity = gameOverPanelContainerPlayer2.transform.childCount / 4f;
             gameOverPanelPlayer1.SetActive(true);
             gameOverPanelPlayer2.SetActive(true);
             pauseButton.SetActive(false);
@@ -129,6 +116,22 @@ public class PlayerManager : MonoBehaviour
             Time.timeScale = 0;
             Destroy(gameObject);
         }
+        
+        //Timer
+        if (isGameStarted && !isGamePaused) timer -= Time.unscaledDeltaTime;
+        
+        if (timer <= 0)
+        {
+            timer = isChanging ? changeTimerDuration : intervalChangeTimerDuration;
+            
+            changePlayerPanel.SetActive(!isChanging);
+            if (!isChanging) previousTimeScale = Time.timeScale;
+            Time.timeScale = isChanging ? previousTimeScale : 0;
+            
+            isChanging = !isChanging;
+        }
+
+        timerText.text = timer.ToString("00");
 
         //Start Game
         if (!isGameStarted)
@@ -178,7 +181,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (isPlayer1)
         {
-            var value = 0.01f / (gameOverPanelContainerPlayer1.transform.childCount / 5f / gameOverPanelScrollRectPlayer1.scrollSensitivity);
+            var value = 1f / (gameOverPanelContainerPlayer1.transform.childCount / 2f);
 
             gameOverPanelScrollbarPlayer1.value = isUp
                 ? gameOverPanelScrollbarPlayer1.value + value
@@ -186,7 +189,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            var value = 0.01f / (gameOverPanelContainerPlayer2.transform.childCount / 5f / gameOverPanelScrollRectPlayer2.scrollSensitivity);
+            var value = 1f / (gameOverPanelContainerPlayer2.transform.childCount / 2f);
 
             gameOverPanelScrollbarPlayer2.value = isUp
                 ? gameOverPanelScrollbarPlayer2.value + value
