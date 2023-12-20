@@ -6,6 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
     [NonSerialized] public PlayerController playerController;
+    [NonSerialized] public PlayerManager playerManager;
     [NonSerialized] public MainMenu mainMenu;
     [NonSerialized] public int index;
     [NonSerialized] public bool isGameStarted = false;
@@ -30,13 +31,18 @@ public class PlayerInputHandler : MonoBehaviour
             if (v2.x < -0.45) mainMenu.ChangeCharacterUI(index, true);
             else if (v2.x > 0.45) mainMenu.ChangeCharacterUI(index, false);
         }
-        else
+        else if (!PlayerManager.gameOver)
         {
             if (v2.x < -0.45) playerController.MoveLeft();
             else if (v2.x > 0.45) playerController.MoveRight();
 
             if (v2.y < -0.45) playerController.Slide();
             else if (v2.y > 0.45) playerController.Jump();
+        }
+        else
+        {
+            if (v2.y < -0.45) playerManager.ScrollGameOverContainer(index == 0, false);
+            else if (v2.y > 0.45) playerManager.ScrollGameOverContainer(index == 0, true);
         }
     }
 

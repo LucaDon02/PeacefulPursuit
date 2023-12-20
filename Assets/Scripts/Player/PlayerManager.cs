@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,6 +12,15 @@ public class PlayerManager : MonoBehaviour
     
     public GameObject gameOverPanelPlayer1;
     public GameObject gameOverPanelPlayer2;
+    
+    public ScrollRect gameOverPanelScrollRectPlayer1;
+    public ScrollRect gameOverPanelScrollRectPlayer2;
+    
+    public GameObject gameOverPanelContainerPlayer1;
+    public GameObject gameOverPanelContainerPlayer2;
+    
+    public Scrollbar gameOverPanelScrollbarPlayer1;
+    public Scrollbar gameOverPanelScrollbarPlayer2;
     
     public GameObject newRecordPanelPlayer1;
     public GameObject newRecordPanelPlayer2;
@@ -56,6 +66,7 @@ public class PlayerManager : MonoBehaviour
                 1 => player2.player.GetComponent<PlayerController>(),
                 _ => throw new ArgumentOutOfRangeException()
             };
+            inputHandler.playerManager = this;
             inputHandler.isGameStarted = true;
         }
     }
@@ -161,5 +172,25 @@ public class PlayerManager : MonoBehaviour
     {
         var player = playerName == "Player1" ? player1 : player2;
         player.score += (int)(defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10f + 1) + 0.5);
+    }
+
+    public void ScrollGameOverContainer(bool isPlayer1, bool isUp)
+    {
+        if (isPlayer1)
+        {
+            var value = 0.01f / (gameOverPanelContainerPlayer1.transform.childCount / 5f / gameOverPanelScrollRectPlayer1.scrollSensitivity);
+
+            gameOverPanelScrollbarPlayer1.value = isUp
+                ? gameOverPanelScrollbarPlayer1.value + value
+                : gameOverPanelScrollbarPlayer1.value - value;
+        }
+        else
+        {
+            var value = 0.01f / (gameOverPanelContainerPlayer2.transform.childCount / 5f / gameOverPanelScrollRectPlayer2.scrollSensitivity);
+
+            gameOverPanelScrollbarPlayer2.value = isUp
+                ? gameOverPanelScrollbarPlayer2.value + value
+                : gameOverPanelScrollbarPlayer2.value - value;
+        }
     }
 }

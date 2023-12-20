@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.002665385, g: 0.0677248, b: 0.29531163, a: 1}
+  m_IndirectSpecularColor: {r: 0.034402482, g: 0.2082301, b: 0.6899034, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5948,7 +5948,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.87747e-39, y: 0, z: 0, w: 1e-45}
+  m_BoundingSphereOverride: {x: 0, y: 7.1e-44, z: 0, w: -7.884638e-38}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -12628,12 +12628,18 @@ MonoBehaviour:
   menuButton: {fileID: 41551278}
   pauseButton: {fileID: 747767365}
   gameOverPanelPlayer1: {fileID: 664631330}
-  newRecordPanelPlayer1: {fileID: 1432115767}
-  newRecordTextPlayer1: {fileID: 494670722}
-  damageAnimationPlayer1: {fileID: 807605198}
   gameOverPanelPlayer2: {fileID: 210108396}
+  gameOverPanelScrollRectPlayer1: {fileID: 963254476}
+  gameOverPanelScrollRectPlayer2: {fileID: 35624042}
+  gameOverPanelContainerPlayer1: {fileID: 1960931846}
+  gameOverPanelContainerPlayer2: {fileID: 840757912}
+  gameOverPanelScrollbarPlayer1: {fileID: 489196841}
+  gameOverPanelScrollbarPlayer2: {fileID: 1014821179}
+  newRecordPanelPlayer1: {fileID: 1432115767}
   newRecordPanelPlayer2: {fileID: 890168988}
+  newRecordTextPlayer1: {fileID: 494670722}
   newRecordTextPlayer2: {fileID: 2119888626}
+  damageAnimationPlayer1: {fileID: 807605198}
   damageAnimationPlayer2: {fileID: 2098351102}
   player1: {fileID: 1469877393}
   player2: {fileID: 1469877392}
@@ -12683,7 +12689,6 @@ MonoBehaviour:
   - {fileID: 6239046481350211349, guid: d19444cf8416d244592b0133dba3d2b5, type: 3}
   - {fileID: 1954673021442862711, guid: f4515e4ba2138df44b80befad018b201, type: 3}
   isPlayer1: 0
-  player: {fileID: 0}
 --- !u!114 &1469877393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12708,7 +12713,6 @@ MonoBehaviour:
   - {fileID: 6239046481350211349, guid: d19444cf8416d244592b0133dba3d2b5, type: 3}
   - {fileID: 1954673021442862711, guid: f4515e4ba2138df44b80befad018b201, type: 3}
   isPlayer1: 1
-  player: {fileID: 0}
 --- !u!1001 &1470261495
 PrefabInstance:
   m_ObjectHideFlags: 0

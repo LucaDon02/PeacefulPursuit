@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -222,7 +220,7 @@ public class MainMenu : MonoBehaviour
     {
         if (isPlayer1)
         {
-            playerInputManager.leav
+            // playerInputManager.leav
             player1Ready = false;
             UnReady(unReadyButtonPlayer1.GetComponent<Button>());
             pressButtonPanelPlayer1.SetActive(true);
