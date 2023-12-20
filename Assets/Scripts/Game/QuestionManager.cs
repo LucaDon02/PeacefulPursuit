@@ -25,14 +25,12 @@ public class QuestionManager : MonoBehaviour
     private List<JsonManager.Question> questionsPlayer1 = new List<JsonManager.Question>();
     private List<string> answersPlayer1 = new();
     private readonly List<JsonManager.Question> wrongQuestionsPlayer1 = new();
-    private int currentQuestionPlayer1;
-    private float answerTimePlayer1;
+    private int currentQuestionIndex;
+    private float answerTime;
     
     private List<JsonManager.Question> questionsPlayer2 = new List<JsonManager.Question>();
     private List<string> answersPlayer2 = new();
     private readonly List<JsonManager.Question> wrongQuestionsPlayer2 = new();
-    private int currentQuestionPlayer2;
-    private float answerTimePlayer2;
 
     public GameObject questionPrefab;
     public GameObject questionContainerPlayer1;
@@ -74,7 +72,7 @@ public class QuestionManager : MonoBehaviour
             questions.Remove(question);
         }
         
-        BlankQuestionUI();
+        ResetQuestionUI();
         StartCoroutine(WaitUntilGameStarted());
     }
     
@@ -82,85 +80,79 @@ public class QuestionManager : MonoBehaviour
     {
         yield return new WaitUntil(IsGameStarted);
 
-        SetQuestionUI(questionsPlayer1[currentQuestionPlayer1], questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+        SetQuestionUI();
     }
 
-    private void SetQuestionUI(JsonManager.Question question, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
-    {
-        questionText.text = question.question;
-        answerAText.text = question.answerA;
-        answerBText.text = question.answerB;
-        answerCText.text = question.answerC;
-    }
-    
     public void ResetQuestionUI()
     {
-        SetQuestionUI(questionsPlayer1[currentQuestionPlayer1], questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        SetQuestionUI(questionsPlayer2[currentQuestionPlayer2], questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+        questionPlayer1.text = "";
+        answerAPlayer1.text = "";
+        answerBPlayer1.text = "";
+        answerCPlayer1.text = "";
+        
+        questionPlayer2.text = "";
+        answerAPlayer2.text = "";
+        answerBPlayer2.text = "";
+        answerCPlayer2.text = "";
     }
     
-    public void BlankQuestionUI()
+    public void SetQuestionUI()
     {
-        SetQuestionUI(new JsonManager.Question(), questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        SetQuestionUI(new JsonManager.Question(), questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
+        var questionObjectPlayer1 = questionsPlayer1[currentQuestionIndex];
+        var questionObjectPlayer2 = questionsPlayer2[currentQuestionIndex];
+        
+        questionPlayer1.text = questionObjectPlayer1.question;
+        answerAPlayer1.text = questionObjectPlayer1.answerA;
+        answerBPlayer1.text = questionObjectPlayer1.answerB;
+        answerCPlayer1.text = questionObjectPlayer1.answerC;
+        
+        questionPlayer2.text = questionObjectPlayer2.question;
+        answerAPlayer2.text = questionObjectPlayer2.answerA;
+        answerBPlayer2.text = questionObjectPlayer2.answerB;
+        answerCPlayer2.text = questionObjectPlayer2.answerC;
     }
 
     private void Update()
     {
-        UpdateAnswerTimeAndDisplay(1, ref answerTimePlayer1, questionsPlayer1, questionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1);
-        UpdateAnswerTimeAndDisplay(2, ref answerTimePlayer2, questionsPlayer2, questionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2);
-    }
-
-    private void UpdateAnswerTimeAndDisplay(int playerNumber, ref float answerTime, List<JsonManager.Question> questions, TextMeshProUGUI questionText, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
-    {
         if (answerTime <= 0) return;
         
         answerTime -= 1 * Time.deltaTime;
+
+        if (answerTime > 0 && !((currentQuestionIndex + 1 == questionsPlayer1.Count || currentQuestionIndex + 1 == questionsPlayer2.Count) 
+                                && (wrongQuestionsPlayer1.Count == 0 || wrongQuestionsPlayer2.Count == 0))) return;
         
-        if (answerTime > 0) return;
-        
-        ResetAnswerColors(answerAText, answerBText, answerCText);
-                
-        switch (playerNumber)
-        {
-            case 1:
-            {
-                currentQuestionPlayer1++;
-                if (currentQuestionPlayer1 == questions.Count) AddWrongQuestions();
-                if (currentQuestionPlayer1 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer1], questionText, answerAText, answerBText, answerCText);
-                else PlayerManager.gameOver = true;
-                break;
-            }
-            case 2:
-            {
-                currentQuestionPlayer2++;
-                if (currentQuestionPlayer2 == questions.Count) AddWrongQuestions();
-                if (currentQuestionPlayer2 < questions.Count) SetQuestionUI(questions[currentQuestionPlayer2], questionText, answerAText, answerBText, answerCText);
-                else PlayerManager.gameOver = true;
-                break;
-            }
-        }
+        ResetAnswerColors();
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex == questionsPlayer1.Count || currentQuestionIndex == questionsPlayer2.Count) AddWrongQuestions();
+
+        if (currentQuestionIndex < questionsPlayer1.Count && currentQuestionIndex < questionsPlayer2.Count) SetQuestionUI();
+        else PlayerManager.gameOver = true;
     }
 
-    private void ResetAnswerColors(TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
+    private void ResetAnswerColors()
     {
-        answerAText.color = Color.white;
-        answerBText.color = Color.white;
-        answerCText.color = Color.white;
+        answerAPlayer1.color = Color.white;
+        answerBPlayer1.color = Color.white;
+        answerCPlayer1.color = Color.white;
+        
+        answerAPlayer2.color = Color.white;
+        answerBPlayer2.color = Color.white;
+        answerCPlayer2.color = Color.white;
     }
 
     public void AnswerQuestionPlayer1(int lane) // 0:left, 1:middle, 2:right
     {
-        AnswerQuestion(lane, questionsPlayer1, currentQuestionPlayer1, answerAPlayer1, answerBPlayer1, answerCPlayer1, ref answerTimePlayer1, "Player1");
+        AnswerQuestion(lane, questionsPlayer1, currentQuestionIndex, answerAPlayer1, answerBPlayer1, answerCPlayer1, "Player1");
     }
     
     public void AnswerQuestionPlayer2(int lane) // 0:left, 1:middle, 2:right
     {
-        AnswerQuestion(lane, questionsPlayer2, currentQuestionPlayer2, answerAPlayer2, answerBPlayer2, answerCPlayer2, ref answerTimePlayer2, "Player2");
+        AnswerQuestion(lane, questionsPlayer2, currentQuestionIndex, answerAPlayer2, answerBPlayer2, answerCPlayer2, "Player2");
     }
 
-    private void AnswerQuestion(int lane, List<JsonManager.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, ref float answerTime, string playerName)
+    private void AnswerQuestion(int lane, List<JsonManager.Question> questions, int currentQuestionIndex, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText, string playerName)
     {
         string[] answerOptions = { "A", "B", "C" };
         var selectedAnswer = answerOptions[lane];

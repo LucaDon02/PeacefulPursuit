@@ -43,7 +43,7 @@ public class LevelEvents : MonoBehaviour
         if (PlayerManager.isGamePaused || PlayerManager.gameOver) return;
         Time.timeScale = 0;
         PlayerManager.isGamePaused = true;
-        questionManager.BlankQuestionUI();
+        questionManager.ResetQuestionUI();
     }
     
     public void ResumeGame()
@@ -51,7 +51,7 @@ public class LevelEvents : MonoBehaviour
         if (!PlayerManager.isGamePaused) return;
         Time.timeScale = 1;
         PlayerManager.isGamePaused = false;
-        questionManager.ResetQuestionUI();
+        questionManager.SetQuestionUI();
     }
     
     public void QuitGame()
