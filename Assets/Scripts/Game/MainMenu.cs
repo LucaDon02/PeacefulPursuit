@@ -220,7 +220,6 @@ public class MainMenu : MonoBehaviour
     {
         if (isPlayer1)
         {
-            // playerInputManager.leav
             player1Ready = false;
             UnReady(unReadyButtonPlayer1.GetComponent<Button>());
             pressButtonPanelPlayer1.SetActive(true);

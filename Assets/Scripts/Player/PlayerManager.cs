@@ -102,7 +102,6 @@ public class PlayerManager : MonoBehaviour
             }
             timerText.gameObject.transform.parent.gameObject.SetActive(false);
             gameOverPanelScrollRectPlayer1.scrollSensitivity = gameOverPanelContainerPlayer1.transform.childCount / 4f;
-            gameOverPanelScrollRectPlayer2.scrollSensitivity = gameOverPanelContainerPlayer2.transform.childCount / 4f;
             gameOverPanelPlayer1.SetActive(true);
             gameOverPanelPlayer2.SetActive(true);
             pauseButton.SetActive(false);

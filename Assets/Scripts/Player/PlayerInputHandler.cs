@@ -10,6 +10,9 @@ public class PlayerInputHandler : MonoBehaviour
     [NonSerialized] public MainMenu mainMenu;
     [NonSerialized] public int index;
     [NonSerialized] public bool isGameStarted = false;
+    // This field decides if the left stick is postioned on the left or right.
+    [NonSerialized] public const double ControllerThreshold = 0.45;
+    
 
     private void Awake()
     {
@@ -28,21 +31,21 @@ public class PlayerInputHandler : MonoBehaviour
         
         if (!isGameStarted)
         {
-            if (v2.x < -0.45) mainMenu.ChangeCharacterUI(index, true);
-            else if (v2.x > 0.45) mainMenu.ChangeCharacterUI(index, false);
+            if (v2.x < -ControllerThreshold) mainMenu.ChangeCharacterUI(index, true);
+            else if (v2.x > ControllerThreshold) mainMenu.ChangeCharacterUI(index, false);
         }
         else if (!PlayerManager.gameOver)
         {
-            if (v2.x < -0.45) playerController.MoveLeft();
-            else if (v2.x > 0.45) playerController.MoveRight();
+            if (v2.x < -ControllerThreshold) playerController.MoveLeft();
+            else if (v2.x > ControllerThreshold) playerController.MoveRight();
 
-            if (v2.y < -0.45) playerController.Slide();
-            else if (v2.y > 0.45) playerController.Jump();
+            if (v2.y < -ControllerThreshold) playerController.Slide();
+            else if (v2.y > ControllerThreshold) playerController.Jump();
         }
         else
         {
-            if (v2.y < -0.45) playerManager.ScrollGameOverContainer(index == 0, false);
-            else if (v2.y > 0.45) playerManager.ScrollGameOverContainer(index == 0, true);
+            if (v2.y < -ControllerThreshold) playerManager.ScrollGameOverContainer(index == 0, false);
+            else if (v2.y > ControllerThreshold) playerManager.ScrollGameOverContainer(index == 0, true);
         }
     }
 

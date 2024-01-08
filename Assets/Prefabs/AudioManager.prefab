@@ -69,3 +69,27 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: PlayerDamage
+    clip: {fileID: 8300000, guid: 0efdd175e2a54b64f9f5761b1260c508, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: JumpSound
+    clip: {fileID: 8300000, guid: bf653164b15a1a745b169a7842014bb6, type: 3}
+    volume: 0.908
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: cartoonJump
+    clip: {fileID: 8300000, guid: 078b893b11f101448a78c89b1d7fa353, type: 3}
+    volume: 0.396
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: spinDash
+    clip: {fileID: 8300000, guid: cf69f561909c2284fae134ca00c2c64d, type: 3}
+    volume: 0.396
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
