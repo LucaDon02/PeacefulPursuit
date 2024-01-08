@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026499312, g: 0.06735732, b: 0.2937187, a: 1}
+  m_IndirectSpecularColor: {r: 0.007300845, g: 0.10929858, b: 0.4210998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4155,6 +4155,7 @@ MonoBehaviour:
   previousCharacterPlayer2: {fileID: 1573060893}
   highScoreText: {fileID: 1913028984}
   cms: {fileID: 433853681}
+  playerInputManager: {fileID: 0}
 --- !u!4 &1152272850
 Transform:
   m_ObjectHideFlags: 0
