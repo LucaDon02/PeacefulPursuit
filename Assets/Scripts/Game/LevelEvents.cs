@@ -54,10 +54,4 @@ public class LevelEvents : MonoBehaviour
         questionManager.SetQuestionUI();
     }
     
-    /*
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-    */
 }

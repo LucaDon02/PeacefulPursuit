@@ -1,45 +1,68 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager Instance { get; private set; }
     public Sound[] sounds;
 
     void Awake()
     {
-        if(instance == null)
+        InitalizeSingleton();
+        InitializeSounds();
+        PlaySound("MainTheme");
+    }
+    private void InitalizeSingleton()
+    {
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
-            return;
         }
-
-        foreach(var s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.loop = s.loop;
-            s.source.pitch = s.pitch;
-        }
-        
-        PlaySound("MainTheme");
     }
 
-    public void PlaySound(string name) { foreach (var s in sounds) if (s.name == name) s.source.Play(); }
+    private void InitializeSounds()
+    {
+        foreach (var sound in sounds)
+        {
+            InitializeSound(sound);
+        }
+    }
+
+    private void InitializeSound(Sound sound)
+    {
+        sound.source = gameObject.AddComponent<AudioSource>();
+        sound.source.clip = sound.Clip;
+        sound.source.volume = sound.Volume;
+        sound.source.loop = sound.Loop;
+        sound.source.pitch = sound.Pitch;
+    }
+
+    public void PlaySound(string name)
+    {
+        var soundToPlay = GetSoundByName(name);
+        if (soundToPlay != null)
+        {
+            soundToPlay.source.Play();
+        }
+    }
 
     public void PauseSound(string name)
     {
-        foreach (var s in sounds)
+        var soundToPause = GetSoundByName(name);
+        if (soundToPause != null)
         {
-            if (s.name == name)
-            {
-                s.source.Pause();
-            }
+            soundToPause.source.Pause();
         }
+    }
+    
+
+    private Sound GetSoundByName(string name)
+    {
+        return sounds.FirstOrDefault(s => s.Name == name);
     }
 }

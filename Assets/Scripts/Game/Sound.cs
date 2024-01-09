@@ -3,17 +3,16 @@
 [System.Serializable]
 public class Sound
 {
-    public string name;
-    public AudioClip clip;
+    [SerializeField] private string name;
+    [SerializeField] private AudioClip clip;
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [Range(0.1f, 3f)] [SerializeField] private float pitch;
+    [SerializeField] private bool loop;
+    [HideInInspector] public AudioSource source;
 
-    [Range(0f,1f)]
-    public float volume;
-
-    [Range(-3f, 3f)]
-    public float pitch;
-
-    public bool loop;
-
-    [HideInInspector]
-    public AudioSource source;
+    public string Name => name;
+    public AudioClip Clip => clip;
+    public float Volume => volume;
+    public float Pitch => pitch;
+    public bool Loop => loop;
 }
