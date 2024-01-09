@@ -128,6 +128,14 @@ public class PlayerManager : MonoBehaviour
             Time.timeScale = isChanging ? previousTimeScale : 0;
             
             isChanging = !isChanging;
+            if (isChanging) {
+                FindObjectOfType<AudioManager>().PauseSound("MainTheme");
+                FindObjectOfType<AudioManager>().PlaySound("changeController");
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().PlaySound("MainTheme");
+            }
         }
 
         timerText.text = timer.ToString("00");

@@ -174,7 +174,11 @@ public class QuestionManager : MonoBehaviour
         {
             case "Player1":
                 answersPlayer1.Add(selectedAnswer);
-                if (!correctAnswer) wrongQuestionsPlayer1.Add(question);
+                if (!correctAnswer)
+                {
+                    wrongQuestionsPlayer1.Add(question);
+                    //FindObjectOfType<AudioManager>().PlaySound("PlayerDamage");
+                }
                 break;
             case "Player2":
                 answersPlayer2.Add(selectedAnswer);

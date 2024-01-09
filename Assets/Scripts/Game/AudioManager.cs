@@ -31,4 +31,15 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlaySound(string name) { foreach (var s in sounds) if (s.name == name) s.source.Play(); }
+
+    public void PauseSound(string name)
+    {
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                s.source.Pause();
+            }
+        }
+    }
 }
