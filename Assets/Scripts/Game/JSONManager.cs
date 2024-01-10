@@ -36,7 +36,10 @@ public class JsonManager : MonoBehaviour
     public class GameData
     {
         public int selectedCharacterPlayer1;
+        public string teamColorPlayer1;
+        
         public int selectedCharacterPlayer2;
+        public string teamColorPlayer2;
     }
 
     private static Questions _questions = new Questions();
@@ -121,6 +124,21 @@ public class JsonManager : MonoBehaviour
     public static void SetSelectedCharacterPlayer2(int index) {
         _gameData.selectedCharacterPlayer2 = index;
         OutputJsonGameData();
+    }
+
+    public static Color GetTeamColor(int player)
+    {
+        var colorName = player == 1 ? _gameData.teamColorPlayer1 : _gameData.teamColorPlayer2;
+        return colorName switch
+        {
+            "blue" => Color.blue,
+            "cyan" => Color.cyan,
+            "green" => Color.green,
+            "magenta" => Color.magenta,
+            "red" => Color.red,
+            "yellow" => Color.yellow,
+            _ => Color.gray
+        };
     }
     
     private static void OutputJsonQuestions()

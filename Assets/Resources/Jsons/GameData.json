@@ -1,4 +1,6 @@
 {
-    "selectedCharacterPlayer1": 3,
-    "selectedCharacterPlayer2": 1
+    "selectedCharacterPlayer1": 5,
+    "teamColorPlayer1": "blue",
+    "selectedCharacterPlayer2": 4,
+    "teamColorPlayer2": "magenta"
 }

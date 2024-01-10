@@ -188,6 +188,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (isPlayer1)
         {
+            if ((gameOverPanelScrollbarPlayer1.value < 0.01 && !isUp) || (gameOverPanelScrollbarPlayer1.value > 0.99 && isUp)) return;
             var value = 1f / (gameOverPanelContainerPlayer1.transform.childCount / 2f);
 
             gameOverPanelScrollbarPlayer1.value = isUp
@@ -196,6 +197,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
+            if ((gameOverPanelScrollbarPlayer2.value < 0.01 && isUp) || (gameOverPanelScrollbarPlayer2.value > 0.99 && !isUp)) return;
             var value = 1f / (gameOverPanelContainerPlayer2.transform.childCount / 2f);
 
             gameOverPanelScrollbarPlayer2.value = isUp

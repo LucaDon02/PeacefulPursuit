@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.034402482, g: 0.2082301, b: 0.6899034, a: 1}
+  m_IndirectSpecularColor: {r: 0.002678609, g: 0.06811515, b: 0.29698402, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5948,7 +5948,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 7.1e-44, z: 0, w: -7.884638e-38}
+  m_BoundingSphereOverride: {x: 0, y: -1.5013938e-37, z: 5.32e-43, w: -1.4525308e-37}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -7045,8 +7045,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 364.065, y: 45}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 364.065, y: 120}
+  m_Spacing: {x: 0, y: 7.5}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &840757916
@@ -14316,7 +14316,7 @@ MonoBehaviour:
   playerManager: {fileID: 1469877390}
   questionBannerPlayer1: {fileID: 750638061}
   questionBannerPlayer2: {fileID: 201335027}
-  questionPrefab: {fileID: 3689077418263745836, guid: 48c73ba6bdf01814cbe51b3227a0a9ac, type: 3}
+  questionPrefab: {fileID: 8527144550625697684, guid: 48c73ba6bdf01814cbe51b3227a0a9ac, type: 3}
   questionContainerPlayer1: {fileID: 1960931846}
   questionContainerPlayer2: {fileID: 840757912}
 --- !u!4 &1759436384
@@ -15623,8 +15623,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 364.065, y: 45}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 364.065, y: 120}
+  m_Spacing: {x: 0, y: 7.5}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1960931849
@@ -17766,26 +17766,6 @@ PrefabInstance:
     - target: {fileID: 5595939842272982844, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
-      propertyPath: sounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
-      propertyPath: sounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 0efdd175e2a54b64f9f5761b1260c508, type: 3}
-    - target: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
-      propertyPath: sounds.Array.data[4].name
-      value: PlayerDamage
-      objectReference: {fileID: 0}
-    - target: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
-      propertyPath: sounds.Array.data[4].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
-      propertyPath: sounds.Array.data[4].volume
-      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
