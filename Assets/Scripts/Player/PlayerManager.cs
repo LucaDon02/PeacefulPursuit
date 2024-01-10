@@ -188,21 +188,26 @@ public class PlayerManager : MonoBehaviour
     {
         if (isPlayer1)
         {
+            Debug.Log(gameOverPanelScrollbarPlayer1.value);
             if ((gameOverPanelScrollbarPlayer1.value < 0.01 && !isUp) || (gameOverPanelScrollbarPlayer1.value > 0.99 && isUp)) return;
             var value = 1f / (gameOverPanelContainerPlayer1.transform.childCount / 2f);
 
-            gameOverPanelScrollbarPlayer1.value = isUp
+            var newValue = isUp
                 ? gameOverPanelScrollbarPlayer1.value + value
                 : gameOverPanelScrollbarPlayer1.value - value;
+
+            gameOverPanelScrollbarPlayer1.value = newValue < 0 ? 0 : newValue > 1 ? 1 : newValue;
         }
         else
         {
-            if ((gameOverPanelScrollbarPlayer2.value < 0.01 && isUp) || (gameOverPanelScrollbarPlayer2.value > 0.99 && !isUp)) return;
+            if ((gameOverPanelScrollbarPlayer2.value < 0.01 && !isUp) || (gameOverPanelScrollbarPlayer2.value > 0.99 && isUp)) return;
             var value = 1f / (gameOverPanelContainerPlayer2.transform.childCount / 2f);
 
-            gameOverPanelScrollbarPlayer2.value = isUp
+            var newValue = isUp
                 ? gameOverPanelScrollbarPlayer2.value + value
                 : gameOverPanelScrollbarPlayer2.value - value;
+
+            gameOverPanelScrollbarPlayer2.value = newValue < 0 ? 0 : newValue > 1 ? 1 : newValue;
         }
     }
 }
