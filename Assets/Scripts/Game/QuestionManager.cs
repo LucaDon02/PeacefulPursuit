@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour
 {
@@ -164,11 +165,13 @@ public class QuestionManager : MonoBehaviour
         
         questionItem.transform.Find("Question").GetComponent<TextMeshProUGUI>().text = question.question;
                 
-        var answer = questionItem.transform.Find("Answer").GetComponent<TextMeshProUGUI>();
-        answer.text = selectedAnswer;
-        answer.color = correctAnswer ? Color.green : Color.red;
-                
-        questionItem.transform.Find("Correct answer").GetComponent<TextMeshProUGUI>().text = question.correctAnswer.ToString();
+        var answers = questionItem.transform.Find("Answers").transform;
+        answers.Find("Answer A").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerA;
+        answers.Find("Answer B").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerB;
+        answers.Find("Answer C").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerC;
+        answers.Find("Answer " + selectedAnswer).GetComponent<Image>().color = JsonManager.GetTeamColor(playerName == "Player1" ? 1 : 2);
+
+        questionItem.transform.Find("Labels").transform.Find(question.correctAnswer).GetComponent<TextMeshProUGUI>().color = Color.green;
         
         switch (playerName)
         {
