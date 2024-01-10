@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
         isSliding = false;
    
         velocity.y = Mathf.Sqrt(jumpHeight * 2 * -gravity);
+        FindObjectOfType<AudioManager>().PlaySound("cartoonJump");
     }
 
     private void OnTriggerEnter(Collider other)

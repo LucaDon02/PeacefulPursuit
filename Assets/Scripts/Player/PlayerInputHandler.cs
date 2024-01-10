@@ -1,7 +1,9 @@
 using System;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using Vector2 = UnityEngine.Vector2;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -10,39 +12,75 @@ public class PlayerInputHandler : MonoBehaviour
     [NonSerialized] public MainMenu mainMenu;
     [NonSerialized] public int index;
     [NonSerialized] public bool isGameStarted = false;
+    // This field decides if the left stick is postioned on the left or right.
+    private const double ControllerThreshold = 0.45;
+    private const string MainMenuObjectName = "Main Menu";
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         index = GetComponent<PlayerInput>().playerIndex;
-        mainMenu = GameObject.Find("Main Menu").GetComponent<MainMenu>();
-        
-        GameObject.Find("MainMenu Player" + (index + 1)).transform.Find("PressButtonPanel").gameObject.SetActive(false);
+        mainMenu = GameObject.Find(MainMenuObjectName)?.GetComponent<MainMenu>();
+
+        if (mainMenu == null)
+        {
+            Debug.LogError($"Could not find {MainMenuObjectName} or MainMenu component.");
+            return;
+        }
+        DisablePressButtonPanel(); 
+    }
+
+    private void DisablePressButtonPanel()
+    {
+        var pressButtonPanel = GameObject.Find($"MainMenu Player{index + 1}")?.transform.Find("PressButtonPanel")?.gameObject;
+        if (pressButtonPanel != null)
+        {
+            pressButtonPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError($"Could not find PressButtonPanel for Player{index + 1}.");
+        }
+    }
+
+    private void HandleMainMenuMovement(Vector2 movementInput)
+    {
+            if (movementInput.x < -ControllerThreshold) mainMenu.ChangeCharacterUI(index, true);
+            else if (movementInput.x > ControllerThreshold) mainMenu.ChangeCharacterUI(index, false);
+    }
+
+    private void HandleGameMovement(Vector2 movementInput)
+    {
+            if (movementInput.x < -ControllerThreshold) playerController.MoveLeft();
+            else if (movementInput.x > ControllerThreshold) playerController.MoveRight();
+
+            if (movementInput.y < -ControllerThreshold) playerController.Slide();
+            else if (movementInput.y > ControllerThreshold) playerController.Jump();
+    }
+
+    private void HandleGameOverMovement(Vector2 movementInput)
+    {
+            if (movementInput.y < -ControllerThreshold) playerManager.ScrollGameOverContainer(index == 0, false);
+            else if (movementInput.y > ControllerThreshold) playerManager.ScrollGameOverContainer(index == 0, true);
     }
 
     public void OnMove(CallbackContext callbackContext)
     {
         if (!callbackContext.performed) return;
         
-        var v2 = callbackContext.ReadValue<Vector2>();
+        var movementInput = callbackContext.ReadValue<Vector2>();
         
         if (!isGameStarted)
         {
-            if (v2.x < -0.45) mainMenu.ChangeCharacterUI(index, true);
-            else if (v2.x > 0.45) mainMenu.ChangeCharacterUI(index, false);
+            HandleMainMenuMovement(movementInput);
         }
         else if (!PlayerManager.gameOver)
         {
-            if (v2.x < -0.45) playerController.MoveLeft();
-            else if (v2.x > 0.45) playerController.MoveRight();
-
-            if (v2.y < -0.45) playerController.Slide();
-            else if (v2.y > 0.45) playerController.Jump();
+            HandleGameMovement(movementInput);
         }
         else
         {
-            if (v2.y < -0.45) playerManager.ScrollGameOverContainer(index == 0, false);
-            else if (v2.y > 0.45) playerManager.ScrollGameOverContainer(index == 0, true);
+            HandleGameOverMovement(movementInput);
         }
     }
 

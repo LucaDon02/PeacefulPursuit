@@ -102,7 +102,6 @@ public class PlayerManager : MonoBehaviour
             }
             timerText.gameObject.transform.parent.gameObject.SetActive(false);
             gameOverPanelScrollRectPlayer1.scrollSensitivity = gameOverPanelContainerPlayer1.transform.childCount / 4f;
-            gameOverPanelScrollRectPlayer2.scrollSensitivity = gameOverPanelContainerPlayer2.transform.childCount / 4f;
             gameOverPanelPlayer1.SetActive(true);
             gameOverPanelPlayer2.SetActive(true);
             pauseButton.SetActive(false);
@@ -129,6 +128,14 @@ public class PlayerManager : MonoBehaviour
             Time.timeScale = isChanging ? previousTimeScale : 0;
             
             isChanging = !isChanging;
+            if (isChanging) {
+                FindObjectOfType<AudioManager>().PauseSound("MainTheme");
+                FindObjectOfType<AudioManager>().PlaySound("changeController");
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().PlaySound("MainTheme");
+            }
         }
 
         timerText.text = timer.ToString("00");
