@@ -52,6 +52,8 @@ public class PlayerManager : MonoBehaviour
     public int defaultCorrectQuestionBonus = 25;
     public Image checkmarkPlayer1;
     public Image checkmarkPlayer2;
+    public Image crossPlayer1;
+    public Image crossPlayer2;
 
     public double secondsFading;
     private double currentFadingTime = 0;
@@ -181,16 +183,23 @@ public class PlayerManager : MonoBehaviour
             if (isCorrectAnswerPlayer1)
             {
                 checkmarkPlayer1.color = new Color(255, 255, 255, alphaValue);
+                crossPlayer1.color = new Color(255, 255, 255, 0);
             }
-            else {
+            else
+            {
+                crossPlayer1.color = new Color(255, 255, 255, alphaValue);
             }
 
             if (isCorrectAnswerPlayer2)
             {
                 checkmarkPlayer2.color = new Color(255, 255, 255, alphaValue);
+                crossPlayer2.color = new Color(255, 255, 255, 0);
             }
-            else {
+            else
+            {
+                crossPlayer2.color = new Color(255, 255, 255, alphaValue);
             }
+            
             // check if fading has reached max
             if (currentFadingTime >= secondsFading)
             {
