@@ -166,6 +166,11 @@ public class PlayerManager : MonoBehaviour
                 isGameStarted = true;
             }
         }
+        DisplayCorrectOrWrongAnswer();
+    }
+
+    private void DisplayCorrectOrWrongAnswer()
+    {
         if (isFlashing)
         {
             // Increase or decrease fade
