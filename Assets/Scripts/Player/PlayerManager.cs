@@ -247,11 +247,13 @@ public class PlayerManager : MonoBehaviour
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer1 = true;
+                FindObjectOfType<AudioManager>().PlaySound("correctAnswer");
             }
             else
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer2 = true;
+                FindObjectOfType<AudioManager>().PlaySound("correctAnswer");
             } 
             var player = playerName == "Player1" ? player1 : player2;
         player.score += (int)(defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10f + 1) + 0.5);
@@ -262,11 +264,13 @@ public class PlayerManager : MonoBehaviour
                  {
                      isFlashing = true;
                      isCorrectAnswerPlayer1 = false;
+                     FindObjectOfType<AudioManager>().PlaySound("wrongAnswer");
                  }
                  else
                  {
                      isFlashing = true;
                      isCorrectAnswerPlayer2 = false;
+                     FindObjectOfType<AudioManager>().PlaySound("wrongAnswer");
                  } 
                  
          }

@@ -49,7 +49,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 97ef5fec45cf5c94b87bd251ad486367, type: 3}
     volume: 0.396
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: PickUp
     clip: {fileID: 8300000, guid: ec8bece9c4e4c7543a7a0c56fb430b2e, type: 3}
@@ -89,6 +89,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: changeController
     clip: {fileID: 8300000, guid: a97e613d88615494d9eff314189fcc92, type: 3}
+    volume: 0.396
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: correctAnswer
+    clip: {fileID: 8300000, guid: db64898783091c242bac94b302ef21f8, type: 3}
+    volume: 0.396
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: wrongAnswer
+    clip: {fileID: 8300000, guid: 8eca6e2c242eb1744afe424baba49644, type: 3}
     volume: 0.396
     pitch: 1
     loop: 0
