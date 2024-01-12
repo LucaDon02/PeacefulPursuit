@@ -50,6 +50,21 @@ public class PlayerManager : MonoBehaviour
     private float previousTimeScale;
 
     public int defaultCorrectQuestionBonus = 25;
+    public Image checkmarkPlayer1;
+    public Image checkmarkPlayer2;
+    public Image crossPlayer1;
+    public Image crossPlayer2;
+
+    public double secondsFading;
+    private double currentFadingTime = 0;
+    public bool isFlashing;
+    private bool isFadingIn = true;
+    private bool isCorrectAnswerPlayer1; 
+    private bool isCorrectAnswerPlayer2; 
+    private float currentFadingTimePlayer2 = 0;
+    
+    [SerializeField]
+    private QuestionManager questionManager;
 
     private void Start()
     {
@@ -129,11 +144,13 @@ public class PlayerManager : MonoBehaviour
             
             isChanging = !isChanging;
             if (isChanging) {
+                questionManager.ResetQuestionUI();
                 FindObjectOfType<AudioManager>().PauseSound("MainTheme");
                 FindObjectOfType<AudioManager>().PlaySound("changeController");
             }
             else
             {
+                questionManager.SetQuestionUI();
                 FindObjectOfType<AudioManager>().PlaySound("MainTheme");
             }
         }
@@ -143,7 +160,7 @@ public class PlayerManager : MonoBehaviour
         //Start Game
         if (!isGameStarted)
         {
-            countdownTime -= Time.deltaTime;
+            countdownTime -= Time.fixedDeltaTime;
             countdownTextPlayer1.text = countdownTime.ToString("0");
             countdownTextPlayer2.text = countdownTime.ToString("0");
 
@@ -152,6 +169,62 @@ public class PlayerManager : MonoBehaviour
                 countdownTextPlayer1.gameObject.SetActive(false);
                 countdownTextPlayer2.gameObject.SetActive(false);
                 isGameStarted = true;
+            }
+        }
+        DisplayCorrectOrWrongAnswer();
+    }
+
+    private void DisplayCorrectOrWrongAnswer()
+    {
+        if (isFlashing)
+        {
+            // Increase or decrease fade
+
+            if (isFadingIn)
+            {
+                currentFadingTime += Time.fixedDeltaTime;
+            }
+            else
+            {
+                currentFadingTime -= Time.fixedDeltaTime;
+            }
+
+            float alphaValue = (float)(currentFadingTime / secondsFading);
+            if (isCorrectAnswerPlayer1)
+            {
+                checkmarkPlayer1.color = new Color(255, 255, 255, alphaValue);
+                crossPlayer1.color = new Color(255, 255, 255, 0);
+            }
+            else
+            {
+                crossPlayer1.color = new Color(255, 255, 255, alphaValue);
+            }
+
+            if (isCorrectAnswerPlayer2)
+            {
+                checkmarkPlayer2.color = new Color(255, 255, 255, alphaValue);
+                crossPlayer2.color = new Color(255, 255, 255, 0);
+            }
+            else
+            {
+                crossPlayer2.color = new Color(255, 255, 255, alphaValue);
+            }
+            
+            // check if fading has reached max
+            if (currentFadingTime >= secondsFading)
+            {
+                isFadingIn = false;
+            }
+
+            if (currentFadingTime <= 0)
+            {
+                currentFadingTime = 0;
+                isFlashing = false;
+                isFadingIn = true;
+                
+                // make checkmark transparent
+                checkmarkPlayer1.color = new Color(255, 255, 255, 0);
+                checkmarkPlayer2.color = new Color(255, 255, 255, 0);
             }
         }
     }
@@ -180,9 +253,37 @@ public class PlayerManager : MonoBehaviour
     
     public void CorrectQuestion(string playerName)
     {
-        var player = playerName == "Player1" ? player1 : player2;
+            if (playerName == "Player1")
+            {
+                isFlashing = true;
+                isCorrectAnswerPlayer1 = true;
+                FindObjectOfType<AudioManager>().PlaySound("correctAnswer");
+            }
+            else
+            {
+                isFlashing = true;
+                isCorrectAnswerPlayer2 = true;
+                FindObjectOfType<AudioManager>().PlaySound("correctAnswer");
+            } 
+            var player = playerName == "Player1" ? player1 : player2;
         player.score += (int)(defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10f + 1) + 0.5);
-    }
+    } 
+    public void WrongQuestion(string playerName)
+         {
+                 if (playerName == "Player1")
+                 {
+                     isFlashing = true;
+                     isCorrectAnswerPlayer1 = false;
+                     FindObjectOfType<AudioManager>().PlaySound("wrongAnswer");
+                 }
+                 else
+                 {
+                     isFlashing = true;
+                     isCorrectAnswerPlayer2 = false;
+                     FindObjectOfType<AudioManager>().PlaySound("wrongAnswer");
+                 } 
+                 
+         }
 
     public void ScrollGameOverContainer(bool isPlayer1, bool isUp)
     {

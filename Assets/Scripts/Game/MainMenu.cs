@@ -18,9 +18,6 @@ public class MainMenu : MonoBehaviour
     public GameObject pressButtonPanelPlayer1;
     public GameObject pressButtonPanelPlayer2;
     
-    public GameObject readyTextPlayer1;
-    public GameObject readyTextPlayer2;
-
     public GameObject readyButtonPlayer1;
     public GameObject readyButtonPlayer2;
     
@@ -35,6 +32,9 @@ public class MainMenu : MonoBehaviour
 
     public TextMeshProUGUI highScoreText;
     public GameObject cms;
+    
+    public Image readyCheckPlayer1;
+    public Image readyCheckPlayer2;
 
     public PlayerInputManager playerInputManager;
 
@@ -103,8 +103,8 @@ public class MainMenu : MonoBehaviour
         switch (button.transform.parent.name)
         {
             case "MainMenu Player1":
+                readyCheckPlayer1.color = new Color(255, 255, 255, 100);
                 player1Ready = true;
-                readyTextPlayer1.SetActive(true);
                 unReadyButtonPlayer1.SetActive(true);
                 readyButtonPlayer1.SetActive(false);
                 nextCharacterPlayer1.interactable = false;
@@ -112,7 +112,7 @@ public class MainMenu : MonoBehaviour
                 break;
             case "MainMenu Player2":
                 player2Ready = true;
-                readyTextPlayer2.SetActive(true);
+                readyCheckPlayer2.color = new Color(255, 255, 255, 100);
                 unReadyButtonPlayer2.SetActive(true);
                 readyButtonPlayer2.SetActive(false);
                 nextCharacterPlayer2.interactable = false;
@@ -128,7 +128,7 @@ public class MainMenu : MonoBehaviour
         switch (button.transform.parent.name)
         {
             case "MainMenu Player1":
-                readyTextPlayer1.SetActive(false);
+                readyCheckPlayer1.color = new Color(255, 255, 255, 0);
                 player1Ready = false;
                 readyButtonPlayer1.SetActive(true);
                 unReadyButtonPlayer1.SetActive(false);
@@ -137,7 +137,7 @@ public class MainMenu : MonoBehaviour
                 break;
             case "MainMenu Player2":
                 player2Ready = false;
-                readyTextPlayer2.SetActive(false);
+                readyCheckPlayer2.color = new Color(255, 255, 255, 0);
                 readyButtonPlayer2.SetActive(true);
                 unReadyButtonPlayer2.SetActive(false);
                 nextCharacterPlayer2.interactable = true;

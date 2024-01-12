@@ -41,6 +41,8 @@ public class QuestionManager : MonoBehaviour
     {
         InitializeUIReferences();
         InitializeQuestions();
+        playerManager = FindObjectOfType<PlayerManager>();
+
     }
 
     private void InitializeUIReferences()
@@ -130,6 +132,7 @@ public class QuestionManager : MonoBehaviour
 
         if (currentQuestionIndex < questionsPlayer1.Count && currentQuestionIndex < questionsPlayer2.Count) SetQuestionUI();
         else PlayerManager.gameOver = true;
+
     }
 
     private void ResetAnswerColors()
@@ -191,7 +194,14 @@ public class QuestionManager : MonoBehaviour
 
         SetAnswerColor(correctAnswer ? Color.green : Color.red, selectedAnswer, answerAText, answerBText, answerCText);
 
-        if (correctAnswer) playerManager.CorrectQuestion(playerName);
+        if (correctAnswer)
+        {
+            playerManager.CorrectQuestion(playerName);
+        }
+        else
+        {
+            playerManager.WrongQuestion(playerName);
+        }
 
         answerTime = answerShowTime;
     }
