@@ -62,6 +62,9 @@ public class PlayerManager : MonoBehaviour
     private bool isCorrectAnswerPlayer1; 
     private bool isCorrectAnswerPlayer2; 
     private float currentFadingTimePlayer2 = 0;
+    
+    [SerializeField]
+    private QuestionManager questionManager;
 
     private void Start()
     {
@@ -141,11 +144,13 @@ public class PlayerManager : MonoBehaviour
             
             isChanging = !isChanging;
             if (isChanging) {
+                questionManager.ResetQuestionUI();
                 FindObjectOfType<AudioManager>().PauseSound("MainTheme");
                 FindObjectOfType<AudioManager>().PlaySound("changeController");
             }
             else
             {
+                questionManager.SetQuestionUI();
                 FindObjectOfType<AudioManager>().PlaySound("MainTheme");
             }
         }
