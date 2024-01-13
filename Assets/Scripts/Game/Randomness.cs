@@ -10,7 +10,7 @@ namespace Game
         private ColorAdjustments colorAdjustments;
         public float[] randomHueShitf;
 
-        void Start()
+        private void Start()
         {
             volume = GetComponent<Volume>();
             volume.profile.TryGet(out colorAdjustments);

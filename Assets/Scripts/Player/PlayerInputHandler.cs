@@ -1,4 +1,5 @@
 using System;
+using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -6,6 +7,10 @@ using Vector2 = UnityEngine.Vector2;
 
 namespace Player
 {
+    /// <summary>
+    /// This class handles the controller input using the Unity Input System
+    /// We read to values and pass it to the appropiate sections (Menu, Game, Gameover)
+    /// </summary>
     public class PlayerInputHandler : MonoBehaviour
     {
         [NonSerialized] public PlayerController playerController;
@@ -33,14 +38,14 @@ namespace Player
 
         private void DisablePressButtonPanel()
         {
-            var pressButtonPanel = GameObject.Find($"MainMenu Player{index + 1}")?.transform.Find("PressButtonPanel")?.gameObject;
-            if (pressButtonPanel != null)
+            GameObject pressButtonPanel = GameObject.Find($"MainMenu Player{index + 1}")?.transform.Find("PressButtonPanel")?.gameObject;
+            if (pressButtonPanel == null)
             {
-                pressButtonPanel.SetActive(false);
+                Debug.LogError($"Could not find PressButtonPanel for Player{index + 1}.");
             }
             else
             {
-                Debug.LogError($"Could not find PressButtonPanel for Player{index + 1}.");
+                pressButtonPanel.SetActive(false);
             }
         }
 
@@ -65,11 +70,13 @@ namespace Player
             else if (movementInput.y > ControllerThreshold) playerManager.ScrollGameOverContainer(index == 0, true);
         }
 
+        // Reads controller input and passes it to the appropiate
+        // Section to handle movement
         public void OnMove(CallbackContext callbackContext)
         {
             if (!callbackContext.performed) return;
         
-            var movementInput = callbackContext.ReadValue<Vector2>();
+            Vector2 movementInput = callbackContext.ReadValue<Vector2>();
         
             if (!isGameStarted)
             {

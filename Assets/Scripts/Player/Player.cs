@@ -20,17 +20,17 @@ namespace Player
 
         private void Awake()
         {
-            var playerName = isPlayer1 ? "Player1" : "Player2";
-            var index = isPlayer1 ? JsonManager.GetSelectedCharacterPlayer1() : JsonManager.GetSelectedCharacterPlayer2();
-            var position = transform.position + (isPlayer1 ? new Vector3(-25, 0, 0) : new Vector3(25, 0, 0));
+            string playerName = isPlayer1 ? "Player1" : "Player2";
+            int index = isPlayer1 ? JsonManager.GetSelectedCharacterPlayer1() : JsonManager.GetSelectedCharacterPlayer2();
+            Vector3 position = transform.position + (isPlayer1 ? new Vector3(-25, 0, 0) : new Vector3(25, 0, 0));
             player = Instantiate(characterPrefabs[index], position, Quaternion.identity);
             player.name = playerName;
             player.GetComponent<PlayerController>().isPlayer1 = isPlayer1;
         }
 
-        void Start() { score = 0; }
+        private void Start() { score = 0; }
 
-        void Update()
+        private void Update()
         {
             scoreText.text = score.ToString();
             buffText.text = buff.ToString();

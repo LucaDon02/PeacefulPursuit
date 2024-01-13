@@ -107,8 +107,8 @@ namespace Game
 
         public static int GetHighScore()
         {
-            var highScorePlayer1 = _scores.scoresPlayer1.Any() ? _scores.scoresPlayer1.Max() : 0;
-            var highScorePlayer2 = _scores.scoresPlayer2.Any() ? _scores.scoresPlayer2.Max() : 0;
+            int highScorePlayer1 = _scores.scoresPlayer1.Any() ? _scores.scoresPlayer1.Max() : 0;
+            int highScorePlayer2 = _scores.scoresPlayer2.Any() ? _scores.scoresPlayer2.Max() : 0;
             return Math.Max(highScorePlayer1, highScorePlayer2);
         }
     
@@ -143,21 +143,21 @@ namespace Game
     
         private static void OutputJsonQuestions()
         {
-            var strOutput = JsonUtility.ToJson(_questions, true);
+            string strOutput = JsonUtility.ToJson(_questions, true);
         
             System.IO.File.WriteAllText(QuestionsDataPath, strOutput);
         }
     
         private static void OutputJsonScores()
         {
-            var strOutput = JsonUtility.ToJson(_scores, true);
+            string strOutput = JsonUtility.ToJson(_scores, true);
         
             System.IO.File.WriteAllText(ScoresDataPath, strOutput);
         }
     
         private static void OutputJsonGameData()
         {
-            var strOutput = JsonUtility.ToJson(_gameData, true);
+            string strOutput = JsonUtility.ToJson(_gameData, true);
         
             System.IO.File.WriteAllText(GameDataDataPath, strOutput);
         }

@@ -51,13 +51,13 @@ namespace Game
 
         public void PlaySound(string soundName)
         {
-            var soundToPlay = GetSoundByName(soundName);
+            Sound soundToPlay = GetSoundByName(soundName);
             soundToPlay?.source.Play();
         }
 
         public void PauseSound(string soundName)
         {
-            var soundToPause = GetSoundByName(soundName);
+            Sound soundToPause = GetSoundByName(soundName);
             soundToPause?.source.Pause();
         }
     

@@ -5,11 +5,11 @@ namespace Game
 {
     public class DamageAnimation : MonoBehaviour
     {
-        public bool start = false;
+        public bool start;
         public float animationDuration = 0.125f;
 
         private Image image;
-        private float timer = 0f;
+        private float timer;
         private bool increasing = true;
         private const float BaseValue = 1000f;
 
@@ -27,10 +27,10 @@ namespace Game
                 start = !increasing;
             }
 
-            var t = Mathf.Clamp01(timer / animationDuration);
+            float t = Mathf.Clamp01(timer / animationDuration);
         
-            var exponent = increasing ? 1 - t : t;
-            var newPixelsPerUnit = Mathf.Pow(BaseValue, exponent);
+            float exponent = increasing ? 1 - t : t;
+            float newPixelsPerUnit = Mathf.Pow(BaseValue, exponent);
 
             image.pixelsPerUnitMultiplier = newPixelsPerUnit;
         }

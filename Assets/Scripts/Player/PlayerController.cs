@@ -23,15 +23,15 @@ namespace Player
         private Vector3 velocity;
 
         public Animator animator;
-        public bool isSliding = false;
+        public bool isSliding;
 
         public float slideDuration = 1.5f;
 
-        bool toggle = false;
+        private bool toggle;
 
         public bool isPlayer1;
 
-        void Start()
+        private void Start()
         {
             controller = GetComponent<CharacterController>();
             Time.timeScale = 1.2f;
@@ -54,7 +54,7 @@ namespace Player
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (!PlayerManager.isGameStarted || PlayerManager.gameOver) return;
 
@@ -91,8 +91,8 @@ namespace Player
         
             if (transform.position != targetPosition)
             {
-                var diff = targetPosition - transform.position;
-                var moveDir = diff.normalized * 30 * Time.deltaTime;
+                Vector3 diff = targetPosition - transform.position;
+                Vector3 moveDir = diff.normalized * (30 * Time.deltaTime);
                 controller.Move(moveDir.sqrMagnitude < diff.magnitude ? moveDir : diff);
             }
 

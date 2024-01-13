@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    /// <summary>
+    /// This class handles the cms, it allows for users to add new questions in the unity ui
+    /// that you can find in the main menu
+    /// </summary>
     public class CMS : MonoBehaviour
     {
         public GameObject questionsGameObject;
@@ -38,7 +42,7 @@ namespace Game
             questions = JsonManager.GetQuestions();
             foreach (var question in questions)
             {
-                var questionItem = Instantiate(questionPrefab, container.transform);
+                GameObject questionItem = Instantiate(questionPrefab, container.transform);
 
                 questionItem.GetComponent<CMSQuestionItem>().cms = this;
                 questionItem.GetComponent<CMSQuestionItem>().question = question;
@@ -48,7 +52,7 @@ namespace Game
                 questionItem.transform.Find("Answer B").GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerB;
                 questionItem.transform.Find("Answer C").GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerC;
             
-                var toggle = question.correctAnswer switch
+                Toggle toggle = question.correctAnswer switch
                 {
                     "A" => questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>(),
                     "B" => questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>(),
@@ -71,8 +75,8 @@ namespace Game
 
             for (var i = 0; i < container.transform.childCount; i++)
             {
-                var questionItem = container.transform.GetChild(i);
-                var question = questions[i];
+                Transform questionItem = container.transform.GetChild(i);
+                JsonManager.Question question = questions[i];
 
                 if (questionItem.GetComponent<CMSQuestionItem>().question != question)
                 {
@@ -85,9 +89,9 @@ namespace Game
                 questionItem.transform.Find("Answer B").GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerB;
                 questionItem.transform.Find("Answer C").GetChild(0).GetComponent<TextMeshProUGUI>().text = question.answerC;
             
-                var toggleA = questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>();
-                var toggleB = questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>();
-                var toggleC = questionItem.transform.Find("Answer C Toggle").GetComponent<Toggle>();
+                Toggle toggleA = questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>();
+                Toggle toggleB = questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>();
+                Toggle toggleC = questionItem.transform.Find("Answer C Toggle").GetComponent<Toggle>();
             
                 switch (question.correctAnswer)
                 {
@@ -131,7 +135,7 @@ namespace Game
         {
             if (question.correctAnswer == newCorrectAnswer) return;
 
-            var toggleOld = question.correctAnswer switch
+            Toggle toggleOld = question.correctAnswer switch
             {
                 "A" => questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>(),
                 "B" => questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>(),
@@ -139,7 +143,7 @@ namespace Game
                 _ => throw new ArgumentOutOfRangeException()
             };
         
-            var toggleNew = newCorrectAnswer switch
+            Toggle toggleNew = newCorrectAnswer switch
             {
                 "A" => questionItem.transform.Find("Answer A Toggle").GetComponent<Toggle>(),
                 "B" => questionItem.transform.Find("Answer B Toggle").GetComponent<Toggle>(),
