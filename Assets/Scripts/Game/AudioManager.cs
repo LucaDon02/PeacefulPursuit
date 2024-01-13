@@ -1,68 +1,71 @@
-﻿using System.Linq;
+﻿/// <summary>
+/// This class manages to audio in the game. There will always only be 1 instance of this class.
+/// It uses Singleton to ensure this, the class allows for audio files to be added with the inspector
+/// and played/pauzed with the method api.
+/// <summary>
+
+using System.Linq;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace Game
 {
-    public static AudioManager Instance { get; private set; }
-    public Sound[] sounds;
+    public class AudioManager : MonoBehaviour
+    {
+        private static AudioManager Instance { get; set; }
+        public Sound[] sounds;
 
-    void Awake()
-    {
-        InitalizeSingleton();
-        InitializeSounds();
-        PlaySound("MainTheme");
-    }
-    private void InitalizeSingleton()
-    {
-        if (Instance == null)
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            InitializeSingleton();
+            InitializeSounds();
+            PlaySound("MainTheme");
         }
-        else
+        private void InitializeSingleton()
         {
-            Destroy(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-    }
 
-    private void InitializeSounds()
-    {
-        foreach (var sound in sounds)
+        private void InitializeSounds()
         {
-            InitializeSound(sound);
+            foreach (var sound in sounds)
+            {
+                InitializeSound(sound);
+            }
         }
-    }
 
-    private void InitializeSound(Sound sound)
-    {
-        sound.source = gameObject.AddComponent<AudioSource>();
-        sound.source.clip = sound.Clip;
-        sound.source.volume = sound.Volume;
-        sound.source.loop = sound.Loop;
-        sound.source.pitch = sound.Pitch;
-    }
-
-    public void PlaySound(string name)
-    {
-        var soundToPlay = GetSoundByName(name);
-        if (soundToPlay != null)
+        private void InitializeSound(Sound sound)
         {
-            soundToPlay.source.Play();
+            sound.source = gameObject.AddComponent<AudioSource>();
+            sound.source.clip = sound.Clip;
+            sound.source.volume = sound.Volume;
+            sound.source.loop = sound.Loop;
+            sound.source.pitch = sound.Pitch;
         }
-    }
 
-    public void PauseSound(string name)
-    {
-        var soundToPause = GetSoundByName(name);
-        if (soundToPause != null)
+        public void PlaySound(string soundName)
         {
-            soundToPause.source.Pause();
+            var soundToPlay = GetSoundByName(soundName);
+            soundToPlay?.source.Play();
         }
-    }
+
+        public void PauseSound(string soundName)
+        {
+            var soundToPause = GetSoundByName(soundName);
+            soundToPause?.source.Pause();
+        }
     
 
-    private Sound GetSoundByName(string name)
-    {
-        return sounds.FirstOrDefault(s => s.Name == name);
+        private Sound GetSoundByName(string soundName)
+        {
+            return sounds.FirstOrDefault(s => s.Name == soundName);
+        }
     }
 }
