@@ -1,17 +1,20 @@
-﻿using UnityEngine.Rendering.Universal;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public class Randomness : MonoBehaviour
+namespace Game
 {
-    private Volume volume;
-    private ColorAdjustments colorAdjustments;
-    public float[] randomHueShitf;
-
-    void Start()
+    public class Randomness : MonoBehaviour
     {
-        volume = GetComponent<Volume>();
-        volume.profile.TryGet(out colorAdjustments);
-        colorAdjustments.hueShift.value = randomHueShitf[Random.Range(0, randomHueShitf.Length)];
+        private Volume volume;
+        private ColorAdjustments colorAdjustments;
+        public float[] randomHueShitf;
+
+        void Start()
+        {
+            volume = GetComponent<Volume>();
+            volume.profile.TryGet(out colorAdjustments);
+            colorAdjustments.hueShift.value = randomHueShitf[Random.Range(0, randomHueShitf.Length)];
+        }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public class SkyboxRotator : MonoBehaviour
+namespace Game
 {
-    public float RotationPerSecond = 2;
-    protected void Update()
+    public class SkyboxRotator : MonoBehaviour
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotationPerSecond);
+        public float RotationPerSecond = 2;
+        protected void Update()
+        {
+            RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotationPerSecond);
+        }
     }
 }

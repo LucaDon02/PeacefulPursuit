@@ -1,4 +1,6 @@
-﻿using UnityEngine.SceneManagement;
+﻿using Game;
+using Player;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;

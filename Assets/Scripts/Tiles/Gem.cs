@@ -1,4 +1,5 @@
 ﻿using Game;
+using Player;
 using UnityEngine;
 
 public class Gem : MonoBehaviour

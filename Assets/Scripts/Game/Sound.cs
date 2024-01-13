@@ -2,6 +2,10 @@
 
 namespace Game
 {
+    /// <summary>
+    /// Sound model for the inspector GUI in Unity.
+    /// This allows us to add more sounds with the GUI, which get mapped in the AudioManager class.
+    /// </summary>
     [System.Serializable]
     public class Sound
     {
