@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Game
 {
+/// <summary>
+    /// Represents an item in the Content Management System (CMS) for handling and displaying individual questions in the Unity UI.
+/// </summary>
     public class CMSQuestionItem : MonoBehaviour
     {
         internal CMS cms;

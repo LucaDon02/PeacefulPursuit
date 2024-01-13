@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Player
 {
+    /// <summary>
+    ///  Controls the movement and actions of the player character, responding to player input and managing character animations.
+    /// Handles functions such as jumping, sliding, and lane changing, while also detecting collisions with obstacles.
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
         private CharacterController controller;

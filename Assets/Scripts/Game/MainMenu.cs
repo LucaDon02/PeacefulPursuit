@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    /// <summary>
+    /// Manages the main menu functionality, including character selection, readiness, and game start.
+    /// Connects to UI elements for player input and interfaces with the JsonManager for data storage and retrieval.
+    /// </summary>
     public class MainMenu : MonoBehaviour
     {
         public int characterIndexPlayer1;//0:Wheel, 1:Amy, 2:Michelle ...

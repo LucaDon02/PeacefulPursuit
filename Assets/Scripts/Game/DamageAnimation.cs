@@ -2,7 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
-{
+{ 
+    ///<summary>
+    /// Manages damage animation in the game, controlling the visual effect of damage received.
+    /// Allows for customization of animation duration and smoothly adjusts the size of the associated Image component over time.
+    ///</summary>
+
     public class DamageAnimation : MonoBehaviour
     {
         public bool start;

@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Game
 {
+        /// <summary>
+            /// Manages level events such as pausing and resuming the game.
+            /// Connects to UI elements for game pause functionality and interacts with the QuestionManager for handling questions during gameplay.
+        /// </summary>
     public class LevelEvents : MonoBehaviour
     {
         public GameObject gamePausedPanel;

@@ -4,6 +4,10 @@ using UnityEngine.Rendering.Universal;
 
 namespace Game
 {
+    /// <summary>
+    /// Controls randomness in the game environment, specifically managing hue shifts in color adjustments.
+    /// Utilizes Unity's Volume and ColorAdjustments for controlling visual effects. 
+    /// </summary>
     public class Randomness : MonoBehaviour
     {
         private Volume volume;

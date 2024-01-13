@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    /// <summary>
+    /// Manages questions during gameplay, handling the display of questions, answers, and player responses.
+    /// Interfaces with the JsonManager for question data and communicates with the PlayerManager for score management.
+    /// </summary>
     public class QuestionManager : MonoBehaviour
     {
         public float answerShowTime = 3.5f;

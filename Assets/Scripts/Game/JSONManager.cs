@@ -4,7 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 namespace Game
-{
+{ 
+    ///<summary>
+        /// Manages JSON data for questions, scores, and game-related information.
+        /// Provides methods for editing and retrieving questions, updating scores, and managing game data.
+    ///</summary>
+
     public class JsonManager : MonoBehaviour
     {
         private static readonly string MainDataPath = Application.dataPath + "/Resources/Jsons/";

@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Player
 {
+    /// <summary>
+    /// Manages a player in the game, handling player-specific attributes such as score, buffs, and debuffs.
+    /// Instantiates the player character based on selected settings, updating UI elements accordingly.
+    /// </summary>
     public class Player : MonoBehaviour
     {
         [NonSerialized] public int score;
