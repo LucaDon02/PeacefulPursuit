@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,6 +63,7 @@ namespace Game
             
                 toggle.interactable = false;
                 toggle.isOn = true;
+                
             }
         }
 
