@@ -32,14 +32,19 @@ namespace Player
             player.GetComponent<PlayerController>().isPlayer1 = isPlayer1;
         }
 
-        private void Start() { score = 0; }
+        private void Start()
+        {
+            score = 0;
+        }
 
         private void Update()
         {
             scoreText.text = score.ToString();
             buffText.text = buff.ToString();
             debuffText.text = debuff.ToString();
-            totalBuffText.text = ((buff - debuff) / 10f + 1).ToString("0.0") + "X";
+            double totalBuff = (buff - debuff) / 10f + 1;
+            if (totalBuff < 0.1) totalBuff = 0.1;
+            totalBuffText.text = totalBuff.ToString("0.0") + "X";
         }
     }
 }

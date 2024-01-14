@@ -128,6 +128,7 @@ namespace Player
                 }
                 timerText.gameObject.transform.parent.gameObject.SetActive(false);
                 gameOverPanelScrollRectPlayer1.scrollSensitivity = gameOverPanelContainerPlayer1.transform.childCount / 4f;
+                gameOverPanelScrollRectPlayer2.scrollSensitivity = gameOverPanelContainerPlayer2.transform.childCount / 4f;
                 gameOverPanelPlayer1.SetActive(true);
                 gameOverPanelPlayer2.SetActive(true);
                 pauseButton.SetActive(false);
@@ -274,7 +275,9 @@ namespace Player
                 FindObjectOfType<AudioManager>().PlaySound(CorrectAnswerSoundTitle);
             } 
             Player player = playerName == "Player1" ? player1 : player2;
-            player.score += (int)(defaultCorrectQuestionBonus * ((player.buff - player.debuff) / 10f + 1) + 0.5);
+            double totalBuff = (player.buff - player.debuff) / 10f + 1;
+            if (totalBuff < 0.1) totalBuff = 0.1;
+            player.score += (int)(defaultCorrectQuestionBonus * totalBuff + 0.5);
         } 
         public void WrongQuestion(string playerName)
         {
