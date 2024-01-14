@@ -1,57 +1,65 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class LevelEvents : MonoBehaviour
+namespace Game
 {
-    public GameObject gamePausedPanel;
-    public Button pauseButton;
-    public QuestionManager questionManager;
-
-    private void Update()
+        /// <summary>
+            /// Manages level events such as pausing and resuming the game.
+            /// Connects to UI elements for game pause functionality and interacts with the QuestionManager for handling questions during gameplay.
+        /// </summary>
+    public class LevelEvents : MonoBehaviour
     {
-        if (!PlayerManager.isGameStarted)
-            return;
+        public GameObject gamePausedPanel;
+        public Button pauseButton;
+        public QuestionManager questionManager;
 
-        if (PlayerManager.gameOver)
-            pauseButton.interactable = false;
-
-        if (PlayerManager.gameOver)
-            return;
-
-
-        if (!Input.GetKeyDown(KeyCode.Escape)) return;
-        if (PlayerManager.isGamePaused)
+        private void Update()
         {
-            ResumeGame();
-            gamePausedPanel.SetActive(false);
-        }
-        else
-        {
-            PauseGame();
-            gamePausedPanel.SetActive(true);
-        }
-    }
+            if (!PlayerManager.isGameStarted)
+                return;
 
-    public void GoToMenu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
+            if (PlayerManager.gameOver)
+                pauseButton.interactable = false;
+
+            if (PlayerManager.gameOver)
+                return;
+
+
+            if (!Input.GetKeyDown(KeyCode.Escape)) return;
+            if (PlayerManager.isGamePaused)
+            {
+                ResumeGame();
+                gamePausedPanel.SetActive(false);
+            }
+            else
+            {
+                PauseGame();
+                gamePausedPanel.SetActive(true);
+            }
+        }
+
+        public void GoToMenu()
+        {
+            SceneManager.LoadScene("Menu");
+        }
     
-    public void PauseGame()
-    {
-        if (PlayerManager.isGamePaused || PlayerManager.gameOver) return;
-        Time.timeScale = 0;
-        PlayerManager.isGamePaused = true;
-        questionManager.ResetQuestionUI();
-    }
+        public void PauseGame()
+        {
+            if (PlayerManager.isGamePaused || PlayerManager.gameOver) return;
+            Time.timeScale = 0;
+            PlayerManager.isGamePaused = true;
+            questionManager.ResetQuestionUI();
+        }
     
-    public void ResumeGame()
-    {
-        if (!PlayerManager.isGamePaused) return;
-        Time.timeScale = 1;
-        PlayerManager.isGamePaused = false;
-        questionManager.SetQuestionUI();
-    }
+        public void ResumeGame()
+        {
+            if (!PlayerManager.isGamePaused) return;
+            Time.timeScale = 1;
+            PlayerManager.isGamePaused = false;
+            questionManager.SetQuestionUI();
+        }
     
+    }
 }

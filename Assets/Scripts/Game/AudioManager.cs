@@ -1,14 +1,13 @@
-﻿/// <summary>
-/// This class manages to audio in the game. There will always only be 1 instance of this class.
-/// It uses Singleton to ensure this, the class allows for audio files to be added with the inspector
-/// and played/pauzed with the method api.
-/// <summary>
-
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
+    /// <summary>
+    /// Manages audio in the game, ensuring only one instance exists. 
+    /// Utilizes the Singleton pattern to enforce a single instance.
+    /// Allows for the addition of audio files through the inspector and provides methods for playback control.
+    /// </summary>
     public class AudioManager : MonoBehaviour
     {
         private static AudioManager Instance { get; set; }
@@ -52,13 +51,13 @@ namespace Game
 
         public void PlaySound(string soundName)
         {
-            var soundToPlay = GetSoundByName(soundName);
+            Sound soundToPlay = GetSoundByName(soundName);
             soundToPlay?.source.Play();
         }
 
         public void PauseSound(string soundName)
         {
-            var soundToPause = GetSoundByName(soundName);
+            Sound soundToPause = GetSoundByName(soundName);
             soundToPause?.source.Pause();
         }
     

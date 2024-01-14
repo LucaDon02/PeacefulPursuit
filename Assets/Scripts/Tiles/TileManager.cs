@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Game;
+using Player;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 

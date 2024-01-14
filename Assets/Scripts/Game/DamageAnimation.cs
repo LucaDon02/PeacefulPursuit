@@ -1,38 +1,43 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DamageAnimation : MonoBehaviour
-{
-    public bool start = false;
-    public float animationDuration = 0.125f;
+namespace Game
+{ 
+    ///<summary>
+    /// Manages damage animation in the game, controlling the visual effect of damage received.
+    /// Allows for customization of animation duration and smoothly adjusts the size of the associated Image component over time.
+    ///</summary>
 
-    private Image image;
-    private float timer = 0f;
-    private bool increasing = true;
-    private const float BaseValue = 1000f;
-
-    private void Start() { image = GetComponent<Image>(); }
-
-    private void Update()
+    public class DamageAnimation : MonoBehaviour
     {
-        if (!start) return;
-        timer += Time.unscaledDeltaTime;
-        
-        if (timer > animationDuration)
+        public bool start;
+        public float animationDuration = 0.125f;
+
+        private Image image;
+        private float timer;
+        private bool increasing = true;
+        private const float BaseValue = 1000f;
+
+        private void Start() { image = GetComponent<Image>(); }
+
+        private void Update()
         {
-            timer = 0f;
-            increasing = !increasing;
-            start = !increasing;
-        }
-
-        var t = Mathf.Clamp01(timer / animationDuration);
+            if (!start) return;
+            timer += Time.unscaledDeltaTime;
         
-        var exponent = increasing ? 1 - t : t;
-        var newPixelsPerUnit = Mathf.Pow(BaseValue, exponent);
+            if (timer > animationDuration)
+            {
+                timer = 0f;
+                increasing = !increasing;
+                start = !increasing;
+            }
 
-        image.pixelsPerUnitMultiplier = newPixelsPerUnit;
+            float t = Mathf.Clamp01(timer / animationDuration);
+        
+            float exponent = increasing ? 1 - t : t;
+            float newPixelsPerUnit = Mathf.Pow(BaseValue, exponent);
+
+            image.pixelsPerUnitMultiplier = newPixelsPerUnit;
+        }
     }
 }
