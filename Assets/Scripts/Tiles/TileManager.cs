@@ -81,6 +81,7 @@ public class TileManager : MonoBehaviour
     {
         if (activeTiles[2] == portalTilePrefab) SubmitAnswer();
         activeTiles[0].SetActive(false);
+        foreach (GameObject child in activeTiles[0].transform) child.SetActive(true);
         activeTiles.RemoveAt(0);
     }
 
