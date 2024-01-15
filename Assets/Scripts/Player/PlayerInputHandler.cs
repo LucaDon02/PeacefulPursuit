@@ -18,7 +18,7 @@ namespace Player
         [NonSerialized] public MainMenu mainMenu;
         [NonSerialized] public int index;
         [NonSerialized] public bool isGameStarted = false;
-        // This field decides if the left stick is postioned on the left or right.
+        // This field decides if the left stick is pressed full to one side.
         private const double ControllerThreshold = 0.45;
         private const string MainMenuObjectName = "Main Menu";
 
