@@ -170,8 +170,9 @@ namespace Player
                 }
                 timerText.color = Color.gray;
             }
-            else if (timer < 10.49f && !isChanging)
+            else if (timer < 10.49f && !isChanging && !timerText.color.Equals(Color.red))
             {
+                audioManager.PlaySound("timer");
                 timerText.color = Color.red;
             }
 
