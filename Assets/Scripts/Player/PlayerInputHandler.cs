@@ -38,15 +38,7 @@ namespace Player
 
         private void DisablePressButtonPanel()
         {
-            GameObject pressButtonPanel = GameObject.Find($"MainMenu Player{index + 1}")?.transform.Find("PressButtonPanel")?.gameObject;
-            if (pressButtonPanel == null)
-            {
-                Debug.LogError($"Could not find PressButtonPanel for Player{index + 1}.");
-            }
-            else
-            {
-                pressButtonPanel.SetActive(false);
-            }
+            mainMenu.JoinPlayer(index == 0);
         }
 
         private void HandleMainMenuMovement(Vector2 movementInput)

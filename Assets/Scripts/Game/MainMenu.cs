@@ -46,15 +46,10 @@ namespace Game
         private void Start()
         {
             Time.timeScale = 1;
-        
-            characterIndexPlayer1 = JsonManager.GetSelectedCharacterPlayer1();
+            
             foreach (var ch in charactersPlayer1) ch.SetActive(false);
-            charactersPlayer1[characterIndexPlayer1].SetActive(true);
-        
-            characterIndexPlayer2 = JsonManager.GetSelectedCharacterPlayer2();
             foreach (var ch in charactersPlayer2) ch.SetActive(false);
-            charactersPlayer2[characterIndexPlayer2].SetActive(true);
-        
+
             pressButtonPanelPlayer1.SetActive(true);
             pressButtonPanelPlayer2.SetActive(true);
         
@@ -65,10 +60,10 @@ namespace Game
                 switch (inputHandler.index)
                 {
                     case 0:
-                        pressButtonPanelPlayer1.SetActive(false);
+                        JoinPlayer(true);
                         break;
                     case 1:
-                        pressButtonPanelPlayer2.SetActive(false);
+                        JoinPlayer(false);
                         break;
                 }
                 inputHandler.isGameStarted = false;
@@ -221,6 +216,28 @@ namespace Game
             }
         }
 
+        public void JoinPlayer(bool isPlayer1)
+        {
+            if (isPlayer1)
+            {
+                foreach (var ch in charactersPlayer1) ch.SetActive(false);
+                charactersPlayer1[JsonManager.GetSelectedCharacterPlayer1()].SetActive(true);
+                
+                player1Ready = false;
+                UnReady(unReadyButtonPlayer1.GetComponent<Button>());
+                pressButtonPanelPlayer1.SetActive(false);
+            }
+            else
+            {
+                foreach (var ch in charactersPlayer2) ch.SetActive(false);
+                charactersPlayer2[JsonManager.GetSelectedCharacterPlayer2()].SetActive(true);
+                
+                player2Ready = false;
+                UnReady(unReadyButtonPlayer2.GetComponent<Button>());
+                pressButtonPanelPlayer2.SetActive(false);
+            }
+        }
+
         public void LeavePlayer(bool isPlayer1)
         {
             if (isPlayer1)
@@ -228,12 +245,14 @@ namespace Game
                 player1Ready = false;
                 UnReady(unReadyButtonPlayer1.GetComponent<Button>());
                 pressButtonPanelPlayer1.SetActive(true);
+                foreach (var ch in charactersPlayer1) ch.SetActive(false);
             }
             else
             {
                 player2Ready = false;
                 UnReady(unReadyButtonPlayer2.GetComponent<Button>());
                 pressButtonPanelPlayer2.SetActive(true);
+                foreach (var ch in charactersPlayer2) ch.SetActive(false);
             }
         }
     }
