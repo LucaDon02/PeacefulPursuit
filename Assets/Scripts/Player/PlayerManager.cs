@@ -33,6 +33,9 @@ namespace Player
     
         public TextMeshProUGUI newRecordTextPlayer1;
         public TextMeshProUGUI newRecordTextPlayer2;
+
+        public TextMeshProUGUI scoreTextPlayer1;
+        public TextMeshProUGUI scoreTextPlayer2;
     
         public DamageAnimation damageAnimationPlayer1;
         public DamageAnimation damageAnimationPlayer2;
@@ -126,9 +129,15 @@ namespace Player
                         newRecordTextPlayer2.text = NewRecordMessage + player2.score;
                     }
                 }
+
+                scoreTextPlayer1.text = "Score: " + player1.score;
+                scoreTextPlayer2.text = "Score: " + player2.score;
+                
                 timerText.gameObject.transform.parent.gameObject.SetActive(false);
+                
                 gameOverPanelScrollRectPlayer1.scrollSensitivity = gameOverPanelContainerPlayer1.transform.childCount / 4f;
                 gameOverPanelScrollRectPlayer2.scrollSensitivity = gameOverPanelContainerPlayer2.transform.childCount / 4f;
+                
                 gameOverPanelPlayer1.SetActive(true);
                 gameOverPanelPlayer2.SetActive(true);
                 pauseButton.SetActive(false);
