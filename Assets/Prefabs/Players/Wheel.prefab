@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 16
-  maxSpeed: 26
+  maxSpeed: 21
   desiredLane: 1
   laneDistance: 2.5
   isGrounded: 0

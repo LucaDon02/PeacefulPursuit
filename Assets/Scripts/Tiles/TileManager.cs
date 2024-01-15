@@ -66,7 +66,7 @@ public class TileManager : MonoBehaviour
         
         var tile = tilePrefabs[index];
         
-        for (var i = 8; i <= 56 && tile.activeInHierarchy; i += 8) tile = tilePrefabs[index + i];
+        for (var i = 8; i <= 88 && tile.activeInHierarchy; i += 8) tile = tilePrefabs[index + i];
 
         tile.transform.position = Vector3.forward * zSpawn + (isForPlayer1 ? new Vector3(-25, 0, 0) : new Vector3(25, 0, 0));
         tile.transform.rotation = Quaternion.identity;

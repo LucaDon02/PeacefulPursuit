@@ -49,12 +49,12 @@ namespace Player
             if (toggle)
             {
                 toggle = false;
-                if (forwardSpeed < maxSpeed) forwardSpeed += 0.1f * Time.fixedDeltaTime;
+                if (forwardSpeed < maxSpeed) forwardSpeed += 0.05f * Time.fixedDeltaTime;
             }
             else
             {
                 toggle = true;
-                if (Time.timeScale < 2f) Time.timeScale += 0.005f * Time.fixedDeltaTime;
+                if (Time.timeScale < 2f) Time.timeScale += 0.0025f * Time.fixedDeltaTime;
             }
         }
 

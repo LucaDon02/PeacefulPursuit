@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using System;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,8 +14,8 @@ namespace Game
     /// </summary>
     public class MainMenu : MonoBehaviour
     {
-        public int characterIndexPlayer1;//0:Wheel, 1:Amy, 2:Michelle ...
-        public int characterIndexPlayer2;//0:Wheel, 1:Amy, 2:Michelle ...
+        private int characterIndexPlayer1;//0:Wheel, 1:Amy, 2:Michelle ...
+        private int characterIndexPlayer2;//0:Wheel, 1:Amy, 2:Michelle ...
     
         public GameObject[] charactersPlayer1;
         public GameObject[] charactersPlayer2;
@@ -221,19 +222,17 @@ namespace Game
             if (isPlayer1)
             {
                 foreach (var ch in charactersPlayer1) ch.SetActive(false);
-                charactersPlayer1[JsonManager.GetSelectedCharacterPlayer1()].SetActive(true);
+                characterIndexPlayer1 = JsonManager.GetSelectedCharacterPlayer1();
+                charactersPlayer1[characterIndexPlayer1].SetActive(true);
                 
-                player1Ready = false;
-                UnReady(unReadyButtonPlayer1.GetComponent<Button>());
                 pressButtonPanelPlayer1.SetActive(false);
             }
             else
             {
                 foreach (var ch in charactersPlayer2) ch.SetActive(false);
-                charactersPlayer2[JsonManager.GetSelectedCharacterPlayer2()].SetActive(true);
+                characterIndexPlayer2 = JsonManager.GetSelectedCharacterPlayer2();
+                charactersPlayer2[characterIndexPlayer2].SetActive(true);
                 
-                player2Ready = false;
-                UnReady(unReadyButtonPlayer2.GetComponent<Button>());
                 pressButtonPanelPlayer2.SetActive(false);
             }
         }

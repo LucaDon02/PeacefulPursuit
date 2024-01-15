@@ -34,7 +34,7 @@ namespace Player
                 return;
             }
             
-            mainMenu.JoinPlayer(index == 0);
+            if (!isGameStarted) mainMenu.JoinPlayer(index == 0);
         }
 
         private void HandleMainMenuMovement(Vector2 movementInput)

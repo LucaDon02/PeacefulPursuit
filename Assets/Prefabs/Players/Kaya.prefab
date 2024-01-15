@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 16
-  maxSpeed: 26
+  maxSpeed: 21
+  desiredLane: 1
   laneDistance: 2.5
   isGrounded: 0
   groundLayer:
@@ -115,6 +116,7 @@ MonoBehaviour:
   gravity: -14
   jumpHeight: 2.2
   animator: {fileID: 6589800701294493192}
+  isSliding: 0
   slideDuration: 1.5
   isPlayer1: 0
 --- !u!1001 &1184278802937198494
