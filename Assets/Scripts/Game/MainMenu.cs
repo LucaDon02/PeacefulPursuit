@@ -43,8 +43,6 @@ namespace Game
         public Image readyCheckPlayer1;
         public Image readyCheckPlayer2;
 
-        public PlayerInputManager playerInputManager;
-
         private void Start()
         {
             Time.timeScale = 1;

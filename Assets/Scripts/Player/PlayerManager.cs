@@ -66,7 +66,9 @@ namespace Player
         public bool isFlashing;
         private bool isFadingIn = true;
         private bool isCorrectAnswerPlayer1; 
-        private bool isCorrectAnswerPlayer2; 
+        private bool isCorrectAnswerPlayer2;
+
+        public AudioManager audioManager;
         
         // constants
         private const string ThemeToPlay = "MainTheme";
@@ -157,20 +159,20 @@ namespace Player
                 isChanging = !isChanging;
                 if (isChanging) {
                     questionManager.ResetQuestionUI();
-                    FindObjectOfType<AudioManager>().PauseSound(ThemeToPlay);
-                    FindObjectOfType<AudioManager>().PauseSound("timer");
-                    FindObjectOfType<AudioManager>().PlaySound("changeController");
+                    audioManager.PauseSound(ThemeToPlay);
+                    audioManager.PauseSound("timer");
+                    audioManager.PlaySound("changeController");
                 }
                 else
                 {
                     questionManager.SetQuestionUI();
-                    FindObjectOfType<AudioManager>().PlaySound(ThemeToPlay);
+                    audioManager.PlaySound(ThemeToPlay);
                 }
                 timerText.color = Color.gray;
             }
             else if (timer < 10.49f && !isChanging)
             {
-                FindObjectOfType<AudioManager>().PlaySound("timer");
+                audioManager.PlaySound("timer");
                 timerText.color = Color.red;
             }
 
@@ -273,13 +275,13 @@ namespace Player
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer1 = true;
-                FindObjectOfType<AudioManager>().PlaySound(CorrectAnswerSoundTitle);
+                audioManager.PlaySound(CorrectAnswerSoundTitle);
             }
             else
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer2 = true;
-                FindObjectOfType<AudioManager>().PlaySound(CorrectAnswerSoundTitle);
+                audioManager.PlaySound(CorrectAnswerSoundTitle);
             } 
             Player player = playerName == "Player1" ? player1 : player2;
             double totalBuff = (player.buff - player.debuff) / 10f + 1;
@@ -292,13 +294,13 @@ namespace Player
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer1 = false;
-                FindObjectOfType<AudioManager>().PlaySound(WrongAnswerSoundTitle);
+                audioManager.PlaySound(WrongAnswerSoundTitle);
             }
             else
             {
                 isFlashing = true;
                 isCorrectAnswerPlayer2 = false;
-                FindObjectOfType<AudioManager>().PlaySound(WrongAnswerSoundTitle);
+                audioManager.PlaySound(WrongAnswerSoundTitle);
             } 
                  
         }

@@ -29,7 +29,7 @@
             "correctAnswer": "A"
         },
         {
-            "question": "Welk groete is goed voor je ogen?",
+            "question": "Welke groente is goed voor je ogen?",
             "answerA": "Spinazie",
             "answerB": "Wortel",
             "answerC": "Bloemkool",
@@ -163,7 +163,7 @@
         },
         {
             "question": "Hoeveel gram vlees wordt er aanbevolen voor tieners per dag?",
-            "answerA": "100" ,
+            "answerA": "100",
             "answerB": "200",
             "answerC": "300",
             "correctAnswer": "A"
@@ -192,7 +192,7 @@
         {
             "question": "Welk fruit boost je immuumsysteem?",
             "answerA": "Appel",
-            "answerB": "Sinasappel",
+            "answerB": "Sinaasappel",
             "answerC": "Frikandel",
             "correctAnswer": "B"
         },

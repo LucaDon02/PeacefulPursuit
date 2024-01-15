@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.002881306, g: 0.073436, b: 0.31992054, a: 1}
+  m_IndirectSpecularColor: {r: 0.002741627, g: 0.06973963, b: 0.30400598, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12959,6 +12959,7 @@ MonoBehaviour:
   crossPlayer2: {fileID: 75075267}
   secondsFading: 0.5
   isFlashing: 0
+  audioManager: {fileID: 5595939841769948630}
   questionManager: {fileID: 1759436383}
 --- !u!4 &1469877391
 Transform:
@@ -18003,6 +18004,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
+--- !u!114 &5595939841769948630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5595939842272982845, guid: 76dc76987fba05f4785addaaec651d58, type: 3}
+  m_PrefabInstance: {fileID: 5595939841769948629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fed992831dff547ad4f8d6cfbc52b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
