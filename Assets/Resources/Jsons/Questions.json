@@ -155,7 +155,7 @@
             "correctAnswer": "A"
         },
         {
-            "question": "Welk zuivelproduct wordt het meest gegeten?",
+            "question": "Welk zuivelproduct wordt het meest gegeten/gedronken?",
             "answerA": "Yoghurt",
             "answerB": "Melk",
             "answerC": "Kaas",
@@ -174,6 +174,41 @@
             "answerB": "Noten",
             "answerC": "Bananen",
             "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel suikerklontjes zitten er in een AA flesje?",
+            "answerA": "6",
+            "answerB": "8",
+            "answerC": "12",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Wat is goed voor je haren?",
+            "answerA": "Spinazie",
+            "answerB": "Spaghetti",
+            "answerC": "Bananen",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welk fruit boost je immuumsysteem?",
+            "answerA": "Appel",
+            "answerB": "Sinasappel",
+            "answerC": "Frikandel",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat voor sport helpt met conditie opbouw?",
+            "answerA": "Zwemmen",
+            "answerB": "Bowlen",
+            "answerC": "Golf",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Hoeveel uur mag je maximaal per dag gamen?",
+            "answerA": "1",
+            "answerB": "2",
+            "answerC": "3",
+            "correctAnswer": "C"
         }
     ]
 }
