@@ -68,7 +68,7 @@ namespace Player
         private bool isCorrectAnswerPlayer1; 
         private bool isCorrectAnswerPlayer2;
 
-        public AudioManager audioManager;
+        private  AudioManager audioManager;
         
         // constants
         private const string ThemeToPlay = "MainTheme";
@@ -97,6 +97,7 @@ namespace Player
                 inputHandler.playerManager = this;
                 inputHandler.isGameStarted = true;
             }
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         private void Update()
@@ -160,7 +161,6 @@ namespace Player
                 if (isChanging) {
                     questionManager.ResetQuestionUI();
                     audioManager.PauseSound(ThemeToPlay);
-                    audioManager.PauseSound("timer");
                     audioManager.PlaySound("changeController");
                 }
                 else
@@ -172,7 +172,6 @@ namespace Player
             }
             else if (timer < 10.49f && !isChanging)
             {
-                audioManager.PlaySound("timer");
                 timerText.color = Color.red;
             }
 
