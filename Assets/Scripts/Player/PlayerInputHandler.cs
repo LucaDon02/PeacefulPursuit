@@ -33,11 +33,7 @@ namespace Player
                 Debug.LogError($"Could not find {MainMenuObjectName} or MainMenu component.");
                 return;
             }
-            DisablePressButtonPanel(); 
-        }
-
-        private void DisablePressButtonPanel()
-        {
+            
             mainMenu.JoinPlayer(index == 0);
         }
 
