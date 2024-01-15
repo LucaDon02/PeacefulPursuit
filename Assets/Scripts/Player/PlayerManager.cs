@@ -158,6 +158,7 @@ namespace Player
                 if (isChanging) {
                     questionManager.ResetQuestionUI();
                     FindObjectOfType<AudioManager>().PauseSound(ThemeToPlay);
+                    FindObjectOfType<AudioManager>().PauseSound("timer");
                     FindObjectOfType<AudioManager>().PlaySound("changeController");
                 }
                 else
@@ -169,6 +170,7 @@ namespace Player
             }
             else if (timer < 10.49f && !isChanging)
             {
+                FindObjectOfType<AudioManager>().PlaySound("timer");
                 timerText.color = Color.red;
             }
 
