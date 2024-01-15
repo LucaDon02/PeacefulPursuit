@@ -165,6 +165,11 @@ namespace Player
                     questionManager.SetQuestionUI();
                     FindObjectOfType<AudioManager>().PlaySound(ThemeToPlay);
                 }
+                timerText.color = Color.gray;
+            }
+            else if (timer < 10.49f && !isChanging)
+            {
+                timerText.color = Color.red;
             }
 
             timerText.text = timer.ToString("00");
@@ -172,7 +177,7 @@ namespace Player
             //Start Game
             if (!isGameStarted)
             {
-                countdownTime -= Time.fixedDeltaTime;
+                countdownTime -= Time.unscaledDeltaTime;
                 countdownTextPlayer1.text = countdownTime.ToString("0");
                 countdownTextPlayer2.text = countdownTime.ToString("0");
 
@@ -194,11 +199,11 @@ namespace Player
             // Increase or decrease fade
             if (isFadingIn)
             {
-                currentFadingTime += Time.fixedDeltaTime;
+                currentFadingTime += Time.unscaledDeltaTime;
             }
             else
             {
-                currentFadingTime -= Time.fixedDeltaTime;
+                currentFadingTime -= Time.unscaledDeltaTime;
             }
 
             float alphaValue = (float)(currentFadingTime / secondsFading);
