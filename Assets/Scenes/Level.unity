@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0027722728, g: 0.07052899, b: 0.30741036, a: 1}
+  m_IndirectSpecularColor: {r: 0.0035548196, g: 0.07778826, b: 0.33286694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2967,8 +2967,8 @@ RectTransform:
   m_Children:
   - {fileID: 35624040}
   - {fileID: 1215883620}
-  - {fileID: 890168989}
   - {fileID: 1628274052}
+  - {fileID: 890168989}
   m_Father: {fileID: 559142100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7563,8 +7563,8 @@ RectTransform:
   m_Children:
   - {fileID: 963254473}
   - {fileID: 1456506567}
-  - {fileID: 1432115768}
   - {fileID: 1787921435}
+  - {fileID: 1432115768}
   m_Father: {fileID: 593286011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
