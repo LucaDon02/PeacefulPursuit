@@ -134,18 +134,18 @@
             "correctAnswer": "B"
         },
         {
-            "question": "Wat betekent het symbool 'mg'?",
+            "question": "Wat betekent het symbool 'Mg'?",
             "answerA": "Milligram",
             "answerB": "Megagram",
             "answerC": "Microgram",
-            "correctAnswer": "A"
+            "correctAnswer": "B"
         },
         {
-            "question": "Wat betekent 'ml' als een maateenheid?",
+            "question": "Wat betekent 'Ml' als een maateenheid?",
             "answerA": "Milliliter",
             "answerB": "Megaliter",
             "answerC": "Microliter",
-            "correctAnswer": "A"
+            "correctAnswer": "B"
         },
         {
             "question": "Wat is het meest gegeten fruit ter wereld?",
@@ -201,7 +201,7 @@
             "answerA": "Zwemmen",
             "answerB": "Bowlen",
             "answerC": "Golf",
-            "correctAnswer": "C"
+            "correctAnswer": "A"
         },
         {
             "question": "Hoeveel uur mag je maximaal per dag gamen?",
