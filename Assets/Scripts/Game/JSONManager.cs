@@ -12,7 +12,7 @@ namespace Game
 
     public class JsonManager : MonoBehaviour
     {
-        private static readonly string MainDataPath = Application.dataPath + "/Resources/Jsons/";
+        private static readonly string MainDataPath = Application.dataPath + "/StreamingAssets/Jsons/";
         private static readonly string QuestionsDataPath = MainDataPath + "Questions.json";
         private static readonly string ScoresDataPath = MainDataPath + "Scores.json";
         private static readonly string GameDataDataPath = MainDataPath + "GameData.json";

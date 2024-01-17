@@ -1,0 +1,214 @@
+{
+    "questions": [
+        {
+            "question": "Hoeveel gram groente moet een jongere van 13 jaar of ouder per dag eten?",
+            "answerA": "250",
+            "answerB": "300",
+            "answerC": "350",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Hoeveel stukken fruit zou je op een dag moeten eten?",
+            "answerA": "3",
+            "answerB": "2",
+            "answerC": "4",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel minuten per week moet je sporten?",
+            "answerA": "60",
+            "answerB": "120",
+            "answerC": "150",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Hoeveel suikerklontjes zitten er in een glas cola?",
+            "answerA": "6",
+            "answerB": "10",
+            "answerC": "15",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welke groente is goed voor je ogen?",
+            "answerA": "Spinazie",
+            "answerB": "Wortel",
+            "answerC": "Bloemkool",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel uur moet je slapen per dag",
+            "answerA": "6",
+            "answerB": "8",
+            "answerC": "10",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Welk mineraal is belangrijk voor sterke botten?",
+            "answerA": "Calcium",
+            "answerB": "Ijzer",
+            "answerC": "Kalium",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Wat is een gezonde drank?",
+            "answerA": "Water",
+            "answerB": "Cola",
+            "answerC": "Energydrank",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Wat is een belangrijk onderdeel van een gezonde lunch?",
+            "answerA": "Frites",
+            "answerB": "Brood",
+            "answerC": "Chocolade",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat kan helpen bij het verminderen van stress?",
+            "answerA": "Koffie",
+            "answerB": "Bananen",
+            "answerC": "Suikerspin",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat bevat veel vitamine C?",
+            "answerA": "Mango",
+            "answerB": "Kiwi",
+            "answerC": "Banaan",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat is goed voor je tanden?",
+            "answerA": "Chips",
+            "answerB": "Noten",
+            "answerC": "Appel",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Wat is een gezonde snack?",
+            "answerA": "Snoep",
+            "answerB": "Yoghurt",
+            "answerC": "Banaan",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat bevat veel vitamine C?",
+            "answerA": "Aardbei",
+            "answerB": "Framboos",
+            "answerC": "Banaan",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Wat is een goede bron van vezels?",
+            "answerA": "Witbrood",
+            "answerB": "Havermout",
+            "answerC": "Banaan",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Welke groente bevat veel antioxidanten?",
+            "answerA": "Wortel",
+            "answerB": "Bloemkool",
+            "answerC": "Tomaten",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Wat is een gezonde bron van eiwitten?",
+            "answerA": "Frisdrank",
+            "answerB": "Kipfilet",
+            "answerC": "Pannenkoeken",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Welke noot is een gezonde bron van omega-3 vetzuren?",
+            "answerA": "Pinda's",
+            "answerB": "Walnoten",
+            "answerC": "Amandelen",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel glazen water per dag worden meestal aanbevolen?",
+            "answerA": "4",
+            "answerB": "8",
+            "answerC": "12",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat betekent het symbool 'Mg'?",
+            "answerA": "Milligram",
+            "answerB": "Megagram",
+            "answerC": "Microgram",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat betekent 'Ml' als een maateenheid?",
+            "answerA": "Milliliter",
+            "answerB": "Megaliter",
+            "answerC": "Microliter",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat is het meest gegeten fruit ter wereld?",
+            "answerA": "Bananen",
+            "answerB": "Appels",
+            "answerC": "Druiven",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welk zuivelproduct wordt het meest gegeten/gedronken?",
+            "answerA": "Yoghurt",
+            "answerB": "Melk",
+            "answerC": "Kaas",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel gram vlees wordt er aanbevolen voor tieners per dag?",
+            "answerA": "100",
+            "answerB": "200",
+            "answerC": "300",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Wat is goed voor je hersenen?",
+            "answerA": "Patat",
+            "answerB": "Noten",
+            "answerC": "Bananen",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Hoeveel suikerklontjes zitten er in een AA-flesje?",
+            "answerA": "6",
+            "answerB": "8",
+            "answerC": "12",
+            "correctAnswer": "C"
+        },
+        {
+            "question": "Wat is goed voor je haren?",
+            "answerA": "Spinazie",
+            "answerB": "Spaghetti",
+            "answerC": "Bananen",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Welk fruit boost je immuunsysteem?",
+            "answerA": "Appel",
+            "answerB": "Sinaasappel",
+            "answerC": "Frikandel",
+            "correctAnswer": "B"
+        },
+        {
+            "question": "Wat voor sport helpt met conditie opbouw?",
+            "answerA": "Zwemmen",
+            "answerB": "Bowlen",
+            "answerC": "Golf",
+            "correctAnswer": "A"
+        },
+        {
+            "question": "Hoeveel uur mag je maximaal per dag gamen?",
+            "answerA": "1",
+            "answerB": "2",
+            "answerC": "3",
+            "correctAnswer": "C"
+        }
+    ]
+}
