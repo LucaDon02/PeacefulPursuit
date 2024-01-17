@@ -77,8 +77,7 @@ namespace Player
         private const string CorrectAnswerSoundTitle = "correctAnswer";
         private const string WrongAnswerSoundTitle = "wrongAnswer";
     
-        [SerializeField]
-        private QuestionManager questionManager;
+        [SerializeField] private QuestionManager questionManager;
 
         private void Start()
         {
@@ -291,7 +290,7 @@ namespace Player
             } 
             Player player = playerName == "Player1" ? player1 : player2;
             double totalBuff = (player.buff - player.debuff) / 10f + 1;
-            if (totalBuff < 0.1) totalBuff = 0.1;
+            if (totalBuff < 0.5) totalBuff = 0.5;
             player.score += (int)(defaultCorrectQuestionBonus * totalBuff + 0.5);
         } 
         public void WrongQuestion(string playerName)

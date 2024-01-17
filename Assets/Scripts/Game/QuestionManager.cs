@@ -31,16 +31,19 @@ namespace Game
         private List<JsonManager.Question> questionsPlayer1 = new List<JsonManager.Question>();
         private List<string> answersPlayer1 = new();
         private readonly List<JsonManager.Question> wrongQuestionsPlayer1 = new();
-        private int currentQuestionIndex;
-        private float answerTime;
-    
+
         private List<JsonManager.Question> questionsPlayer2 = new List<JsonManager.Question>();
         private List<string> answersPlayer2 = new();
         private readonly List<JsonManager.Question> wrongQuestionsPlayer2 = new();
+        
+        private int currentQuestionIndex;
+        private float answerTime;
 
         public GameObject questionPrefab;
         public GameObject questionContainerPlayer1;
         public GameObject questionContainerPlayer2;
+        
+        [SerializeField] private GameObject progressBar;
 
         private void Awake()
         {
@@ -137,7 +140,6 @@ namespace Game
 
             if (currentQuestionIndex < questionsPlayer1.Count && currentQuestionIndex < questionsPlayer2.Count) SetQuestionUI();
             else PlayerManager.gameOver = true;
-
         }
 
         private void ResetAnswerColors()
@@ -208,6 +210,18 @@ namespace Game
             }
 
             answerTime = answerShowTime;
+            
+            int totalQuestionCountPlayer1 = questionsPlayer1.Count + wrongQuestionsPlayer1.Count;
+            int totalQuestionCountPlayer2 = questionsPlayer2.Count + wrongQuestionsPlayer2.Count;
+
+            var localScale = progressBar.transform.localScale;
+            localScale = new Vector3(
+                (float)(currentQuestionIndex + 1) / (totalQuestionCountPlayer1 < totalQuestionCountPlayer2 ? 
+                    totalQuestionCountPlayer1 : totalQuestionCountPlayer2),
+                localScale.y,
+                localScale.z);
+            progressBar.transform.localScale = localScale;
+            Debug.Log(localScale);
         }
 
         private void SetAnswerColor(Color color, string selectedAnswer, TextMeshProUGUI answerAText, TextMeshProUGUI answerBText, TextMeshProUGUI answerCText)
