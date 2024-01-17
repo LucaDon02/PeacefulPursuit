@@ -55,7 +55,7 @@ namespace Player
         public TextMeshProUGUI timerText;
         public GameObject changePlayerPanel;
         private float timer;
-        private bool isChanging;
+        [NonSerialized] public static bool isChanging;
         private float previousTimeScale;
 
         public int defaultCorrectQuestionBonus = 25;

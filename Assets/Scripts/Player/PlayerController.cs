@@ -105,7 +105,7 @@ namespace Player
 
         public void Jump()
         {
-            if (!isGrounded) return;
+            if (!isGrounded || PlayerManager.gameOver || PlayerManager.isGamePaused || PlayerManager.isChanging) return;
         
             StopCoroutine(SlideCoroutine());
             animator.SetBool("isSliding", false);
@@ -145,19 +145,21 @@ namespace Player
     
         public void MoveLeft()
         {
+            if (PlayerManager.gameOver || PlayerManager.isGamePaused || PlayerManager.isChanging) return;
             desiredLane--;
             if (desiredLane == -1) desiredLane = 0;
         }
 
         public void MoveRight()
         {
+            if (PlayerManager.gameOver || PlayerManager.isGamePaused || PlayerManager.isChanging) return;
             desiredLane++;
             if (desiredLane == 3) desiredLane = 2;
         }
 
         public void Slide()
         {
-            if (isSliding) return;
+            if (isSliding || PlayerManager.gameOver || PlayerManager.isGamePaused || PlayerManager.isChanging) return;
             StartCoroutine(SlideCoroutine());
             if (!isGrounded) velocity.y = -10;
         }
