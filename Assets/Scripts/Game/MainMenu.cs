@@ -161,7 +161,15 @@ namespace Game
             }
         }
 
-        public void OpenCMS() { cms.SetActive(true); }
+        public void OpenCMS()
+        {
+            cms.SetActive(true);
+        }
+        
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
 
         public void ChangeCharacterUI(int playerIndex, bool isLeft)
         {
