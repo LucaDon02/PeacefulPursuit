@@ -44,6 +44,11 @@ namespace Game
         {
             SceneManager.LoadScene("Menu");
         }
+        
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     
         public void PauseGame()
         {
